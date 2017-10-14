@@ -1,0 +1,73 @@
+package AoE
+	import Vectors
+	import Vectors2
+	import Location2
+	import Group2
+
+	// TODO: Circles Fix
+
+	/** Returns all units that are close to a line */
+	public function getUnitsAlongLine(vec2 start, vec2 finish, real thickness) returns group
+		group circleGroup = twoCircles(start, finish)
+		// Check with line
+		group retG = CreateGroup()
+		for unit u in circleGroup
+			if distanceToLine(start, finish, u.getPos()) <= thickness
+				retG.addUnit(u)
+		circleGroup.destr()
+		return retG
+
+	/** Returns all units in a cone */
+	public function getUnitsInCone(vec2 start, vec2 finish, real finalthickness) returns group
+		group circleGroup = twoCircles(start, finish)
+		// Check with line
+		group retG = CreateGroup()
+		for unit u in circleGroup
+			vec2 pos = u.getPos()
+			real factor = distanceAlongLine(start, finish, pos) / start.distToVec(finish)
+			if distanceToLine(start, finish, pos) <= finalthickness * factor
+				retG.addUnit(u)
+		circleGroup.destr()
+		return retG
+		
+	// Gets units around the line with two circles
+	function twoCircles(vec2 start, vec2 finish) returns group
+		real dist = start.distToVec(finish)
+		location startLoc = start.asLoc()
+		location finishLoc = start.asLoc()
+		group startG = GetUnitsInRangeOfLocAll(dist, startLoc)
+		group finishG = GetUnitsInRangeOfLocAll(dist, finishLoc)
+		startLoc.remove()
+		finishLoc.remove()
+		group newG = startG.intersect(finishG)
+		startG.destr()
+		finishG.destr()
+		return newG
+		
+	/** Calculates the distance of a point to a line */
+	function distanceToLine(vec2 start, vec2 finish, vec2 loc) returns real
+		// The angle to the testing location
+		angle degLoc = start.angleTo(loc)
+		// The angle of the line
+		angle degLine = start.angleTo(finish)
+		// Angle between the lines
+		real alpha = (degLoc - degLine).radians()
+		if alpha < 0
+			alpha *= -1
+		real hypoLength = start.distToVec(loc)
+		real r = alpha.sin() * hypoLength
+		if r < 0
+			r += -1
+		return r
+		
+	/** Calculates the length along a line to a perpendicular point */
+	function distanceAlongLine(vec2 start, vec2 finish, vec2 loc) returns real
+		// The angle to the testing location
+		angle degLoc = start.angleTo(loc)
+		// The angle of the line
+		angle degLine = start.angleTo(finish)
+		// Angle between the lines
+		angle alpha = degLoc - degLine
+		real hypoLength = start.distToVec(loc)
+		real r = alpha.cos() * hypoLength
+		return r

@@ -1,0 +1,50 @@
+package MountFelHound
+	import Unit
+	import TargetChecker
+	import TargetRestrictors
+	import MouseTargetRestriction
+	import ArrayList
+
+	integer BRUTE2_ID = 'n01C'
+	integer HOUND_ID = 'u00K'
+	integer MOUNT_ID = 'A03X'
+	integer DMG_ID = 'A029'
+	integer MARAUDER_ID = 'o00J'
+	string ORDER = "charm"
+	string ERROR = "You must target a Fel Hound"
+	
+	init
+		CreateTrigger()
+			..registerAnyUnitEvent(EVENT_PLAYER_UNIT_SPELL_EFFECT)
+			..addAction(function actions)
+			..addCondition(Condition(function conditions))
+		// Some hoops to build the target restriction
+		ArrayList<int> targets = new ArrayList<int>()
+		targets.add(HOUND_ID)
+		TypeList tl = new TypeList(ERROR, targets)
+		TargetChecker tr = new TargetChecker()
+			..addRestriction(Restrictions.Summoned)
+			..addRestrictionDirect(tl)
+		new MouseTargetRestriction(BRUTE2_ID, ORDER, tr)
+		
+	function conditions() returns bool
+		return GetSpellAbilityId() == MOUNT_ID
+		
+	function actions()
+		unit caster = GetSpellAbilityUnit()
+		player owner = caster.getOwner()
+		unit target = GetSpellTargetUnit()
+		vec2 loc = target.getPos()
+		int level = caster.getAbilityLevel(DMG_ID)
+		angle facing = caster.getFacingAngle()
+		real hp = caster.getHP() / caster.getMaxHP()
+		hp += target.getHP() / target.getMaxHP()
+		hp /= 2
+		
+		caster.remove()
+		target.remove()
+		
+		unit n = createUnit(owner, MARAUDER_ID, loc, facing)
+		n.addAbility(DMG_ID)
+		n.setAbilityLevel(DMG_ID, level)
+		n.setHP(n.getMaxHP() * hp)

@@ -1,0 +1,40 @@
+// Based on the Table class
+// Uses the unitID as parentKey to be able to flush all unit data
+package UnitTable
+	import Hashtable
+
+	init
+		CreateTrigger()
+			..registerAnyUnitEvent(EVENT_PLAYER_UNIT_DEATH)
+			..addAction(function actions)
+
+	// Glush on death
+	function actions()
+		UnitTable.flush(GetTriggerUnit())
+	
+	public class UnitTable
+		private static hashtable ht = InitHashtable()
+		
+		static function flush( unit u )
+			FlushChildHashtable(ht, u.getHandleId())
+		
+		// Unit
+		function saveUnit( unit u, unit value )
+			ht.saveUnitHandle( u.getHandleId(), this castTo int, value )
+			
+		function loadUnit( unit u ) returns unit
+			return ht.loadUnitHandle( u.getHandleId(), this castTo int )
+		
+		// Real
+		function saveReal( unit u, real value )
+			ht.saveReal(u.getHandleId(), this castTo int, value)
+			
+		function loadReal( unit u ) returns real
+			return ht.loadReal( u.getHandleId(), this castTo int )
+			
+		// Int
+		function saveInt( unit u, int value )
+			ht.saveInt(u.getHandleId(), this castTo int, value)
+			
+		function loadInt( unit u ) returns int
+			return ht.loadInt( u.getHandleId(), this castTo int )

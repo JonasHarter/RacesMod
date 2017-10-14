@@ -1,0 +1,161 @@
+package Cuff
+	import ArrayList
+	import UnitIndexer2
+	import ClosureTimers
+	import Timer
+	
+	/**
+		Cuff
+			A system that extenda the current Warcraft 3 buffs.
+			
+			See examples for usage.
+			
+			Limitations:
+				Two buffs based on the same ability won't stack on a unit but rather remove both
+	**/
+	public class Cuff
+
+		// Variables that determine when the system will treat a unit as buffed
+		// Buffs can be added via addBuff, the condition function has to be overwritten
+		// If both condition and buffs are in use, conditions will be interpreted as boolean
+		// If both are false, it will always run
+		private bool useBuffs = true
+		private bool useCondition = false
+		
+		// How all abilities will be added
+		// False: All added and set to the level
+		// True: Each ability stands for one level
+		private bool abilitiesStacked = false
+		
+		
+		private ArrayList<integer> buffs = new ArrayList<integer>()
+		private ArrayList<integer> abilities = new ArrayList<integer>()
+		// Tracks applied units and the cuff level
+		private integer array[JASS_MAX_ARRAY_SIZE] level
+		
+		private timer refreshTimer
+		// At what speed the cuff refreshes
+		private constant static real refreshTimerIntervall = 1.0
+		private real refreshTimerCounter = 0.0
+		
+		construct()
+			time()
+					
+		construct(bool useBuffs, bool useCondition, bool abilitiesStacked)
+			this.useBuffs = useBuffs
+			this.useCondition = useCondition
+			this.abilitiesStacked = abilitiesStacked
+			time()
+		
+		/** Starts the loop of the cuff after a delay to stagger them. **/
+		function time()
+			refreshTimer = CreateTimer()
+			refreshTimer.setData(this castTo int)
+			real delay = (this castTo int) / 10
+			doAfter(delay, () -> this.refreshTimer.startPeriodic(refreshTimerIntervall, () -> GetExpiredTimer().getData() castTo Cuff.run()))
+			
+		/** Stores the level off the Cuff on the unit under its ID **/
+		function storeLevel(unit u, int value)
+			level[u.getIndex()] = value
+			
+		function loadLevel(unit u) returns int
+			return level[u.getIndex()]
+			
+		/** The Main function. Checks the state of each unit and what cuff function to call **/
+		function run()
+			// TimerCheck
+			bool timerCheck = false
+			this.refreshTimerCounter += refreshTimerIntervall
+			if(this.refreshTimerCounter >= 1.0)
+				timerCheck = true
+				this.refreshTimerCounter -= 1.0
+			// All unit loop
+			group allUnits = GetUnitsInRectAll(GetPlayableMapRect())
+			for unit u in allUnits
+				int lastLvl = this.loadLevel(u)
+				int curLvl = this.getLevel(u)
+				if curLvl != 0
+					if lastLvl == 0
+						this.start(u, curLvl)
+						this.storeLevel(u, curLvl)
+					else if lastLvl != curLvl
+						this.finish(u, lastLvl)
+						this.storeLevel(u, curLvl)
+						this.start(u, curLvl)
+					else if timerCheck
+						this.running(u, curLvl)
+				else if lastLvl > 0
+					this.finish(u, lastLvl)
+					this.storeLevel(u, 0)
+			allUnits.destr()
+			
+		/** For overwrite. Checks wether a unit satisfies the condition **/
+		function condition(unit target) returns integer
+			return 0
+		
+		function addBuff(int b)
+			buffs.add(b)
+			
+		function addAbility(int a)
+			abilities.add(a)
+		
+		/** Checks wether a unit has the buff or satisfies the condition **/
+		function getLevel(unit u) returns int
+			// Condition
+			int cond = 0
+			if this.useCondition
+				cond = this.condition(u)
+			// Bound Buffs
+			// BuffLevel starts at 1
+			// Result will be the highest level
+			int buffs = 0
+			if this.useBuffs
+				int i = 0
+				for int b in this.buffs
+					i++
+					if u.hasAbility(b)
+						buffs = i
+            // Return the correct value
+			if useCondition and not(useBuffs)
+				return cond
+			else if useBuffs and not(useCondition)
+				return buffs
+			else if useCondition and useBuffs and cond > 0
+				return buffs
+			else if not(useBuffs) and not(useCondition)
+				return 1
+			else
+				return 0
+				
+        /* Runs if the buff is new on the unit **/
+		function start(unit target, integer level)
+			// Add abilites
+			if abilities.getSize() > 0
+				if abilitiesStacked
+					target.addAbility(abilities.get(level - 1))
+				else
+					for int a in abilities
+						target.addAbility(a)
+						target.setAbilityLevel(a, level)
+			apply(target, level)
+				
+		/** Called by start. Overwrite. **/
+		function apply(unit target, integer level)
+			skip
+			
+        /* Runs each second. Overwrite.**/
+		function running(unit target, integer level)
+			skip
+
+        /* Runs if the buff is gone. **/
+		function finish(unit target, integer level)
+			if abilities.getSize() != 0
+				for int a in abilities
+					target.removeAbility(a)
+			clean(target, level)
+			
+		/** Called by finish. Overwrite. **/
+		function clean(unit target, integer level)
+			skip
+	
+endpackage

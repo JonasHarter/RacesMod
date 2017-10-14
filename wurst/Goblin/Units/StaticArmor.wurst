@@ -1,0 +1,26 @@
+package StaticArmor
+	import DummyCaster
+
+	let TECH_ID = 'R00D'
+	let TECH_ABILITY = 'A00F'
+	let SPELL_ID = 'A00S'
+	let ORDER = "purge"
+
+	init
+		CreateTrigger()
+			..registerAnyUnitEvent( EVENT_PLAYER_UNIT_ATTACKED )
+			..addCondition( Condition( function conditions ) )
+			..addAction( function actions )
+			
+	function conditions() returns bool
+		let attacked = GetAttackedUnitBJ()
+		let b1 = GetPlayerTechCountSimple(TECH_ID, attacked.getOwner()) >= 1
+		let b2 = GetRandomInt(1, 100) > 90
+		let b3 = attacked.hasAbility(TECH_ABILITY)
+		return b1 and b2 and b3
+		
+	function actions()
+		let attacker = GetAttacker()
+		let owner = GetAttackedUnitBJ().getOwner()
+		DummyCaster d = new DummyCaster(SPELL_ID, ORDER, owner, true)
+		d.castOnTarget(attacker)

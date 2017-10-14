@@ -1,0 +1,26 @@
+package Blightning
+	import DummyCaster
+
+	int B_SPELL_ID = 'A03G'
+	int B_ITEM_ID = 'A04C'
+	int B_BUFF = 'B00B'
+	int STUN_ID = 'A04D'
+	string STUN_ORDER = "thunderbolt"
+	
+	init
+		CreateTrigger()
+			..registerAnyUnitEvent(EVENT_PLAYER_UNIT_SPELL_EFFECT)
+			..addAction(function actions)
+			..addCondition(Condition(function conditions))
+			
+	function conditions() returns boolean
+		int i = GetSpellAbilityId()
+		return i == B_SPELL_ID or i == B_ITEM_ID
+		
+	function actions()
+		unit u = GetTriggerUnit()
+		unit target = GetSpellTargetUnit()
+		if( not(target.hasAbility(B_BUFF)))
+			return
+		DummyCaster d = new DummyCaster(STUN_ID, STUN_ORDER, u.getOwner(), true)
+		d.castOnTarget(target)

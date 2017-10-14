@@ -1,0 +1,13 @@
+package OrbOfAzshara
+	import Cuff
+
+	real manaLoss = 5.0
+
+	init
+		OrbOfAzshara x = new OrbOfAzshara()
+		x.addBuff('B01V')
+		
+	class OrbOfAzshara extends Cuff
+			
+		override function running(unit target, integer level)
+			target.addMana(-1 * manaLoss)

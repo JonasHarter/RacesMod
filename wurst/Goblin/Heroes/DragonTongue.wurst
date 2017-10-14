@@ -1,0 +1,43 @@
+package DragonTongue
+	import TargetChecker
+	import AoE
+	import Location2
+	import Burn
+	import Unit2
+
+	let SPELL_ID = 'A00J'
+	TargetChecker TARGETS = new TargetChecker()
+			..addRestriction(Restrictions.Ally)
+			..addRestriction(Restrictions.Structure)
+	
+	function damage(int level) returns real
+		return level * 60.0
+
+	function length(int level) returns real
+		return 800.0
+		
+	function width(int level) returns real
+		return 105.0
+		
+	init
+		CreateTrigger()
+			..registerAnyUnitEvent( EVENT_PLAYER_UNIT_SPELL_EFFECT )
+			..addCondition( Condition( function conditions ) )
+			..addAction( function actions )
+			
+	function conditions() returns bool
+		return GetSpellAbilityId() == SPELL_ID
+		
+	function actions()
+		let caster = GetTriggerUnit()
+		let level = caster.getAbilityLevel(SPELL_ID)
+		let start = caster.getPos()
+		var target = GetSpellTargetLoc().asVec2(true)
+		target = start.polarOffset(start.angleTo(target), length(level))
+		let targets = getUnitsAlongLine(caster.getPos(), target, width(level))
+		let damage = damage(level)
+		for u in targets
+			if TARGETS.checkRestriction(caster, u).result
+				caster.damageTargetSpell(u, damage)
+				burn(u, caster.getOwner(), level)
+		targets.destr()

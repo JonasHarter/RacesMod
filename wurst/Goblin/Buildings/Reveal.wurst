@@ -1,0 +1,24 @@
+package Reveal
+	import DummyCaster
+	import Location2
+
+	int SPELL_ID = 'A00A'
+	int REVEAL_ID = 'A00E'
+	string REVEAL_ORDER = "farsight"
+
+	init
+		CreateTrigger()
+			..registerAnyUnitEvent(EVENT_PLAYER_UNIT_SPELL_EFFECT)
+			..addCondition(Condition(function conditions ))
+			..addAction(function actions)
+			
+	function conditions() returns bool
+		return GetSpellAbilityId() == SPELL_ID
+
+	function actions()
+		unit caster = GetTriggerUnit()
+		player owner = caster.getOwner()
+		vec2 target = GetSpellTargetLoc().asVec2(true)
+		DummyCaster d = new DummyCaster(REVEAL_ID, REVEAL_ORDER, owner, true)
+		d.castOnPoint(target)
+		

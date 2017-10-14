@@ -1,0 +1,5 @@
+Which Spells use which Buffs
+Goblin
+Naga
+Demon
+Neutral

@@ -1,0 +1,4 @@
+!!file.WurstProjectConfig
+dependencies: ['https://github.com/wurstscript/wurstStdlib2']
+projectName: RacesMod
+releaseName:RacesModRelease.w3x

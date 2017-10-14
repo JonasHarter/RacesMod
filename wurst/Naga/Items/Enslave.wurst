@@ -1,0 +1,16 @@
+package Enslave
+
+	let AB_ID = 'A03W'
+	let UNIT_ID = 'n00P'
+
+	init
+		CreateTrigger()
+			..registerAnyUnitEvent(EVENT_PLAYER_UNIT_SPELL_EFFECT)
+			..addCondition(Condition(function conditions ))
+			..addAction(function actions)
+			
+	function conditions() returns bool
+		return GetSpellAbilityId() == AB_ID
+
+	function actions()
+		ReplaceUnitBJ( GetSpellTargetUnit(), UNIT_ID, bj_UNIT_STATE_METHOD_RELATIVE )

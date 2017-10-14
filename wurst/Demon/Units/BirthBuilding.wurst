@@ -1,0 +1,75 @@
+package BirthBuilding
+	import Demon
+	import ArrayList
+	import Table
+	import Colors
+	
+	string EFFECT_STR = "Demon\\UBirth.MDX"
+	Table effects = new Table()
+	int TRANSPARENCY = 75
+	
+	init
+		Preload(EFFECT_STR)
+
+		CreateTrigger()
+		..registerAnyUnitEvent( EVENT_PLAYER_UNIT_CONSTRUCT_START )
+			..addCondition( Condition( function startC ) )
+			..addAction( function start )
+		CreateTrigger()
+			..registerAnyUnitEvent( EVENT_PLAYER_UNIT_CONSTRUCT_FINISH )
+			..addCondition( Condition( function finishC ) )
+			..addAction( function finish )
+		CreateTrigger()
+			..registerAnyUnitEvent( EVENT_PLAYER_UNIT_DEATH )
+			..addCondition( Condition( function deathC ) )
+			..addAction( function death )
+			
+	// Start ****************************************************
+	
+	function startC() returns boolean
+		int u = GetConstructingStructure().getTypeId()
+		ArrayList<int> buildings = DemonBuildings()
+		for int i in buildings
+			if u == i
+				return true
+		return false
+		
+	function start()
+		unit u = GetConstructingStructure()
+		int i = u.getHandleId()
+		vec2 loc = u.getPos()
+		effect e = addEffect(EFFECT_STR, loc)
+		u.setVertexColor(colorA(255, 255, 255, TRANSPARENCY))
+		effects.saveEffect(i, e)
+		
+	// Finish ****************************************************
+	
+	function finishC() returns boolean
+		int u = GetConstructedStructure().getTypeId()
+		ArrayList<int> buildings = DemonBuildings()
+		for int i in buildings
+			if u == i
+				return true
+		return false
+		
+	function finish()
+		unit u = GetConstructedStructure()
+		int i = u.getHandleId()
+		u.setVertexColor(colorA(255, 255, 255, 255))
+		effect e = effects.loadEffect(i)
+		e.destr()
+		
+	// Death ****************************************************
+	
+	function deathC() returns boolean
+		int u = GetDyingUnit().getTypeId()
+		ArrayList<int> buildings = DemonBuildings()
+		for int i in buildings
+			if u == i
+				return true
+		return false
+		
+	function death()
+		int i = GetDyingUnit().getHandleId()
+		effect e = effects.loadEffect(i)
+		e.destr()

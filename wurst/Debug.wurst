@@ -1,0 +1,4 @@
+package Debug
+
+	init
+		SetTimeOfDay( 17.30 )

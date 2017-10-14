@@ -1,0 +1,55 @@
+package SoulBond
+	import UnitTable
+	import Cuff
+
+	int SOUL_ID = 'A03H'
+	real MAX_DIST = 500.0
+	//int HEAL_AB = 'A04V'
+	int HEAL_SB = 'A04T'
+	UnitTable soulTable = new UnitTable()
+
+	init
+		CreateTrigger()
+			..registerAnyUnitEvent(EVENT_PLAYER_UNIT_SPELL_EFFECT)
+			..addAction(function actions)
+			..addCondition(Condition(function conditions))
+		SoulBondCuff sbc = new SoulBondCuff()
+		for player p in GetPlayersAll()
+			p.setAbilityAvailable( HEAL_SB, false)
+        
+
+	function conditions() returns bool
+		return GetSpellAbilityId() == SOUL_ID
+
+	function actions()
+		unit target = GetSpellTargetUnit()
+		unit caster = GetTriggerUnit()
+		soulTable.saveUnit(caster, target)
+		
+		
+	class SoulBondCuff extends Cuff
+			
+		construct()
+			super(false, true, false)
+		
+		override function condition(unit target) returns integer
+			if target.hasAbility(SOUL_ID)
+				return 1
+			return 0
+			
+		override function running(unit target, integer level)
+			// Get the other unit
+			unit soulmate = soulTable.loadUnit(target)
+			if soulmate == null
+				return
+			// Check distance
+			real dist = soulmate.getPos().distToVec(target.getPos())
+			if dist > MAX_DIST
+				soulmate.removeAbility(HEAL_SB)
+				target.removeAbility(HEAL_SB)
+				return
+			// Set abilities
+			if not target.hasAbility(HEAL_SB)
+				target.addAbility(HEAL_SB)
+			if not soulmate.hasAbility(HEAL_SB)
+				soulmate.addAbility(HEAL_SB)

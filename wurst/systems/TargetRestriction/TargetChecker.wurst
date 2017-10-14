@@ -1,0 +1,55 @@
+package TargetChecker
+	import ArrayList
+	import TargetRestrictors
+	
+	/**	Return class for TargetChecker
+		Contains the result and an optional error message **/
+	tuple result(bool result, string error)
+	
+	/** The possible conditions the TargetCheck can test **/
+	// For explanations check the actual classes in TargetRestrictors
+	public enum Restrictions
+		Flying
+		Ground
+		Structure
+		Ally
+		Summoned
+		MagicImmune
+		Invincible
+		
+	/** Class that allows checking wether units satifiy certain targeting restrictions.
+		Basically a fancy array for TargetRestrictors **/
+	public class TargetChecker
+	
+		private ArrayList<TargetRestrictor> restrictor = new ArrayList<TargetRestrictor>()
+	
+		/** Directly add a restriction to the Checker **/
+		function addRestriction(Restrictions c)
+			switch c
+				case Restrictions.Flying
+					restrictor.add(new Flying())
+				case Restrictions.Ground
+					restrictor.add(new Ground())
+				case Restrictions.Structure
+					restrictor.add(new Structure())
+				case Restrictions.Ally
+					restrictor.add(new Ally())
+				case Restrictions.Summoned
+					restrictor.add(new Summoned())
+				case Restrictions.MagicImmune
+					restrictor.add(new MagicImmune())
+				case Restrictions.Invincible
+					restrictor.add(new Invincible())
+				default
+					print("TargetChecker.add called with unknown type")
+					
+		/** Adds a restriction that lack configuration via the enum to the Checker **/
+		function addRestrictionDirect(TargetRestrictor c)
+			restrictor.add(c)
+		
+		/** Checks wether a unit violates any restrictions. True means all good **/
+		function checkRestriction(unit source, unit target) returns result
+			for TargetRestrictor tc in restrictor
+				if tc.check(source, target)
+					return result(false, tc.error)
+			return result(true, "")

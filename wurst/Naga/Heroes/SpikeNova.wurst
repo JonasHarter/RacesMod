@@ -1,0 +1,81 @@
+package SpikeNova
+	import Vectors2
+	import Location2
+	import TargetChecker
+	import ArrayList
+	import DummyCaster
+	import Unit2
+	import Group2
+
+	let AB_ID = 'A024'
+	let SS_ID = 'A025'
+	string SS_O = "shadowstrike"
+	let RANGE = 600.0
+	let maxAmountPerTarget = 3
+	TargetChecker check
+
+	function targetAmount(integer level) returns integer
+		return 3 + level * 2
+    
+	function damage(integer level) returns real
+		return 30.0 + level * 10
+		
+	init
+		check = new TargetChecker()
+			..addRestriction(Restrictions.Ally)
+			..addRestriction(Restrictions.Structure)
+			..addRestriction(Restrictions.MagicImmune)
+			..addRestriction(Restrictions.Invincible)
+		CreateTrigger()
+			..registerAnyUnitEvent(EVENT_PLAYER_UNIT_SPELL_EFFECT)
+			..addCondition(Condition(function conditions ))
+			..addAction(function actions)
+			
+	function conditions() returns bool
+		return GetSpellAbilityId() == AB_ID
+
+	function actions()
+		let caster = GetTriggerUnit()
+		let level = caster.getAbilityLevel(AB_ID)
+		location loc = caster.getPos().asLoc()
+		group allTargets = GetUnitsInRangeOfLocAll(RANGE, loc)
+		loc.remove()
+		if allTargets.getSize() == 0
+			allTargets.destr()
+			return
+		// Get targets
+		ArrayList<unit> validTargets = new ArrayList<unit>()
+		ArrayList<int> validTargetsCounter = new ArrayList<int>()
+		for u in allTargets
+			if check.checkRestriction(caster, u).result
+				validTargets.add(u)
+				validTargetsCounter.add(0)
+		allTargets.destr()
+		if validTargets.getSize() == 0
+			destroy validTargets
+			destroy validTargetsCounter
+			return
+		// Assign amounts
+		let amount = targetAmount(level)
+		int i = 1
+		while i <= amount and i <= validTargets.getSize() * maxAmountPerTarget
+			let rand = GetRandomInt(0, validTargets.getSize() - 1)
+			let cur = validTargetsCounter.get(rand)
+			if cur < maxAmountPerTarget
+				validTargetsCounter.set(rand, cur + 1)
+				i++
+		// Damage
+		int h = 0
+		DummyCaster d = new DummyCaster(SS_ID, SS_O, caster.getOwner(), false)
+		d.setSourcePoint(caster.getPos3())
+		for j = 0 to validTargets.getSize() - 1
+			for k = 1 to validTargetsCounter.get(j)
+				h++
+				print("!" + h.toString())
+				let target = validTargets.get(j)
+				d.castOnTarget(target)
+				caster.damageTargetSpell(target, damage(level))
+		destroy validTargets
+		destroy validTargetsCounter
+		
+	

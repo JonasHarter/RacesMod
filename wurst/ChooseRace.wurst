@@ -1,0 +1,65 @@
+package ChooseRace
+	import Dialog2
+	import StartingPosition
+
+	init
+		CreateTrigger()
+			..registerTimerEvent(0.1, false)
+			..addAction(function BuildDialog)
+		CreateTrigger()
+			..registerTimerEvent(1.0, false)
+			..addAction(function ShowDialog)
+			
+	dialog RaceDialog = DialogCreate()
+	button array RaceButtons
+	
+	function BuildDialog()
+		RaceDialog.clear()
+		RaceDialog.setHeading("Choose your race")
+		RaceButtons[0] = RaceDialog.addButton("|cff0042FF Human |r")
+		RaceButtons[1] = RaceDialog.addButton("|cffFF0303 Orc |r")
+		RaceButtons[2] = RaceDialog.addButton("|cff1CE6B9 Nightelf |r")
+		RaceButtons[3] = RaceDialog.addButton("|cff540081 Undead |r")
+		RaceButtons[4] = RaceDialog.addButton("|cffFFFC01 Goblin |r")
+		RaceButtons[5] = RaceDialog.addButton("|cffFEBA0E Demon |r")
+		RaceButtons[6] = RaceDialog.addButton("|cff20C000 Naga |r")
+		CreateTrigger()
+			..registerDialogEvent(RaceDialog)
+			..addAction(function DialogClick)
+		/*
+		|c00E55BB0Player 8|r
+		|c00959697Player 9|r
+		|c007EBFF1Player 10|r
+		|c00106246Player 11|r
+		|c004E2A04Player 12|r
+		*/
+		
+	function ShowDialog()
+		for int i = 0 to bj_MAX_PLAYERS
+			let p = Player(i)
+			// Is player playing
+			if(IsPlayerSlotState(p, PLAYER_SLOT_STATE_PLAYING))
+				// is player human
+				if(GetPlayerController(p) == MAP_CONTROL_USER)
+					RaceDialog.show(p)
+				else if(GetPlayerController(p) == MAP_CONTROL_COMPUTER)
+					skip
+					
+				
+	function DialogClick()
+		let p = GetTriggerPlayer()
+		let b = GetClickedButton()
+		Races r = Races.Human
+		if(b == RaceButtons[1])
+			r = Races.Orc
+		else if(b == RaceButtons[2])
+			r = Races.NightElf
+		else if(b == RaceButtons[3])
+			r = Races.Undead
+		else if(b == RaceButtons[4])
+			r = Races.Goblin
+		else if(b == RaceButtons[5])
+			r = Races.Demon
+		else if(b == RaceButtons[6])
+			r = Races.Naga
+		CreateStartingUnits(p, r)

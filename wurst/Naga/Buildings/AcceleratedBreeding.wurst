@@ -1,0 +1,30 @@
+package AcceleratedBreeding
+	import ArrayList
+
+	integer UPG_ID = 'R00I'
+	// Trainable murlocs only
+	ArrayList<int> murlocs = new ArrayList<int>()
+
+	init
+		CreateTrigger()
+			..registerAnyUnitEvent(EVENT_PLAYER_UNIT_TRAIN_FINISH)
+			..addCondition(Condition(function conditions ))
+			..addAction(function actions)
+		murlocs.add('n00P') // Slave
+		murlocs.add('n00Q') // Reaver
+		murlocs.add('o00E') // Bloodgill
+		
+	function conditions() returns bool
+		let u = GetTrainedUnit()
+		let ut = GetUnitTypeId(u)
+		let b1 = GetPlayerTechCountSimple(UPG_ID, GetTriggerPlayer()) > 0
+		var b2 = false
+		for i in murlocs
+			if i == ut
+				b2 = true
+		return b1 and b2
+		
+	function actions()
+		let u = GetTrainedUnit()
+		let nu = createUnit(u.getOwner(), u.getTypeId(), u.getPos(), u.getFacingAngle())
+		nu.issueTargetOrder("move", u)

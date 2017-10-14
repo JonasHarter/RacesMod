@@ -1,0 +1,113 @@
+package RocketJump
+	import ArrayList
+	import Location2
+	import Basics2
+	import FreeLoc
+	import DummyCaster
+
+	let SPELL_ID = 'A01N'
+	let loopTick = 0.01
+	
+	init
+		CreateTrigger()
+			..registerAnyUnitEvent(EVENT_PLAYER_UNIT_SPELL_EFFECT)
+			..addCondition(Condition(function conditions ))
+			..addAction(function actions)
+		CreateTrigger()
+			..registerTimerEvent(loopTick, true)
+			..addAction(function flyLoop)
+		Preload(FlyingUnit.EFFECT)
+
+	function conditions() returns bool
+		return GetSpellAbilityId() == SPELL_ID
+
+	function actions()
+		let caster = GetTriggerUnit()
+		let target = GetSpellTargetLoc().asVec2(true)
+		FlyingUnit.register(caster, target)
+		
+	function flyLoop()
+		FlyingUnit.tick()
+		
+	class FlyingUnit
+		
+		private static ArrayList<FlyingUnit> flyingUnits = new ArrayList<FlyingUnit>(1)
+		static let distPerStep = 10.0
+		static let heightPerStep = 10.0
+		static let EFFECT = "Goblin\\FireBlast.mdx"
+		static let CLAP_ID = 'A01P'
+		static let CLAP_O = "stomp"
+				
+		static function register(unit u, vec2 target)
+			FlyingUnit fu = new FlyingUnit(u, target)
+			flyingUnits.add(fu)
+			
+		static function tick()
+			if flyingUnits.getSize() <= 0
+				return
+			// Simply calling remove doesn't seem to work
+			/*for fu in flyingUnits
+				fu.move()
+				if fu.finish
+					fu.clear()
+					flyingUnits.remove(fu)*/
+			for i = 0 to flyingUnits.getSize() - 1
+				let fu = flyingUnits.get(i)
+				fu.move()
+				if fu.finish
+					fu.clear()
+					flyingUnits.removeAt(i)
+					destroy fu
+				
+
+		//##########
+		unit flyer
+		vec2 loc
+		vec2 target
+		int currentStep = 0
+		real currentHeight = 0
+		int finalStep
+		int midStep
+		bool finish = false
+		int level
+			
+		private construct(unit u, vec2 target)
+			u.addAbility(HEIGHT_ENABLER)
+			u.removeAbility(HEIGHT_ENABLER)
+			u.setPathing(false)
+			u.addAbility(INVULNERABILITY)
+			loc = u.getPos()
+			let dist = loc.distToVec(target)
+			finalStep = (dist / distPerStep).toInt()
+			midStep = (finalStep / 2).toInt()
+			this.target = getFreeLocation(target) 
+			flyer = u
+			
+		private function move()
+			if finish
+				return
+			currentStep++
+			// Adjust FlyHeight
+			if currentStep < midStep
+				currentHeight += heightPerStep
+			else
+				currentHeight -= heightPerStep
+			flyer.setFlyHeight(currentHeight, 0)
+			// Effect
+			AddSpecialEffectTargetUnitBJ( "origin", flyer, EFFECT).destr()
+			// Pos
+			loc = loc.moveTowards(target, distPerStep)
+			flyer.setPos(loc)
+			// Done
+			finish = target.distToVec(loc) < distPerStep * 2
+			return
+			
+		private function clear()
+			flyer.setPathing(true)
+			flyer.setPos(target)
+			flyer.setFlyHeight(0, 0)
+			flyer.removeAbility(INVULNERABILITY)
+			DummyCaster d = new DummyCaster(CLAP_ID, CLAP_O, flyer.getOwner(), true)
+			d.setLevel(flyer.getAbilityLevel(SPELL_ID))
+			d.castInPoint(target)
+		

@@ -1,0 +1,41 @@
+package DemoicKiss
+	import Unit2
+	import DummyCaster
+
+	int KISS_ID = 'A04M'
+	real HP_PER_LEVEL = 120.0
+	int BUFF_SPELL = 'A04N'
+	string BUFF_ORDER = "unholyfrenzy"
+
+	init
+		// SpellTrigger
+		CreateTrigger()
+			..registerAnyUnitEvent(EVENT_PLAYER_UNIT_SPELL_EFFECT)
+			..addAction(function actions)
+			..addCondition(Condition(function conditions))
+		/* Buff
+		Cuff x = new Cuff()
+		x.addBuff(BUFF_ID)
+		x.addAbility(AB_ID)*/
+		
+	function conditions() returns bool
+		return GetSpellAbilityId() == KISS_ID
+		
+	function actions()
+		unit target = GetSpellTargetUnit()
+		unit caster = GetSpellAbilityUnit()
+		int level = caster.getAbilityLevel(KISS_ID)
+		// Unnatural -> Buff
+		if( target.isUnitType(UNIT_TYPE_UNDEAD) )
+			DummyCaster d = new DummyCaster(BUFF_SPELL, BUFF_ORDER, caster.getOwner(), true)
+			d.setLevel(level)
+			d.castOnTarget(target)
+		// Living -> Dmg/Heal
+		else
+			real amount = level * HP_PER_LEVEL
+			real targetHP = target.getHP()
+			// Actual lifeloss instead of dmg
+			target.addHP(-amount)
+			if(targetHP < amount)
+				amount = targetHP
+			caster.addHP(amount)

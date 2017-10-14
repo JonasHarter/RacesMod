@@ -1,0 +1,18 @@
+package RiotSpikes
+	import Cuff
+
+	int BUFF_ID = 'B020'
+	int AB_ID = 'A04J'
+	real DMG = 30
+
+	init
+		RiotSpikesCuff x = new RiotSpikesCuff()
+		x.addBuff(BUFF_ID) 
+		x.addAbility(AB_ID)
+		for player p in GetPlayersAll()
+			p.setAbilityAvailable(AB_ID, false)
+
+	class RiotSpikesCuff extends Cuff
+			
+		override function apply(unit target, integer level)
+			target.addHP(-DMG)

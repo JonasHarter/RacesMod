@@ -1,0 +1,8 @@
+package FreeLoc
+	
+	/** Finds a free location closest to target location */
+	public function getFreeLocation(vec2 loc) returns vec2
+		let i = CreateItem('afac', loc.x, loc.y)
+		let newLoc = i.getPos()
+		i.remove()
+		return newLoc

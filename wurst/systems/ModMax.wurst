@@ -1,0 +1,70 @@
+
+// Allows modifying units max health and mana as well as maintaining the old value
+//TODO compiletime createAbilities
+package ModMax
+	// Ability that gains
+	// 1: 50
+	// 2: 49
+	// 3: 40
+	// 4: 0
+	// 5: 51
+	// 6: 60
+	// 7: 100
+	// HP or Mana
+	integer HP_ID = 'A020'
+	integer MANA_ID = 'A01T'
+	enum State
+		LIFE
+		MANA
+	
+	public function unit.modMaxHP(int amount, bool keepOldValue)
+		if(keepOldValue)
+			modMax(this, amount, State.LIFE, this.getHP())
+		else
+			modMax(this, amount, State.LIFE, 0)
+		
+	public function unit.modMaxMana(int amount, bool keepOldValue)		
+		if(keepOldValue)
+			modMax(this, amount, State.MANA, this.getMana())
+		else
+			modMax(this, amount, State.MANA, 0)
+	
+	function modMax(unit u, int amount, State uState, real oldUnitState)
+		int i = amount
+		int targetLvl = 1
+		int ability_id = HP_ID
+		unitstate stateString = UNIT_STATE_LIFE
+		if( uState == State.LIFE)
+			ability_id = HP_ID
+			stateString = UNIT_STATE_LIFE
+		else if( uState == State.MANA )
+			ability_id = MANA_ID
+			stateString = UNIT_STATE_MANA
+		else
+			error("ModMax State")
+		while(i != 0)
+			u.addAbility(ability_id)
+			if( i >= 50)
+				targetLvl = 4
+				i -= 50
+			else if( i >= 10)
+				targetLvl = 3
+				i -= 10
+			else if( i >= 1)
+				targetLvl = 2
+				i -= 1
+			else if( i <= -50)
+				targetLvl = 7
+				i += 50
+			else if( i <= -10)
+				targetLvl = 6
+				i += 10
+			else if( i <= -1)
+				targetLvl = 5
+				i += 1
+			else
+				error("ModMax Loop")
+			u.setAbilityLevel(ability_id, targetLvl)
+			u.removeAbility(ability_id)
+		if(oldUnitState != 0)
+			SetUnitState(u, stateString, oldUnitState)

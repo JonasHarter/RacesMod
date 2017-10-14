@@ -1,0 +1,25 @@
+package FingerOfDeath
+	import PowerOverwhelming
+	import ClosureTimers
+	import Unit2
+
+	int FINGER_AB = 'A04O'
+	real MANABONUS_P_LEVEL = 60.0
+	real DMG = 500.0
+	
+	init
+		CreateTrigger()
+			..registerAnyUnitEvent(EVENT_PLAYER_UNIT_SPELL_EFFECT)
+			..addAction(function actions)
+			..addCondition(Condition(function conditions))
+
+	function conditions() returns bool
+		return GetSpellAbilityId() == FINGER_AB
+
+	function actions()
+		unit caster = GetTriggerUnit()
+		unit target = GetSpellTargetUnit()
+		caster.damageTargetUltimate(target, DMG)
+		if caster.hasAbility(POWER_BUFF)
+			int bonusLevel = caster.getAbilityLevel(POWER_AB)
+			doAfter(0.5, () -> caster.addMana(bonusLevel * MANABONUS_P_LEVEL))

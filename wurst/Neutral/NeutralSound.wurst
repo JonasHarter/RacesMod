@@ -1,0 +1,32 @@
+package NeutralSound
+	import UnitSound
+
+	init
+		CreateTrigger()
+			..registerTimerEvent(1.0, false)
+			..addAction(function test)
+			
+	function test()
+		// Filibuster
+		let a = new UnitSound('N00T')
+		a.setOptions("Units\\Human\\HeroMountainKing\\HeroMountainKing", ".wav", false, 1.4)
+		a.setUnitSoundType(UnitSoundType.Death)
+		a.addUnitSound("Death")
+		a.setUnitSoundType(UnitSoundType.Ready)
+		a.addUnitSound("Pissed6")
+		a.setUnitSoundType(UnitSoundType.Warcry)
+		a.addUnitSound("YesAttack2")
+		a.setUnitSoundType(UnitSoundType.What)
+		a.addUnitSound("What1")
+		a.addUnitSound("What2")
+		a.addUnitSound("What3")
+		a.addUnitSound("What4")
+		a.setUnitSoundType(UnitSoundType.Yes)
+		a.addUnitSound("Yes1")
+		a.addUnitSound("Yes2")
+		a.addUnitSound("Yes3")
+		a.addUnitSound("Yes4")
+		a.setUnitSoundType(UnitSoundType.YesAttack)
+		a.addUnitSound("YesAttack1")
+		a.addUnitSound("YesAttack3")
+		a.addUnitSound("YesAttack4")

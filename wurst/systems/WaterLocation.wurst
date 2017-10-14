@@ -1,0 +1,21 @@
+package WaterLocation
+	import Vectors2
+	import Location2
+	
+	function vec2.isWaterDeep() returns bool
+		location loc = this.asLoc()
+		bool b1 = not(IsTerrainPathableBJ(loc, PATHING_TYPE_FLOATABILITY))
+		bool b2 = IsTerrainPathableBJ(loc, PATHING_TYPE_WALKABILITY)
+		bool b3 = IsTerrainPathableBJ(loc, PATHING_TYPE_BUILDABILITY)
+		loc.remove()
+		return b1 and b2 and b3
+		
+	function vec2.isWaterShallow() returns bool
+		location loc = this.asLoc()
+		bool b1 = not(IsTerrainPathableBJ(loc, PATHING_TYPE_FLOATABILITY))
+		bool b2 = not(IsTerrainPathableBJ(loc, PATHING_TYPE_WALKABILITY))
+		loc.remove()
+		return b1 and b2
+		
+	public function vec2.isWaterAll() returns bool
+		return this.isWaterDeep() or this.isWaterShallow()

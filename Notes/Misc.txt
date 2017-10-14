@@ -1,0 +1,42 @@
+>Races
+	Draenei, Corrupted, Scarlet Crusade, Nerubians, High Borne, Trolls
+
+>Random
+	getGlobal_NAME
+	Remember to destroy ClassInstances
+	Use constants where possible
+	last order for spelltarget restriction and murloc slaves
+	Aura items?
+	PoisonBuff doesn't stack!
+	Global Hashtable for 1 line-ht -> HashMap
+	Modify UnitAckSounds.slk instead of triggering
+	BuffList
+	Use loadmpq.lua to load custom soundsets
+	Check Hotkeys
+		Shrine of Azshara
+	Trigger
+		DmgDetection triggers twice
+		ArrayList.remove(x)
+		onLeave triggers when using a skill
+
+>SharpCraft & RenderEdge
+	Health+Mana Bars
+		Playercolored
+		Show when <100% or on hero
+	16:9
+	Observer Features?
+		Chat?
+	Stackable Buff?
+	Load MPQ - wc3mod.mpq?
+	BaseGameOverwork?
+		Buffs
+		Hotkeys
+	
+>Per Race
+	Interface
+		GUI
+		Ability Circle
+		Announcer Sounds
+		Command Buttons
+		Rally Button + Model
+		Background Music

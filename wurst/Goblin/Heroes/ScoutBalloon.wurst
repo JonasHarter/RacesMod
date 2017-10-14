@@ -1,0 +1,27 @@
+package ScoutBalloon
+	import Location2
+
+	let SPELL_ID = 'A01Q'
+	let UNIT_ID = 'h00E'
+	
+	function time(int level) returns real
+		return level * 30.0
+
+	init
+		CreateTrigger()
+			..registerAnyUnitEvent(EVENT_PLAYER_UNIT_SPELL_EFFECT)
+			..addCondition(Condition(function conditions ))
+			..addAction(function actions)
+			
+	function conditions() returns bool
+		return GetSpellAbilityId() == SPELL_ID
+
+	function actions()
+		let caster = GetTriggerUnit()
+		let target = GetSpellTargetLoc().asVec2(true)
+		let level = caster.getAbilityLevel(SPELL_ID)
+		let created = createUnit(caster.getOwner(), UNIT_ID, caster.getPos(), caster.getFacingAngle())
+		created.addAbility(LOCUST_ID)
+		created.removeAbility(LOCUST_ID)
+		created.issuePointOrder("move", target)
+		created.setTimedLife(time(level))

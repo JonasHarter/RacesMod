@@ -1,0 +1,21 @@
+package Haste
+	import DummyCaster
+
+	int HASTE_ID = 'A04Y'
+	int HASTE_B_ID = 'A04Z'
+	string HASTE_B_ORDER = "bloodlust"
+
+	init
+		CreateTrigger()
+			..registerAnyUnitEvent(EVENT_PLAYER_UNIT_SPELL_EFFECT)
+			..addAction(function actions)
+			..addCondition(Condition(function conditions))
+			
+	function conditions() returns boolean
+		return GetSpellAbilityId() == HASTE_ID
+		
+	function actions()
+		unit u = GetTriggerUnit()
+		unit target = GetSpellTargetUnit()
+		DummyCaster d = new DummyCaster(HASTE_B_ID, HASTE_B_ORDER, u.getOwner(), true)
+		d.castOnTarget(target)

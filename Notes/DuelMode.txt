@@ -1,0 +1,19 @@
+Automatically when 1 vs 1
+Observer Features
+	Announce events in Chat?
+	HealthBars
+Enforces Player colors
+	Primary		Race		Secondary
+	---------------------------------
+	Orc         Red         Orange
+	Human       Blue        Cyan
+	Night Elf   Cyan        DarkGreen
+	Undead      Purple      Green
+	Goblin		Yellow      Brown
+	Demon		Orange      Red
+	Naga	    Green       Pink
+	Elves		Pink        LightBLue
+	Forsaken	Gray        Purple
+	Dwarves     LightBLue   Blue
+	Gilneas     DarkGreen   Gray
+	Draenei     Brown       Yellow

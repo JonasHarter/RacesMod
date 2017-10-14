@@ -1,0 +1,51 @@
+package ToxicTrap
+	import ClosureTimers
+	import Location2
+	import Vectors2
+	import DummyCaster
+	import Cuff
+
+	constant int UNIT_ID = 'n01D'
+	constant string EFFECT = "Neutral\\ToxicField.mdx"
+	constant real RANGE = 300.0
+	
+	constant integer SKILL_ID = 'A05K'
+	constant string SKILL_O = "thunderclap"
+	
+	constant int BUFF = 'B02A'
+	constant real DPS = -5.0
+	
+	
+	init
+		ToxTrapCuff ttc = new ToxTrapCuff()
+			..addBuff(BUFF)
+		CreateTrigger()
+			..registerAnyUnitEvent(EVENT_PLAYER_UNIT_DEATH)
+			..addCondition(Condition(function condition))
+			..addAction(function actions)
+
+	// Check makes sure unit has no killer
+	function condition() returns boolean
+		let d = GetDyingUnit().getTypeId()
+		let k = GetKillingUnit().getTypeId()
+		return d == UNIT_ID and k == 0
+		
+	function actions()
+		let d = GetDyingUnit()
+		let owner = d.getOwner()
+		let pos = d.getPos()
+		let loc = pos.asLoc()
+		group g = GetUnitsInRangeOfLocAll(RANGE, loc)
+		DummyCaster c = new DummyCaster(SKILL_ID, SKILL_O, owner, true)
+		c.castInPoint(pos)
+		effect e = addEffect(EFFECT, pos)
+		doAfter(5.0, () -> e.destr())
+		loc.remove()
+		g.destr()
+		d.remove()
+		
+		
+	public class ToxTrapCuff extends Cuff
+		
+		override function running(unit target, integer level)
+			target.addHP(DPS)

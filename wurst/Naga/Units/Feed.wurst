@@ -1,0 +1,31 @@
+package Feed
+	import TargetChecker
+	import TargetRestrictors
+	import MouseTargetRestriction
+	import ArrayList
+	import Naga
+
+	let CASTER_ID = 'n006'
+	let ORDER = "devour"
+	let ERROR = "You must target a Murloc"
+	let SPELL_ID = 'A02J'
+	
+	init
+		TypeList tl = new TypeList(ERROR, getGlobal_Murlocs())
+		TargetChecker tr = new TargetChecker()
+			..addRestrictionDirect(tl)
+		new MouseTargetRestriction(CASTER_ID, ORDER, tr)
+		CreateTrigger()
+			..registerAnyUnitEvent(EVENT_PLAYER_UNIT_SPELL_EFFECT)
+			..addCondition(Condition(function conditions ))
+			..addAction(function actions)
+
+	function conditions() returns bool
+		return GetSpellAbilityId() == SPELL_ID
+
+	function actions()
+		let caster = GetTriggerUnit()
+		let target = GetSpellTargetUnit()
+		let hp = target.getHP()
+		caster.addHP(hp)
+		target.kill()

@@ -1,0 +1,18 @@
+package Weakness
+	import Cuff
+	import ModMax
+
+	int AB_ID = 'B01Z'
+	int HP_RED = 50
+	
+	init
+		WeaknessCuff x = new WeaknessCuff()
+		x.addBuff(AB_ID) 
+
+	class WeaknessCuff extends Cuff
+			
+		override function apply(unit target, integer level)
+			target.modMaxHP(-HP_RED, true)
+			
+		override function clean(unit target, integer level)
+			target.modMaxHP(HP_RED, false)

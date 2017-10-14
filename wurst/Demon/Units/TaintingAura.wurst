@@ -1,0 +1,24 @@
+package TaintingAura
+	import Cuff
+	import DummyCaster
+
+	int TAINT_BUFF = 'B01Y'
+	int MARKER = 'A045'
+	int BLIGHT_AB = 'A046'
+
+	init
+		CreateTrigger()
+			..registerAnyUnitEvent( EVENT_PLAYER_UNIT_DEATH )
+			..addCondition( Condition( function conditions ) )
+			..addAction( function actions )
+		Cuff x = new Cuff()
+		x.addBuff(TAINT_BUFF)
+		x.addAbility(MARKER)
+		
+	function conditions() returns bool
+		return GetDyingUnit().hasAbility(MARKER)
+		
+	function actions()
+		unit u = GetDyingUnit()
+		DummyCaster d = new DummyCaster(BLIGHT_AB, "", u.getOwner(), true)
+		d.castInPoint(u.getPos())

@@ -1,0 +1,29 @@
+package Register
+	import Vectors
+	import ArrayList
+	import Unit2
+	import Player2
+	import Force2
+	
+	bool array regPlayers
+		
+	init
+		trigger t = CreateTrigger()
+		for player p in GetPlayersAll()
+			t.registerPlayerChatEvent(p, "-bars", true)
+		t.addAction( function registerPlayer )
+		
+	function registerPlayer()
+		player p = GetTriggerPlayer()
+		int pNum = p.getId()
+		if regPlayers[pNum]
+			regPlayers[pNum] = false
+			if GetLocalPlayer() == p
+				EnablePreSelect(true, true)
+		else
+			regPlayers[pNum] = true
+			if GetLocalPlayer() == p
+				EnablePreSelect(false, false)
+				
+	public function playerRegistered(player p) returns boolean
+		return regPlayers[p.getId()]
