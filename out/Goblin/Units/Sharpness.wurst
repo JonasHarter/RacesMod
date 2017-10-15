@@ -1,0 +1,12 @@
+package Sharpness
+	import Cuff
+
+	let BUFF_ID = 'B00S'
+	//let AB_ID = 'A01H'
+	let SB_ID = 'A01I'
+	
+	init
+		Cuff x = new Cuff()
+		x.addBuff(BUFF_ID) 
+		x.addAbility(SB_ID)
+

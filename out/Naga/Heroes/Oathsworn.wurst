@@ -1,0 +1,24 @@
+package Oathsworn
+	import Cuff
+
+	integer SPELL_ID_1 = 'A01X'
+	integer SPELL_ID_2 = 'A01Y'
+        
+	init
+		Oathsworn x = new Oathsworn()
+		x.addBuff('B016') 
+		x.addBuff('B017') 
+		x.addBuff('B015')
+
+	class Oathsworn extends Cuff
+		override function apply(unit target, integer level)
+			let perc = target.getHP() / target.getMaxHP()
+			int times = (perc.toInt() / ( 25 - level * 5 )).toInt()
+			target.addAbility(SPELL_ID_1)
+			target.setAbilityLevel(SPELL_ID_1, times)
+			target.addAbility(SPELL_ID_2)
+			target.setAbilityLevel(SPELL_ID_2, times)
+            
+		override function clean(unit target, integer level)
+			target.removeAbility(SPELL_ID_1)
+			target.removeAbility(SPELL_ID_2)

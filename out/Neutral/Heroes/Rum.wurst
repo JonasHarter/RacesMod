@@ -1,0 +1,62 @@
+package Rum
+	import Cuff
+	import DummyCaster
+	
+	constant integer SPELL_ID = 'A03M'
+	constant integer ITEM_ID_1 = 'I00D' 
+	constant integer ITEM_ID_2 = 'I00E' 
+	constant integer ITEM_ID_3 = 'I00F'
+	constant integer B_ID = 'A03O' 
+	constant string B_O = "curse" 
+	constant integer BUFF_ID_1 = 'B01O' 
+	constant integer BUFF_ID_2 = 'B01N' 
+	constant integer BUFF_ID_3 = 'B01P' 
+	constant real HP = 5.0
+	
+	init
+		CreateTrigger()
+			..registerAnyUnitEvent(EVENT_PLAYER_UNIT_SPELL_EFFECT)
+			..addCondition(Condition(function spellC))
+			..addAction(function spellA)
+		CreateTrigger()
+			..registerAnyUnitEvent(EVENT_PLAYER_UNIT_USE_ITEM)
+			..addAction(function itemA)
+		RumCuff x = new RumCuff()
+		x.addBuff(BUFF_ID_1)
+		x.addBuff(BUFF_ID_2)
+		x.addBuff(BUFF_ID_3)
+			
+	function spellC() returns boolean
+		return GetSpellAbilityId() == SPELL_ID
+		
+	function spellA()
+		let caster = GetTriggerUnit()
+		let level = caster.getAbilityLevel(SPELL_ID)
+		var itemid = ITEM_ID_3
+		if level == 2
+			itemid = ITEM_ID_2
+		else if level == 1
+			itemid = ITEM_ID_1
+		caster.addItem(itemid)
+		
+	function itemA()
+		let caster = GetTriggerUnit()
+		let i = GetManipulatedItem().getTypeId()
+		var level = 0
+		if i == ITEM_ID_1
+			level = 1
+		else if i == ITEM_ID_2
+			level = 2
+		else if i == ITEM_ID_3
+			level = 3
+		else
+			return
+		DummyCaster d = new DummyCaster(B_ID, B_O, caster.getOwner(), true)
+		d.setLevel(level)
+		d.castOnTarget(caster)
+		
+	public class RumCuff extends Cuff
+
+		override function running(unit target, integer level)
+			target.addHP(HP * level)
+			

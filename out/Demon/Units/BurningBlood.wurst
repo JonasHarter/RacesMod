@@ -1,0 +1,27 @@
+package BurningBlood
+	
+	int BURNING_ID = 'A03E'
+	int DMG_ID = 'A03F'
+	string EFFECT = "Demon\\Blood Explosion.mdx"
+	
+	init
+		CreateTrigger()
+			..registerAnyUnitEvent(EVENT_PLAYER_UNIT_DEATH)
+			..addAction(function actions)
+			..addCondition(Condition(function conditions))
+		
+	function conditions() returns bool
+		unit killer = GetKillingUnit()
+		int level = killer.getAbilityLevel(BURNING_ID)
+		return level > 0
+		
+	function actions()
+		unit killer = GetKillingUnit()
+		int level = killer.getAbilityLevel(DMG_ID)
+		vec2 loc = killer.getPos()
+		if level == 0
+			killer.addAbility(DMG_ID)
+		else
+			level++
+			killer.setAbilityLevel(DMG_ID, level)
+		addEffect(EFFECT, loc).destr()

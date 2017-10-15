@@ -1,0 +1,4 @@
+package PowerOverwhelming
+
+	public int POWER_AB = 'A04P'
+	public int POWER_BUFF = 'B023'

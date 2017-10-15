@@ -1,0 +1,8 @@
+// Wrapps the vjass cuff creation functions
+package Cuff
+
+    public function createLeveledCuff(int spell1, int spell2, int spell3, int buff1, int buff2, int buff3)
+        LeveledCuff_createLeveledCuff(spell1, spell2, spell3, buff1, buff2, buff3)
+
+    public function createSimpleCuff(int spell1, int buff1)
+        SimpleCuff_createSimpleCuff(spell1, buff1)

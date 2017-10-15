@@ -1,0 +1,10 @@
+package Allure
+	import Cuff
+
+	let BUFF_ID = 'B01D'
+	let AB_ID = 'A02M'
+	
+	init
+		Cuff x = new Cuff()
+		x.addBuff(BUFF_ID) 
+		x.addAbility(AB_ID)

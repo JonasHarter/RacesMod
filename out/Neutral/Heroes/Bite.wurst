@@ -1,0 +1,25 @@
+package Bite
+	import Unit2
+
+	constant integer SPELL_ID = 'A03R'
+	constant real HEAL_FACTOR = 0.5
+	
+	function getDmg(int level) returns real
+		return 100.0 * level
+		
+	init
+		CreateTrigger()
+			..registerAnyUnitEvent(EVENT_PLAYER_UNIT_SPELL_EFFECT)
+			..addCondition(Condition(function condition))
+			..addAction(function actions)
+			
+	function condition() returns boolean
+		return GetSpellAbilityId() == SPELL_ID
+		
+	function actions()
+		let caster = GetTriggerUnit()
+		let target = GetSpellTargetUnit()
+		let level = caster.getAbilityLevel(SPELL_ID)
+		let dmg = getDmg(level)
+		caster.damageTargetSpell(target, dmg)
+		caster.addHP(dmg * HEAL_FACTOR)

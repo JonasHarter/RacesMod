@@ -1,0 +1,14 @@
+package Neutral
+	import Player2
+
+	init
+		for player p in GetPlayersAll()
+			//Heroes
+			p.setTechMaxAllowed('N00T', 1)
+			p.setTechMaxAllowed('E008', 1)
+			p.setTechMaxAllowed('O008', 1)
+			// Abilities
+			p.setAbilityAvailable('A01C', false)
+			p.setAbilityAvailable('A01D', false)
+			p.setAbilityAvailable('A01E', false)
+			p.setAbilityAvailable('A03U', false)

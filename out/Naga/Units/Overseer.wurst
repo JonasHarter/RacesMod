@@ -1,0 +1,34 @@
+package Overseer
+	import Cuff
+
+	integer BUFF_ID = 'B008'
+	integer UNIT_ID = 'n00P'
+	integer HARV_8_ID = 'A00M'
+	integer HARV_10_ID = 'A026'
+	integer DMG_ID = 'A02E'
+	
+	init
+		Overseer x = new Overseer()
+		x.addBuff(BUFF_ID)
+		
+	class Overseer extends Cuff
+		
+		construct()
+			super(true, true, false)
+			
+		override function condition(unit target) returns integer
+			if target.getTypeId() == UNIT_ID
+				return 1
+			return 0
+			
+		override function apply(unit target, integer level)
+			target.addAbility(HARV_10_ID)
+			target.removeAbility(HARV_8_ID)
+			target.addAbility(DMG_ID)
+			AddUnitAnimationPropertiesBJ( false, "gold", target )
+
+		override function clean(unit target, integer level)
+			target.addAbility(HARV_8_ID)
+			target.removeAbility(HARV_10_ID)
+			target.removeAbility(DMG_ID)
+			AddUnitAnimationPropertiesBJ( false, "gold", target )

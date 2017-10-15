@@ -1,0 +1,45 @@
+package CallOfTheHunt
+	import DummyCaster
+	import Cuff
+
+	constant real HEAL = 200.0
+	// The Spell and the affected unit types
+	constant integer SPELL_ID = 'A056'
+	constant integer W_1_ID = 'o00K'
+	constant integer W_2_ID = 'o00L'
+	constant integer W_3_ID = 'o00M'
+	// The Buff Spell
+	constant integer BU_ID = 'A057'
+	constant string BU_O = "unholyfrenzy"
+	// The Cuff Stuff
+	constant integer CB_ID = 'B01R'
+	constant integer CA1_ID = 'A058'
+	constant integer CA2_ID = 'A05A'
+	
+
+	init
+		new Cuff(true, false, false)
+			..addBuff(CB_ID)
+			..addAbility(CA1_ID)
+			..addAbility(CA2_ID)
+		CreateTrigger()
+			..registerAnyUnitEvent(EVENT_PLAYER_UNIT_SPELL_EFFECT)
+			..addCondition(Condition(function condition))
+			..addAction(function actions)
+		
+	function condition() returns boolean
+		return GetSpellAbilityId() == SPELL_ID
+		
+	function actions()
+		let caster = GetTriggerUnit()
+		let owner = caster.getOwner()
+		group g = CreateGroup()
+		g.addUnit(caster)
+		for unit u in GetUnitsOfPlayerAll(owner)
+			if u.getTypeId() == W_1_ID or u.getTypeId() == W_2_ID or u.getTypeId() == W_3_ID
+				g.addUnit(u)
+		for unit u in g
+			u.addHP(HEAL)
+		DummyCaster d = new DummyCaster(BU_ID, BU_O, owner, true)
+		d.castOnGroup(g)
+		g.destr()

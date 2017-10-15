@@ -1,0 +1,24 @@
+package Sabotage
+	import ClosureTimers
+
+	constant real TIME = 10.00
+	constant int SPELL_ID = 'A013'
+
+	init
+		CreateTrigger()
+			..registerAnyUnitEvent(EVENT_PLAYER_UNIT_SPELL_EFFECT)
+			..addCondition(Condition(function condition))
+			..addAction(function actions)
+			
+	function getTime(int level) returns real
+		return TIME * level
+		
+	function condition() returns boolean
+		return GetSpellAbilityId() == SPELL_ID
+		
+	function actions()
+		let target = GetSpellTargetUnit()
+		target.pause()
+		let time = getTime(GetTriggerUnit().getAbilityLevel(SPELL_ID))
+		doAfter(time, () -> target.unpause())
+		

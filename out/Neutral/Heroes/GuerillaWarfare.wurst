@@ -1,0 +1,29 @@
+package GuerillaWarfare
+	import DummyCaster
+	import Location2
+
+	constant integer SPELL_ID = 'A02P'
+	constant integer INV_ID = 'A03P'
+	constant string INV_O = "invisibility"
+	constant real RANGE = 700.0 + MAX_COLLISION_SIZE
+
+	init
+		CreateTrigger()
+			..registerAnyUnitEvent(EVENT_PLAYER_UNIT_SPELL_EFFECT)
+			..addCondition(Condition(function condition))
+			..addAction(function actions)
+
+	function condition() returns boolean
+		return GetSpellAbilityId() == SPELL_ID
+		
+	function actions()
+		let caster = GetTriggerUnit()
+		let owner = caster.getOwner()
+		let level = caster.getAbilityLevel(SPELL_ID)
+		let loc = GetUnitLoc(caster)
+		let g = GetUnitsInRangeOfLocAll(RANGE, loc)
+		DummyCaster d = new DummyCaster(INV_ID, INV_O, owner, true)
+		d.setLevel(level)
+		d.castOnGroup(g)
+		loc.remove()
+		g.destr()

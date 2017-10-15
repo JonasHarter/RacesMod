@@ -1,0 +1,28 @@
+package Transmutate
+	import Player2
+
+	let SPELL_ID = 'A001'
+	let GOLD = 50
+	let LUMBER = 150
+	let ERROR = "More lumber is required"
+	
+	init
+		CreateTrigger()
+			..registerAnyUnitEvent(EVENT_PLAYER_UNIT_SPELL_EFFECT)
+			..addCondition(Condition(function conditions ))
+			..addAction(function actions)
+
+	function conditions() returns bool
+		return SPELL_ID == GetSpellAbilityId()
+		
+	function actions()
+		let u = GetTriggerUnit()
+		let p = u.getOwner()
+		
+		if p.getLumber() >= LUMBER
+			p.addGold(GOLD)
+			p.addLumber(-LUMBER)
+		else
+			p.simulateError(ERROR)
+			u.removeAbility(SPELL_ID)
+			u.addAbility(SPELL_ID)

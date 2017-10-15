@@ -1,0 +1,22 @@
+package Barrage
+	import DummyCaster
+	import Location2
+	
+	let SPELL_ID = 'A01J'
+	let BARRAGE_ID = 'A038'
+	let BARRAGE_ORDER = "blizzard"
+	
+	init
+		CreateTrigger()
+			..registerAnyUnitEvent(EVENT_PLAYER_UNIT_SPELL_EFFECT)
+			..addCondition(Condition(function conditions ))
+			..addAction(function actions)
+			
+	function conditions() returns bool
+		return GetSpellAbilityId() == SPELL_ID
+
+	function actions()
+		let caster = GetTriggerUnit()
+		DummyCaster d = new DummyCaster(BARRAGE_ID, BARRAGE_ORDER, caster.getOwner(), false)
+		d.castOnPoint(GetSpellTargetLoc().asVec2(true))
+		d.recycleDelay = 60.0

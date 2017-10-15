@@ -1,0 +1,23 @@
+package NocturnalPredator
+	import Cuff
+	
+	constant integer SPELL_ID = 'A055'
+	constant integer INV_ID = 'A054'
+	
+	init
+		NPCuff x = new NPCuff()
+		x.addAbility(INV_ID)
+	
+	class NPCuff extends Cuff
+		
+		construct()
+			super(false, true, false)
+
+		override function condition(unit target) returns integer
+			if GetTimeOfDay() >= 18.0 or GetTimeOfDay() <= 6.00
+				return target.getAbilityLevel(SPELL_ID)
+			return 0
+
+		override function running(unit target, integer level)
+			let l = target.getAbilityLevel(SPELL_ID)
+			target.addHP(I2R(l))

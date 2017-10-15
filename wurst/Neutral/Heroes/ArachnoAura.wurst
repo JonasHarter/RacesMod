@@ -1,4 +1,5 @@
 package ArachnoAura
+	import HideAbility
 	import Cuff
 	
 	constant integer BUFF_ID_1 = 'B00O'
@@ -10,10 +11,7 @@ package ArachnoAura
 	constant integer SPELL_ID_3 = 'A01E'
 
 	init
-		Cuff x = new Cuff(true, false, true)
-		x.addBuff(BUFF_ID_1)
-		x.addBuff(BUFF_ID_2)
-		x.addBuff(BUFF_ID_3)
-		x.addAbility(SPELL_ID_1)
-		x.addAbility(SPELL_ID_2)
-		x.addAbility(SPELL_ID_3)
+		hideAbility(SPELL_ID_1)
+		hideAbility(SPELL_ID_2)
+		hideAbility(SPELL_ID_3)
+		createLeveledCuff(SPELL_ID_1, SPELL_ID_2, SPELL_ID_3, BUFF_ID_1, BUFF_ID_2, BUFF_ID_3)

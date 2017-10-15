@@ -1,0 +1,14 @@
+package EssenceSlashing
+	import Cuff
+
+	int BUFF_ID = 'B01T'
+	real MANA = -3.0
+
+	init
+		EssenceSlashingCuff x = new EssenceSlashingCuff()
+		x.addBuff(BUFF_ID)
+
+	class EssenceSlashingCuff extends Cuff
+			
+		override function running(unit target, integer level)
+			target.addMana(MANA)

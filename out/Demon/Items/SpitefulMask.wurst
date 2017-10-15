@@ -1,0 +1,19 @@
+package SpitefulMask
+
+	let ITEM_ID = 'A04E'
+	let LIFE = -200.0
+	let MANA = 100.0
+
+	init
+		CreateTrigger()
+			..registerAnyUnitEvent(EVENT_PLAYER_UNIT_USE_ITEM)
+			..addCondition(Condition(function conditions ))
+			..addAction(function actions)
+			
+	function conditions() returns bool
+		return GetManipulatedItem().getTypeId() == ITEM_ID
+
+	function actions()
+		unit u = GetTriggerUnit()
+		u.addHP(LIFE)
+		u.addMana(MANA)

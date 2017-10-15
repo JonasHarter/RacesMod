@@ -1,0 +1,126 @@
+package UnitSoundSys
+	import Unit2
+	import public UnitSound
+	import Group2
+	
+	/*
+	You can catch the current subselection of a player,
+	by checking which unit triggers the unit ordered event first.
+	
+	TODO Autocast orders?
+	TODO Delay Init automatically?
+	TODO UnitSelect
+		If you select multiple units, a random one will play its What sound?
+	TODO Test with imported files
+	TODO
+		Write custom soundsets into UI/SoundInfo/UnitAckSounds.slk
+		Has to be loaded at programmstart
+	*/
+
+	//############### Orders ###############
+
+	// Resets a boolean variable every frame
+	// For catching the order to the first unit in the group only
+	// And for some orders firing multiple events
+	boolean array blockUnit
+	init
+		CreateTrigger()
+			..registerTimerEvent( ANIMATION_PERIOD, true )
+			..addAction( function blockUnitReset )
+	
+	function blockUnitReset()
+		for i = 0 to bj_MAX_PLAYER_SLOTS
+			blockUnit[i] = false
+	
+	// Checks unit orders and filters them
+	init
+		CreateTrigger()
+			..registerAnyUnitEvent(EVENT_PLAYER_UNIT_ISSUED_ORDER)
+			..registerAnyUnitEvent(EVENT_PLAYER_UNIT_ISSUED_TARGET_ORDER)
+			..registerAnyUnitEvent(EVENT_PLAYER_UNIT_ISSUED_POINT_ORDER)
+			..registerAnyUnitEvent(EVENT_PLAYER_UNIT_ISSUED_UNIT_ORDER)
+			..addCondition( Condition( function orderC ) )
+			..addAction( function orderA )
+	
+	
+	function orderC() returns boolean
+		let ownerID = GetTriggerUnit().getOwner().getId()
+		if blockUnit[ownerID]
+			return false
+		blockUnit[ownerID] = true
+		return true
+	
+	function orderA()
+		let ordered = GetTriggerUnit()
+		let o = GetIssuedOrderIdBJ()
+		let target = GetOrderTargetUnit()
+		
+		UnitSound us = UnitSound.get(ordered.getTypeId())
+		if us == null
+			return
+		// Filter order type
+		UnitSoundType uot
+		// Smart means rightclick
+		if o == String2OrderIdBJ("smart") or o == String2OrderIdBJ("attack")
+			// If smart targets no unit its move
+			if target == null
+				uot = UnitSoundType.Yes
+			else
+				// Otherwise an attack
+				// Attacking heros plays warcry
+				if target.isHero()
+					uot = UnitSoundType.Warcry
+				else
+					uot = UnitSoundType.YesAttack
+		else if o == String2OrderIdBJ("attackground")
+			uot = UnitSoundType.YesAttack
+		else
+			uot = UnitSoundType.Yes
+		us.play(ordered, uot)
+		
+	
+	//############### Train ###############
+	
+	init
+		CreateTrigger()
+			..registerAnyUnitEvent(EVENT_PLAYER_UNIT_TRAIN_FINISH)
+			..addAction( function trainA )
+			
+	function trainA()
+		let t = GetTrainedUnit()		
+		UnitSound us = UnitSound.get(t.getTypeId())
+		if us == null
+			return
+		us.play(t, UnitSoundType.Ready)
+	
+	//############### Death ###############
+	
+	init
+		CreateTrigger()
+			..registerAnyUnitEvent(EVENT_PLAYER_UNIT_DEATH)
+			..addAction( function deathA )
+		
+	function deathA()
+		let death = GetTriggerUnit()
+		UnitSound us = UnitSound.get(death.getTypeId())
+		if us == null
+			return
+		us.play(death, UnitSoundType.Death)
+
+	//############### Select ###############
+
+	init
+		trigger x = CreateTrigger()
+		x.addAction(function selectA)
+		for i = 0 to bj_MAX_PLAYER_SLOTS - 1
+			x.registerPlayerUnitEvent(Player(i), EVENT_PLAYER_UNIT_SELECTED, null)
+
+	// Selecting multiple units might play another vanilla sound
+	// so we only play a sound, when our unit is the only selected
+	function selectA()
+		let clicked = GetTriggerUnit()
+		let clicker = clicked.getOwner()
+		if GetUnitsSelectedAll(clicker).getSize() == 1
+			UnitSound us = UnitSound.get(clicked.getTypeId())
+			if us != null
+				us.play(clicked, UnitSoundType.What)

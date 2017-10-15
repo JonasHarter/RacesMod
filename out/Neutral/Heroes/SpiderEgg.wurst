@@ -1,0 +1,39 @@
+package SpiderEgg
+	import UnitIndexer
+	import LastHP
+	
+	constant integer UNIT_ID_1 = 'o00A'
+	constant integer UNIT_ID_2 = 'o00B'
+	constant integer UNIT_ID_3 = 'o009'
+	constant integer UNIT_SUM_1 = 'n00V'
+	constant integer UNIT_SUM_2 = 'n00W'
+	constant integer UNIT_SUM_3 = 'n00U'
+	constant real TIME = 60.0
+	
+	init
+		CreateTrigger()
+			..registerAnyUnitEvent(EVENT_PLAYER_UNIT_DEATH)
+			..addCondition(Condition(function condition))
+			..addAction(function actions)
+
+	function condition() returns boolean
+		let k = GetKillingUnit()
+		return k.getTypeId() == 0
+		
+	function actions()
+		let u = GetDyingUnit()
+		let ut = u.getTypeId()
+		let owner = u.getOwner()
+		let pos = u.getPos()
+		let a = u.getFacingAngle()
+		unit nu
+		if ut == UNIT_ID_1
+			nu = createUnit(owner, UNIT_SUM_1, pos, a)
+		else if ut == UNIT_ID_2
+			nu = createUnit(owner, UNIT_SUM_2, pos, a)
+		else if ut == UNIT_ID_3
+			nu = createUnit(owner, UNIT_SUM_3, pos, a)
+		else
+			return
+		nu.setTimedLife(TIME)
+		nu.setHP(nu.getMaxHP() * (u.getLastHP() / u.getMaxHP()))

@@ -1,0 +1,24 @@
+package Generate
+    import AbilityObjEditing
+    import ObjectIdGenerator
+
+    class MaxLifeMod extends AbilityDefinitionMaxLifeBonusGreater
+        construct(int id)
+            super(id)
+            setName("MaxLifeMod")
+            setEditorSuffix("")
+            setIconNormal("")
+            setItemAbility(false)
+            setLevels(7)
+            setMaxLifeGained(1, 50)
+            setMaxLifeGained(2, 49)
+            setMaxLifeGained(3, 40)
+            setMaxLifeGained(4, 0)
+            setMaxLifeGained(5, 51)
+            setMaxLifeGained(6, 60)
+            setMaxLifeGained(7, 100)
+
+    @compiletime function createMaxLifeMod()
+        //let id = new IdGenerator(0)
+        //let id = 'AAAA'
+        //new MaxLifeMod(id)

@@ -1,0 +1,2943 @@
+// this script was compiled with wurst 1.7.0.0-jenkins-Wurst-468
+globals
+integer array LeveledCuff__cuffList
+integer LeveledCuff__listMax=0
+integer LeveledCuff__listPointer=0
+real Cuff__loopInterval=0.
+integer Cuff__maxLoop=0
+integer si__LeveledCuff_F=0
+integer si__LeveledCuff_I=0
+integer array si__LeveledCuff_V
+integer array s___LeveledCuff_cuffBuff
+integer array s__LeveledCuff_cuffBuff
+integer array s___LeveledCuff_cuffAbility
+integer array s__LeveledCuff_cuffAbility
+real Angle_DEGTORAD=0.
+real Angle_RADTODEG=0.
+integer ArachnoAura_BUFF_ID_1=0
+integer ArachnoAura_BUFF_ID_2=0
+integer ArachnoAura_BUFF_ID_3=0
+integer ArachnoAura_SPELL_ID_1=0
+integer ArachnoAura_SPELL_ID_2=0
+integer ArachnoAura_SPELL_ID_3=0
+real Basics_ANIMATION_PERIOD=0.
+integer Basics_HEIGHT_ENABLER=0
+integer Basics_LOCUST_ID=0
+player Basics_DUMMY_PLAYER=null
+dialog ChooseRace_RaceDialog=null
+button array ChooseRace_RaceButtons
+timer array CallbackSingle_t
+integer Colors_COLOR_WHITE_red=0
+integer Colors_COLOR_WHITE_green=0
+integer Colors_COLOR_WHITE_blue=0
+integer Colors_COLOR_WHITE_alpha=0
+integer Colors_decs=0
+integer DummyRecycler_DUMMY_UNIT_ID=0
+integer DummyRecycler_DIFFERENT_ANGLES=0
+real DummyRecycler_ANGLE_DEGREE=0.
+integer DummyRecycler_SAVED_UNITS_PER_ANGLE=0
+integer array ArrayQueue_rp
+integer array ArrayQueue_size
+timer DelayNode_t=null
+unit array DelayNode_u
+real array DelayNode_delayTime
+integer array DelayNode_next
+integer DelayNode_first=0
+integer array DummyRecycler_angleQueues
+integer ErrorHandling_MUTE_ERROR_DURATION=0
+integer ErrorHandling_PRIMARY_ERROR_KEY=0
+hashtable ErrorHandling_HT=null
+timer GameTimer_gameTimer=null
+real GameTimer_currentTime=0.
+integer Init_TAVERN_ID=0
+integer Init_TAVERN2_ID=0
+boolean MagicFunctions_compiletime=false
+rect MapBounds_playableMapRect=null
+rect MapBounds_boundRect=null
+region MapBounds_boundRegion=null
+real MapBounds_playableMin_x=0.
+real MapBounds_playableMin_y=0.
+real MapBounds_playableMax_x=0.
+real MapBounds_playableMax_y=0.
+real MapBounds_boundMin_x=0.
+real MapBounds_boundMin_y=0.
+real MapBounds_boundMax_x=0.
+real MapBounds_boundMax_y=0.
+string ObjectIds_CHARMAP=null
+trigger OnUnitEnterLeave_eventTrigger=null
+unit OnUnitEnterLeave_tempUnit=null
+group array g
+integer OnUnitEnterLeave_ABILITY_ID=0
+player array Player_players
+boolean Preloader_autoFinish=false
+group Preloader_dumg=null
+unit Preloader_dum=null
+integer Printing_DEBUG_LEVEL=0
+real Printing_DEBUG_MSG_DURATION=0.
+trigger array RegisterEvents_t
+integer RegisterEvents_onCastMap=0
+string String_charset=null
+string String_numberset=null
+hashtable Table_ht=null
+integer TerrainUtils_DUMMY_ITEM_ID=0
+item TerrainUtils_dItem=null
+timer array TimerUtils_freeTimers
+integer TimerUtils_freeTimersCount=0
+integer TimerUtils_timerData=0
+integer TimerUtils_HELD=0
+integer TypeCasting_typecastdata=0
+trigger UnitIndexer_onIndexTrigger=null
+trigger UnitIndexer_onDeindexTrigger=null
+unit array UnitIndex__unit
+hashtable UnitTable_ht=null
+integer array CallbackSingle_nextFree
+integer CallbackSingle_firstFree=0
+integer CallbackSingle_maxIndex=0
+integer array CallbackSingle_typeId
+integer array ArrayQueue_nextFree
+integer ArrayQueue_firstFree=0
+integer ArrayQueue_maxIndex=0
+integer array ArrayQueue_typeId
+integer DelayNode_firstFree=0
+integer array DelayNode_typeId
+integer array Table_nextFree
+integer Table_firstFree=0
+integer Table_maxIndex=0
+integer array Table_typeId
+integer array IdGenerator_nextFree
+integer IdGenerator_firstFree=0
+integer IdGenerator_maxIndex=0
+integer array UnitIndex_nextFree
+integer UnitIndex_firstFree=0
+integer UnitIndex_maxIndex=0
+integer array UnitIndex_typeId
+integer wurst_stack_depth=0
+string array wurst_stack
+real unit_getPos_return_x=0.
+real unit_getPos_return_y=0.
+real vec2_op_plus_return_x=0.
+real vec2_op_plus_return_y=0.
+real vec2_op_mult_return_x=0.
+real vec2_op_mult_return_y=0.
+real player_getStartLocation_return_x=0.
+real player_getStartLocation_return_y=0.
+real MeleeGetProjectedVec_return_x=0.
+real MeleeGetProjectedVec_return_y=0.
+real vec2_op_minus_return_x=0.
+real vec2_op_minus_return_y=0.
+real vec2_norm_return_x=0.
+real vec2_norm_return_y=0.
+code ref_function_Cuff__iterate=null
+code ref_function_init_Angle=null
+code ref_function_init_String=null
+code ref_function_init_Printing=null
+code ref_function_init_Vectors=null
+code ref_function_init_Group=null
+code ref_function_init_Table=null
+code ref_function_bridge_init_Colors=null
+code ref_function_init_Basics=null
+code ref_function_init_GameTimer=null
+code ref_function_init_MagicFunctions=null
+code ref_function_init_ErrorHandling=null
+code ref_function_init_TerrainUtils=null
+code ref_function_init_Player=null
+code ref_function_init_Maths=null
+code ref_function_init_ArachnoAura=null
+code ref_function_init_ChooseRace=null
+code ref_function_init_Debug=null
+code ref_function_init_MapBounds=null
+code ref_function_bridge_init_DummyRecycler=null
+code ref_function_init_FloatingText=null
+code ref_function_bridge_init_TimerUtils=null
+code ref_function_bridge_init_TypeCasting=null
+code ref_function_bridge_init_RegisterEvents=null
+code ref_function_bridge_init_OnUnitEnterLeave=null
+code ref_function_init_UnitIndexer=null
+code ref_function_init_Init=null
+code ref_function_init_ModMax=null
+code ref_function_init_ObjectIds=null
+code ref_function_bridge_init_Preloader=null
+code ref_function_bridge_init_ObjectIdGenerator=null
+code ref_function_init_UnitTable=null
+code ref_function_BuildDialog=null
+code ref_function_ShowDialog=null
+code ref_function_DialogClick=null
+code ref_function_bridge_CallbackSingle_closure_impl=null
+code ref_function_bridge_DelayNode_recycle=null
+code ref_function_GameTimer_closure_impl=null
+code ref_function_bridge_I1=null
+code ref_function_OnUnitEnterLeave_closure_impl=null
+code ref_function_OnUnitEnterLeave_closure_impl_2=null
+code ref_function_finishPreload=null
+code ref_function_bridge_RegisterEvents_closure_impl=null
+code ref_function_bridge_UnitIndexer_closure_impl=null
+code ref_function_bridge_UnitIndexer_closure_impl_2=null
+code ref_function_actions=null
+unit createDummytempReturn=null
+unit group_nexttempReturn=null
+timer getTimertempReturn=null
+trigger triggerFromIndextempReturn=null
+trigger dispatch_Table_Table_Table_loadTriggertempReturn=null
+endglobals
+function CreateAllItems takes nothing returns nothing
+	call CreateItem(1227894839,  - 9030.0,  - 11438.7)
+	call CreateItem(1684370275,  - 10057.6,  - 9675.4)
+	call CreateItem(1684370275,  - 10163.5,  - 9811.4)
+	call CreateItem(1684370275,  - 10064.5,  - 9747.4)
+	call CreateItem(1684370275,  - 10157.6,  - 9737.7)
+	call CreateItem(1684370275,  - 10154.6,  - 9659.7)
+	call CreateItem(1684370275,  - 10061.1,  - 9818.7)
+endfunction
+
+function CreateNeutralHostile takes nothing returns nothing
+	local player p = Player(PLAYER_NEUTRAL_AGGRESSIVE)
+	call CreateUnit(p, 1852662630,  - 7632.4,  - 17860.5, 340.389)
+	call CreateUnit(p, 1852662630,  - 7738.9,  - 17940.9, 46.518)
+	call CreateUnit(p, 1852662630,  - 7706.9,  - 18026.8, 213.822)
+	call CreateUnit(p, 1852662630,  - 7537.8,  - 18008.8, 121.974)
+	call CreateUnit(p, 1852662630,  - 7503.0,  - 17933.0, 63.063)
+	set p = null
+endfunction
+
+function CreateNeutralPassive takes nothing returns nothing
+	local player p = Player(PLAYER_NEUTRAL_PASSIVE)
+	call CreateUnit(p, 1852207727,  - 10283.8,  - 14984.7, 282.820)
+	call CreateUnit(p, 1852207727,  - 10198.7,  - 14916.7, 282.820)
+	call CreateUnit(p, 1852207727,  - 10156.5,  - 15024.1, 282.820)
+	set p = null
+endfunction
+
+function CreateNeutralPassiveBuildings takes nothing returns nothing
+	local player p = Player(PLAYER_NEUTRAL_PASSIVE)
+	local unit u = CreateUnit(p, 1853120886,  - 10048.0,  - 8704.0, 270.000)
+	call SetUnitColor(u, ConvertPlayerColor(0))
+	set u = CreateUnit(p, 1852666467,  - 9984.0,  - 9088.0, 270.000)
+	call SetUnitColor(u, ConvertPlayerColor(1))
+	set u = CreateUnit(p, 1852272492,  - 1280.0,  - 7936.0, 270.000)
+	call SetResourceAmount(u, 12500)
+	set u = CreateUnit(p, 1852272492,  - 1280.0,  - 9216.0, 270.000)
+	call SetResourceAmount(u, 12500)
+	set u = CreateUnit(p, 1852272492,  - 1344.0,  - 10560.0, 270.000)
+	call SetResourceAmount(u, 12500)
+	set p = null
+	set u = null
+endfunction
+
+function CreateBuildingsForPlayer0 takes nothing returns nothing
+	local player p = Player(0)
+	call CreateUnit(p, 1848651852,  - 10048.0,  - 7488.0, 270.000)
+	call CreateUnit(p, 1747988560,  - 10048.0,  - 7936.0, 270.000)
+	call CreateUnit(p, 1865429060,  - 9632.0,  - 7520.0, 270.000)
+	call CreateUnit(p, 1966092338,  - 9664.0,  - 7936.0, 270.000)
+	call CreateUnit(p, 1848651853,  - 9312.0,  - 7968.0, 270.000)
+	call CreateUnit(p, 1848651855,  - 9376.0,  - 7456.0, 270.000)
+	call CreateUnit(p, 1848651855,  - 9376.0,  - 7648.0, 270.000)
+	call CreateUnit(p, 1848651855,  - 9184.0,  - 7648.0, 270.000)
+	call CreateUnit(p, 1848651855,  - 9184.0,  - 7456.0, 270.000)
+	call CreateUnit(p, 1848651855,  - 8992.0,  - 7456.0, 270.000)
+	call CreateUnit(p, 1848651855,  - 8992.0,  - 7648.0, 270.000)
+	call CreateUnit(p, 1848651855,  - 8800.0,  - 7456.0, 270.000)
+	call CreateUnit(p, 1848651855,  - 8800.0,  - 7648.0, 270.000)
+	call CreateUnit(p, 1848651855,  - 8608.0,  - 7456.0, 270.000)
+	call CreateUnit(p, 1848651855,  - 8608.0,  - 7648.0, 270.000)
+	call CreateUnit(p, 1848651825,  - 8448.0,  - 7424.0, 270.000)
+	call CreateUnit(p, 1848651827,  - 8960.0,  - 7936.0, 270.000)
+	call CreateUnit(p, 1848651826,  - 8576.0,  - 7936.0, 270.000)
+	set p = null
+endfunction
+
+function CreateBuildingsForPlayer1 takes nothing returns nothing
+	local player p = Player(1)
+	call CreateUnit(p, 1751674741,  - 7680.0,  - 14848.0, 270.000)
+	call CreateUnit(p, 1751674741,  - 7680.0,  - 15104.0, 270.000)
+	call CreateUnit(p, 1751610487,  - 7680.0,  - 16320.0, 270.000)
+	call CreateUnit(p, 1751674741,  - 7680.0,  - 14592.0, 270.000)
+	call CreateUnit(p, 1751674741,  - 7424.0,  - 14848.0, 270.000)
+	call CreateUnit(p, 1751674741,  - 7936.0,  - 14848.0, 270.000)
+	set p = null
+endfunction
+
+function CreatePlayerBuildings takes nothing returns nothing
+	call CreateBuildingsForPlayer0()
+	call CreateBuildingsForPlayer1()
+endfunction
+
+function CreateUnitsForPlayer0 takes nothing returns nothing
+	local player p = Player(0)
+	local unit u = CreateUnit(p, 1852207984,  - 10090.3,  - 9351.0, 37.170)
+	call IssueImmediateOrder(u, "autodispelon")
+	set u = CreateUnit(p, 1429221458,  - 9072.4,  - 8983.6, 270.000)
+	call SetHeroLevel(u, 10, false)
+	call SetUnitState(u, UNIT_STATE_MANA, 345.)
+	call SelectHeroSkill(u, 1093677906)
+	call IssueImmediateOrder(u, "")
+	call SelectHeroSkill(u, 1093678387)
+	call IssueImmediateOrder(u, "")
+	call SelectHeroSkill(u, 1093678389)
+	call IssueImmediateOrder(u, "")
+	call SelectHeroSkill(u, 1093678390)
+	call IssueImmediateOrder(u, "")
+	set u = CreateUnit(p, 1311780948,  - 9356.0,  - 8947.9, 270.000)
+	call SetHeroLevel(u, 10, false)
+	call SetUnitState(u, UNIT_STATE_MANA, 360.)
+	set u = CreateUnit(p, 1865429067,  - 9148.7,  - 8784.1, 160.768)
+	set u = CreateUnit(p, 1848651856,  - 9908.0,  - 8282.8, 94.397)
+	set u = CreateUnit(p, 1848651857,  - 9789.6,  - 8287.8, 133.510)
+	set u = CreateUnit(p, 1865429061,  - 9654.6,  - 8304.9, 211.977)
+	set u = CreateUnit(p, 1697656883,  - 9776.9,  - 8206.9, 250.837)
+	set u = CreateUnit(p, 1328558136,  - 8751.9,  - 9046.7, 355.920)
+	call SetHeroLevel(u, 10, false)
+	call SelectHeroSkill(u, 1093677366)
+	call IssueImmediateOrder(u, "")
+	call SelectHeroSkill(u, 1093677367)
+	call IssueImmediateOrder(u, "")
+	call SelectHeroSkill(u, 1093677368)
+	call IssueImmediateOrder(u, "")
+	call SelectHeroSkill(u, 1093678412)
+	call IssueImmediateOrder(u, "")
+	set u = CreateUnit(p, 1848651828,  - 8611.2,  - 8316.6, 273.096)
+	set u = CreateUnit(p, 1747988561,  - 9163.1,  - 8299.4, 260.164)
+	set u = CreateUnit(p, 1966092340,  - 8887.3,  - 9679.5, 270.000)
+	set u = CreateUnit(p, 1848651831,  - 8927.6,  - 8271.9, 335.346)
+	set u = CreateUnit(p, 1848651829,  - 8497.4,  - 8273.8, 112.514)
+	set u = CreateUnit(p, 1848651830,  - 8408.7,  - 8305.1, 308.022)
+	set u = CreateUnit(p, 1697656884,  - 8331.9,  - 8307.5, 189.926)
+	set u = CreateUnit(p, 1865429067,  - 9010.1,  - 8777.0, 350.420)
+	set p = null
+	set u = null
+endfunction
+
+function CreateUnitsForPlayer1 takes nothing returns nothing
+	local player p = Player(1)
+	local unit u = CreateUnit(p, 1751871081,  - 10150.0,  - 14569.3, 99.140)
+	local real life
+	set u = CreateUnit(p, 1870100854,  - 10403.0,  - 17794.6, 111.174)
+	set u = CreateUnit(p, 1751871081,  - 10375.7,  - 14678.2, 170.843)
+	set u = CreateUnit(p, 1870100854,  - 10371.4,  - 18003.7, 163.910)
+	set u = CreateUnit(p, 1751871081,  - 10474.1,  - 14931.2, 101.190)
+	set life = GetUnitState(u, UNIT_STATE_LIFE)
+	call SetUnitState(u, UNIT_STATE_LIFE, 0.50 * life)
+	set u = CreateUnit(p, 1751611762,  - 7480.5,  - 13039.5, 6.361)
+	set u = CreateUnit(p, 1751611762,  - 7358.5,  - 13179.9, 131.225)
+	set u = CreateUnit(p, 1751611762,  - 7409.4,  - 13396.4, 131.225)
+	set u = CreateUnit(p, 1214409837,  - 7683.0,  - 11775.8, 113.273)
+	set u = CreateUnit(p, 1751611762,  - 7703.6,  - 13240.7, 6.361)
+	set u = CreateUnit(p, 1751611762,  - 7720.9,  - 13457.7, 131.225)
+	set u = CreateUnit(p, 1865429042,  - 10352.1,  - 13268.9, 332.874)
+	set u = CreateUnit(p, 1865429042,  - 10239.4,  - 13419.4, 117.744)
+	set u = CreateUnit(p, 1869836407,  - 10225.5,  - 16205.7, 41.035)
+	call IssueImmediateOrder(u, "corporealform")
+	set u = CreateUnit(p, 1869836407,  - 10219.7,  - 16419.8, 170.634)
+	call IssueImmediateOrder(u, "corporealform")
+	set u = CreateUnit(p, 1869838131,  - 7364.4,  - 12075.8, 330.292)
+	set u = CreateUnit(p, 1869838131,  - 7270.9,  - 11878.1, 71.249)
+	set u = CreateUnit(p, 1747988567,  - 10039.7,  - 11620.5, 270.000)
+	set u = CreateUnit(p, 1747988567,  - 10239.6,  - 11620.2, 270.000)
+	set u = CreateUnit(p, 1747988567,  - 10448.5,  - 11627.8, 270.000)
+	set life = GetUnitState(u, UNIT_STATE_LIFE)
+	call SetUnitState(u, UNIT_STATE_LIFE, 0.10 * life)
+	set u = CreateUnit(p, 1747988567,  - 9837.6,  - 11620.5, 270.000)
+	set u = CreateUnit(p, 1747988567,  - 10038.1,  - 11825.3, 270.000)
+	set u = CreateUnit(p, 1747988567,  - 10238.0,  - 11825.0, 270.000)
+	set u = CreateUnit(p, 1747988567,  - 10446.9,  - 11832.6, 270.000)
+	set life = GetUnitState(u, UNIT_STATE_LIFE)
+	call SetUnitState(u, UNIT_STATE_LIFE, 0.10 * life)
+	set u = CreateUnit(p, 1747988567,  - 9836.0,  - 11825.3, 270.000)
+	set u = CreateUnit(p, 1747988567,  - 10035.5,  - 12010.9, 270.000)
+	set u = CreateUnit(p, 1747988567,  - 10235.4,  - 12010.7, 270.000)
+	set u = CreateUnit(p, 1747988567,  - 10444.3,  - 12018.3, 270.000)
+	set life = GetUnitState(u, UNIT_STATE_LIFE)
+	call SetUnitState(u, UNIT_STATE_LIFE, 0.10 * life)
+	set u = CreateUnit(p, 1747988567,  - 9833.5,  - 12010.9, 270.000)
+	set u = CreateUnit(p, 1747988567,  - 10026.0,  - 12180.7, 270.000)
+	set u = CreateUnit(p, 1747988567,  - 10225.9,  - 12180.4, 270.000)
+	set u = CreateUnit(p, 1747988567,  - 10434.8,  - 12188.1, 270.000)
+	set life = GetUnitState(u, UNIT_STATE_LIFE)
+	call SetUnitState(u, UNIT_STATE_LIFE, 0.10 * life)
+	set u = CreateUnit(p, 1747988567,  - 9824.0,  - 12180.7, 270.000)
+	set p = null
+	set u = null
+endfunction
+
+function CreatePlayerUnits takes nothing returns nothing
+	call CreateUnitsForPlayer0()
+	call CreateUnitsForPlayer1()
+endfunction
+
+function CreateAllUnits takes nothing returns nothing
+	call CreateNeutralPassiveBuildings()
+	call CreatePlayerBuildings()
+	call CreateNeutralHostile()
+	call CreateNeutralPassive()
+	call CreatePlayerUnits()
+endfunction
+
+function Cuff__initialize takes nothing returns nothing
+	local trigger trig = CreateTrigger()
+	call TriggerRegisterTimerEventPeriodic(trig, Cuff__loopInterval)
+	call TriggerAddAction(trig, ref_function_Cuff__iterate)
+	set trig = null
+endfunction
+
+function InitCustomTriggers takes nothing returns nothing
+endfunction
+
+function dialog_addButton takes dialog this, string label returns button
+	return DialogAddButtonBJ(this, label)
+endfunction
+
+function dialog_clear takes dialog this returns nothing
+	call DialogClearBJ(this)
+endfunction
+
+function dialog_setHeading takes dialog this, string msg returns nothing
+	call DialogSetMessageBJ(this, msg)
+endfunction
+
+function trigger_addAction takes trigger this, code actionFunc returns nothing
+	call TriggerAddAction(this, actionFunc)
+endfunction
+
+function trigger_registerDialogEvent takes trigger this, dialog whichDialog returns nothing
+	call TriggerRegisterDialogEvent(this, whichDialog)
+endfunction
+
+function BuildDialog takes nothing returns nothing
+	local trigger receiver
+	local trigger receiver_2
+	call dialog_clear(ChooseRace_RaceDialog)
+	call dialog_setHeading(ChooseRace_RaceDialog, "Choose your race")
+	set ChooseRace_RaceButtons[0] = dialog_addButton(ChooseRace_RaceDialog, "|cff0042FF Human |r")
+	set ChooseRace_RaceButtons[1] = dialog_addButton(ChooseRace_RaceDialog, "|cffFF0303 Orc |r")
+	set ChooseRace_RaceButtons[2] = dialog_addButton(ChooseRace_RaceDialog, "|cff1CE6B9 Nightelf |r")
+	set ChooseRace_RaceButtons[3] = dialog_addButton(ChooseRace_RaceDialog, "|cff540081 Undead |r")
+	set ChooseRace_RaceButtons[4] = dialog_addButton(ChooseRace_RaceDialog, "|cffFFFC01 Goblin |r")
+	set ChooseRace_RaceButtons[5] = dialog_addButton(ChooseRace_RaceDialog, "|cffFEBA0E Demon |r")
+	set ChooseRace_RaceButtons[6] = dialog_addButton(ChooseRace_RaceDialog, "|cff20C000 Naga |r")
+	set receiver = CreateTrigger()
+	call trigger_registerDialogEvent(receiver, ChooseRace_RaceDialog)
+	set receiver_2 = receiver
+	call trigger_addAction(receiver_2, ref_function_DialogClick)
+	set receiver = null
+	set receiver_2 = null
+endfunction
+
+function iterateLeveledCuff takes group g_2 returns boolean
+	local integer currentCuff = LeveledCuff__cuffList[LeveledCuff__listPointer]
+	local unit u
+	local integer iterator
+	loop
+		set u = FirstOfGroup(g_2)
+		exitwhen u == null
+		call GroupRemoveUnit(g_2, u)
+		set iterator = 2
+		loop
+			call UnitRemoveAbility(u, s___LeveledCuff_cuffAbility[s__LeveledCuff_cuffAbility[currentCuff] + iterator])
+			if GetUnitAbilityLevel(u, s___LeveledCuff_cuffBuff[s__LeveledCuff_cuffBuff[currentCuff] + iterator]) > 0 then
+				call UnitAddAbility(u, s___LeveledCuff_cuffAbility[s__LeveledCuff_cuffAbility[currentCuff] + iterator])
+			endif
+			exitwhen iterator == 0
+			set iterator = iterator - 1
+		endloop
+		set u = null
+	endloop
+	if LeveledCuff__listPointer < LeveledCuff__listMax then
+		set LeveledCuff__listPointer = LeveledCuff__listPointer + 1
+		set u = null
+		return false
+	else
+		set LeveledCuff__listPointer = 0
+		set u = null
+		return true
+	endif
+	return false
+endfunction
+
+function Cuff__iterate takes nothing returns nothing
+	local integer i = 0
+	local group g_2
+	loop
+		set i = i + 1
+		exitwhen i > Cuff__maxLoop
+		set g_2 = GetUnitsInRectAll(GetPlayableMapRect())
+		call iterateLeveledCuff(g_2)
+		call DestroyGroup(g_2)
+		set g_2 = null
+	endloop
+	set g_2 = null
+endfunction
+
+function vec2_length takes real this_x, real this_y returns real
+	return SquareRoot(this_x * this_x + this_y * this_y)
+endfunction
+
+function vec2_norm takes real this_x, real this_y returns real
+	local real len = vec2_length(this_x, this_y)
+	local real x = 0.
+	local real y = 0.
+	if len != 0.0 then
+		set x = this_x / len
+		set y = this_y / len
+	endif
+	set vec2_norm_return_x = x
+	set vec2_norm_return_y = y
+	return vec2_norm_return_x
+endfunction
+
+function vec2_op_minus takes real this_x, real this_y, real v_x, real v_y returns real
+	set vec2_op_minus_return_x = this_x - v_x
+	set vec2_op_minus_return_y = this_y - v_y
+	return vec2_op_minus_return_x
+endfunction
+
+function vec2_op_mult takes real this_x, real this_y, real factor returns real
+	set vec2_op_mult_return_x = this_x * factor
+	set vec2_op_mult_return_y = this_y * factor
+	return vec2_op_mult_return_x
+endfunction
+
+function vec2_op_plus takes real this_x, real this_y, real v_x, real v_y returns real
+	set vec2_op_plus_return_x = this_x + v_x
+	set vec2_op_plus_return_y = this_y + v_y
+	return vec2_op_plus_return_x
+endfunction
+
+function MeleeGetProjectedVec takes real src_x, real src_y, real targ_x, real targ_y, real distance returns real
+	local real temp_v_x = vec2_op_minus(targ_x, targ_y, src_x, src_y)
+	local real temp_v_y = vec2_op_minus_return_y
+	local real v_x = temp_v_x
+	local real v_y = temp_v_y
+	local real temp_v_x_2 = vec2_op_mult(vec2_norm(v_x, v_y), vec2_norm_return_y, distance)
+	local real temp_v_y_2 = vec2_op_mult_return_y
+	set v_x = temp_v_x_2
+	set v_y = temp_v_y_2
+	set MeleeGetProjectedVec_return_x = vec2_op_plus(src_x, src_y, v_x, v_y)
+	set MeleeGetProjectedVec_return_y = vec2_op_plus_return_y
+	return MeleeGetProjectedVec_return_x
+endfunction
+
+function angle_degrees takes real this_radians returns real
+	return this_radians * Angle_RADTODEG
+endfunction
+
+function createUnit takes player p, integer unitId, real pos_x, real pos_y, real facing_radians returns unit
+	return CreateUnit(p, unitId, pos_x, pos_y, angle_degrees(facing_radians))
+endfunction
+
+function location_remove takes location this returns nothing
+	call RemoveLocation(this)
+endfunction
+
+function player_getStartLocation takes player this returns real
+	set player_getStartLocation_return_x = GetPlayerStartLocationX(this)
+	set player_getStartLocation_return_y = GetPlayerStartLocationY(this)
+	return player_getStartLocation_return_x
+endfunction
+
+function real_asAngleDegrees takes real this returns real
+	return this * Angle_DEGTORAD
+endfunction
+
+function unit_getX takes unit this returns real
+	return GetUnitX(this)
+endfunction
+
+function unit_getY takes unit this returns real
+	return GetUnitY(this)
+endfunction
+
+function unit_getPos takes unit this returns real
+	set unit_getPos_return_x = unit_getX(this)
+	set unit_getPos_return_y = unit_getY(this)
+	return unit_getPos_return_x
+endfunction
+
+function CreateStartingUnits takes player p, integer r returns nothing
+	local real unitSpacing = 64.00
+	local real defaultAngle_radians = real_asAngleDegrees(bj_UNIT_FACING)
+	local real temp_startPos_x = player_getStartLocation(p)
+	local real temp_startPos_y = player_getStartLocation_return_y
+	local real startPos_x = temp_startPos_x
+	local real startPos_y = temp_startPos_y
+	local location startLoc = Location(startPos_x, startPos_y)
+	local unit nearestMine = MeleeFindNearestMine(startLoc, bj_MELEE_MINE_SEARCH_RADIUS)
+	local real nearLoc_x
+	local real nearLoc_y
+	local real nearLoc_x_2
+	local real nearLoc_y_2
+	local real townHallLoc_x
+	local real townHallLoc_y
+	local unit townHall
+	local real nearLoc_x_3
+	local real nearLoc_y_3
+	local real nearLoc_x_4
+	local real nearLoc_y_4
+	local real nearLoc2_x
+	local real nearLoc2_y
+	local location loc
+	local real nearLoc_x_5
+	local real nearLoc_y_5
+	local real nearLoc_x_6
+	local real nearLoc_y_6
+	local real nearLoc_x_7
+	local real nearLoc_y_7
+	local real nearLoc2_x_2
+	local real nearLoc2_y_2
+	local location loc_2
+	local real temp_nearLoc_x
+	local real temp_nearLoc_y
+	local real temp_nearLoc_x_2
+	local real temp_nearLoc_y_2
+	local real temp_townHallLoc_x
+	local real temp_townHallLoc_y
+	local real temp_nearLoc_x_3
+	local real temp_nearLoc_y_3
+	local real temp_nearLoc_x_4
+	local real temp_nearLoc_y_4
+	local real temp_nearLoc2_x
+	local real temp_nearLoc2_y
+	local real temp_nearLoc_x_5
+	local real temp_nearLoc_y_5
+	local real temp_nearLoc_x_6
+	local real temp_nearLoc_y_6
+	local real temp_nearLoc_x_7
+	local real temp_nearLoc_y_7
+	local real temp_nearLoc2_x_2
+	local real temp_nearLoc2_y_2
+	call location_remove(startLoc)
+	if r == 0 then
+		call createUnit(p, 1752461175, startPos_x, startPos_y, defaultAngle_radians)
+		set temp_nearLoc_x = MeleeGetProjectedVec(unit_getPos(nearestMine), unit_getPos_return_y, startPos_x, startPos_y, 320.)
+		set temp_nearLoc_y = MeleeGetProjectedVec_return_y
+		set nearLoc_x = temp_nearLoc_x
+		set nearLoc_y = temp_nearLoc_y
+		call createUnit(p, 1752196449, nearLoc_x + 0.00 * unitSpacing, nearLoc_y + 1.00 * unitSpacing, defaultAngle_radians)
+		call createUnit(p, 1752196449, nearLoc_x + 1.00 * unitSpacing, nearLoc_y + 0.15 * unitSpacing, defaultAngle_radians)
+		call createUnit(p, 1752196449, nearLoc_x - 1.00 * unitSpacing, nearLoc_y + 0.15 * unitSpacing, defaultAngle_radians)
+		call createUnit(p, 1752196449, nearLoc_x + 0.60 * unitSpacing, nearLoc_y - 1.00 * unitSpacing, defaultAngle_radians)
+		call createUnit(p, 1752196449, nearLoc_x - 0.60 * unitSpacing, nearLoc_y - 1.00 * unitSpacing, defaultAngle_radians)
+	elseif r == 1 then
+		call createUnit(p, 1869050469, startPos_x, startPos_y, defaultAngle_radians)
+		set temp_nearLoc_x_2 = MeleeGetProjectedVec(unit_getPos(nearestMine), unit_getPos_return_y, startPos_x, startPos_y, 320.)
+		set temp_nearLoc_y_2 = MeleeGetProjectedVec_return_y
+		set nearLoc_x_2 = temp_nearLoc_x_2
+		set nearLoc_y_2 = temp_nearLoc_y_2
+		call createUnit(p, 1869636975, nearLoc_x_2 + 0.00 * unitSpacing, nearLoc_y_2 + 1.00 * unitSpacing, defaultAngle_radians)
+		call createUnit(p, 1869636975, nearLoc_x_2 + 1.00 * unitSpacing, nearLoc_y_2 + 0.15 * unitSpacing, defaultAngle_radians)
+		call createUnit(p, 1869636975, nearLoc_x_2 - 1.00 * unitSpacing, nearLoc_y_2 + 0.15 * unitSpacing, defaultAngle_radians)
+		call createUnit(p, 1869636975, nearLoc_x_2 + 0.60 * unitSpacing, nearLoc_y_2 - 1.00 * unitSpacing, defaultAngle_radians)
+		call createUnit(p, 1869636975, nearLoc_x_2 - 0.60 * unitSpacing, nearLoc_y_2 - 1.00 * unitSpacing, defaultAngle_radians)
+	elseif r == 2 then
+		set temp_townHallLoc_x = MeleeGetProjectedVec(unit_getPos(nearestMine), unit_getPos_return_y, startPos_x, startPos_y, 3.50 * bj_CELLWIDTH)
+		set temp_townHallLoc_y = MeleeGetProjectedVec_return_y
+		set townHallLoc_x = temp_townHallLoc_x
+		set townHallLoc_y = temp_townHallLoc_y
+		set townHall = createUnit(p, 1702129516, townHallLoc_x, townHallLoc_y, defaultAngle_radians)
+		call IssueTargetOrder(townHall, "entangleinstant", nearestMine)
+		set temp_nearLoc_x_3 = MeleeGetProjectedVec(unit_getPos(nearestMine), unit_getPos_return_y, startPos_x, startPos_y, 320.)
+		set temp_nearLoc_y_3 = MeleeGetProjectedVec_return_y
+		set nearLoc_x_3 = temp_nearLoc_x_3
+		set nearLoc_y_3 = temp_nearLoc_y_3
+		call createUnit(p, 1702327152, nearLoc_x_3 + 0.00 * unitSpacing, nearLoc_y_3 + 1.00 * unitSpacing, defaultAngle_radians)
+		call createUnit(p, 1702327152, nearLoc_x_3 + 1.00 * unitSpacing, nearLoc_y_3 + 0.15 * unitSpacing, defaultAngle_radians)
+		call createUnit(p, 1702327152, nearLoc_x_3 - 1.00 * unitSpacing, nearLoc_y_3 + 0.15 * unitSpacing, defaultAngle_radians)
+		call createUnit(p, 1702327152, nearLoc_x_3 + 0.60 * unitSpacing, nearLoc_y_3 - 1.00 * unitSpacing, defaultAngle_radians)
+		call createUnit(p, 1702327152, nearLoc_x_3 - 0.60 * unitSpacing, nearLoc_y_3 - 1.00 * unitSpacing, defaultAngle_radians)
+	elseif r == 3 then
+		call createUnit(p, 1970172012, startPos_x, startPos_y, defaultAngle_radians)
+		call BlightGoldMineForPlayerBJ(nearestMine, p)
+		set temp_nearLoc_x_4 = MeleeGetProjectedVec(startPos_x, startPos_y, unit_getPos(nearestMine), unit_getPos_return_y, 288.)
+		set temp_nearLoc_y_4 = MeleeGetProjectedVec_return_y
+		set nearLoc_x_4 = temp_nearLoc_x_4
+		set nearLoc_y_4 = temp_nearLoc_y_4
+		call createUnit(p, 1969711215, nearLoc_x_4, nearLoc_y_4, defaultAngle_radians)
+		set temp_nearLoc2_x = MeleeGetProjectedVec(unit_getPos(nearestMine), unit_getPos_return_y, startPos_x, startPos_y, 320.)
+		set temp_nearLoc2_y = MeleeGetProjectedVec_return_y
+		set nearLoc2_x = temp_nearLoc2_x
+		set nearLoc2_y = temp_nearLoc2_y
+		call createUnit(p, 1969316719, nearLoc2_x + 0.00 * unitSpacing, nearLoc2_y + 0.50 * unitSpacing, defaultAngle_radians)
+		call createUnit(p, 1969316719, nearLoc2_x + 0.65 * unitSpacing, nearLoc2_y - 0.50 * unitSpacing, defaultAngle_radians)
+		call createUnit(p, 1969316719, nearLoc2_x - 0.65 * unitSpacing, nearLoc2_y - 0.50 * unitSpacing, defaultAngle_radians)
+		set loc = Location(nearLoc2_x, nearLoc2_y)
+		call SetBlightLoc(p, loc, 768., true)
+		call location_remove(loc)
+	elseif r == 4 then
+		call createUnit(p, 1747988528, startPos_x, startPos_y, defaultAngle_radians)
+		set temp_nearLoc_x_5 = MeleeGetProjectedVec(unit_getPos(nearestMine), unit_getPos_return_y, startPos_x, startPos_y, 320.)
+		set temp_nearLoc_y_5 = MeleeGetProjectedVec_return_y
+		set nearLoc_x_5 = temp_nearLoc_x_5
+		set nearLoc_y_5 = temp_nearLoc_y_5
+		call createUnit(p, 1747988531, nearLoc_x_5 + 0.00 * unitSpacing, nearLoc_y_5 + 1.00 * unitSpacing, defaultAngle_radians)
+		call createUnit(p, 1747988531, nearLoc_x_5 + 1.00 * unitSpacing, nearLoc_y_5 + 0.15 * unitSpacing, defaultAngle_radians)
+		call createUnit(p, 1747988531, nearLoc_x_5 - 1.00 * unitSpacing, nearLoc_y_5 + 0.15 * unitSpacing, defaultAngle_radians)
+		call createUnit(p, 1747988531, nearLoc_x_5 + 0.60 * unitSpacing, nearLoc_y_5 - 1.00 * unitSpacing, defaultAngle_radians)
+		call createUnit(p, 1747988531, nearLoc_x_5 - 0.60 * unitSpacing, nearLoc_y_5 - 1.00 * unitSpacing, defaultAngle_radians)
+	elseif r == 6 then
+		call createUnit(p, 1848651850, startPos_x, startPos_y, defaultAngle_radians)
+		set temp_nearLoc_x_6 = MeleeGetProjectedVec(unit_getPos(nearestMine), unit_getPos_return_y, startPos_x, startPos_y, 320.)
+		set temp_nearLoc_y_6 = MeleeGetProjectedVec_return_y
+		set nearLoc_x_6 = temp_nearLoc_x_6
+		set nearLoc_y_6 = temp_nearLoc_y_6
+		call createUnit(p, 1848651858, nearLoc_x_6 + 0.00 * unitSpacing, nearLoc_y_6 + 1.00 * unitSpacing, defaultAngle_radians)
+		call createUnit(p, 1848651856, nearLoc_x_6 + 1.00 * unitSpacing, nearLoc_y_6 + 0.15 * unitSpacing, defaultAngle_radians)
+		call createUnit(p, 1848651856, nearLoc_x_6 - 1.00 * unitSpacing, nearLoc_y_6 + 0.15 * unitSpacing, defaultAngle_radians)
+		call createUnit(p, 1848651856, nearLoc_x_6 + 0.60 * unitSpacing, nearLoc_y_6 - 1.00 * unitSpacing, defaultAngle_radians)
+		call createUnit(p, 1848651856, nearLoc_x_6 - 0.60 * unitSpacing, nearLoc_y_6 - 1.00 * unitSpacing, defaultAngle_radians)
+	elseif r == 5 then
+		call createUnit(p, 1966092341, startPos_x, startPos_y, defaultAngle_radians)
+		set temp_nearLoc_x_7 = MeleeGetProjectedVec(unit_getPos(nearestMine), unit_getPos_return_y, startPos_x, startPos_y, 320.)
+		set temp_nearLoc_y_7 = MeleeGetProjectedVec_return_y
+		set nearLoc_x_7 = temp_nearLoc_x_7
+		set nearLoc_y_7 = temp_nearLoc_y_7
+		call createUnit(p, 1966092342, nearLoc_x_7, nearLoc_y_7, defaultAngle_radians)
+		set temp_nearLoc2_x_2 = MeleeGetProjectedVec(startPos_x, startPos_y, unit_getPos(nearestMine), unit_getPos_return_y, 288.)
+		set temp_nearLoc2_y_2 = MeleeGetProjectedVec_return_y
+		set nearLoc2_x_2 = temp_nearLoc2_x_2
+		set nearLoc2_y_2 = temp_nearLoc2_y_2
+		call createUnit(p, 1865429064, nearLoc2_x_2 + 1.00 * unitSpacing, nearLoc2_y_2 + 1.00 * unitSpacing, defaultAngle_radians)
+		call createUnit(p, 1865429064, nearLoc2_x_2 - 1.00 * unitSpacing, nearLoc2_y_2 - 1.00 * unitSpacing, defaultAngle_radians)
+		call createUnit(p, 1865429064, nearLoc2_x_2 + 1.00 * unitSpacing, nearLoc2_y_2 - 1.00 * unitSpacing, defaultAngle_radians)
+		call createUnit(p, 1865429064, nearLoc2_x_2 - 1.00 * unitSpacing, nearLoc2_y_2 + 1.00 * unitSpacing, defaultAngle_radians)
+		set loc_2 = Location(nearLoc2_x_2, nearLoc2_y_2)
+		call SetBlightLoc(p, loc_2, 768., true)
+		call location_remove(loc_2)
+	endif
+	set startLoc = null
+	set nearestMine = null
+	set townHall = null
+	set loc = null
+	set loc_2 = null
+endfunction
+
+function DialogClick takes nothing returns nothing
+	local player p = GetTriggerPlayer()
+	local button b = GetClickedButton()
+	local integer r = 0
+	if b == ChooseRace_RaceButtons[1] then
+		set r = 1
+	elseif b == ChooseRace_RaceButtons[2] then
+		set r = 2
+	elseif b == ChooseRace_RaceButtons[3] then
+		set r = 3
+	elseif b == ChooseRace_RaceButtons[4] then
+		set r = 4
+	elseif b == ChooseRace_RaceButtons[5] then
+		set r = 5
+	elseif b == ChooseRace_RaceButtons[6] then
+		set r = 6
+	endif
+	call CreateStartingUnits(p, r)
+	set p = null
+	set b = null
+endfunction
+
+function GameTimer_closure_impl takes nothing returns nothing
+	set GameTimer_currentTime = GameTimer_currentTime + Basics_ANIMATION_PERIOD
+endfunction
+
+function trigger_evaluate takes trigger this returns nothing
+	call TriggerEvaluate(this)
+endfunction
+
+function unit_addAbility takes unit this, integer abil returns boolean
+	return UnitAddAbility(this, abil)
+endfunction
+
+function unit_makeAbilityPermanent takes unit this, integer abil, boolean flag returns boolean
+	return UnitMakeAbilityPermanent(this, flag, abil)
+endfunction
+
+function OnUnitEnterLeave_closure_impl takes nothing returns nothing
+	local unit receiver = GetFilterUnit()
+	local unit receiver_2
+	call unit_addAbility(receiver, OnUnitEnterLeave_ABILITY_ID)
+	set receiver_2 = receiver
+	call unit_makeAbilityPermanent(receiver_2, OnUnitEnterLeave_ABILITY_ID, true)
+	set OnUnitEnterLeave_tempUnit = receiver_2
+	call trigger_evaluate(OnUnitEnterLeave_eventTrigger)
+	set OnUnitEnterLeave_tempUnit = null
+	set receiver = null
+	set receiver_2 = null
+endfunction
+
+function trigger_execute takes trigger this returns nothing
+	call TriggerExecute(this)
+endfunction
+
+function unit_getAbilityLevel takes unit this, integer id returns integer
+	return GetUnitAbilityLevel(this, id)
+endfunction
+
+function OnUnitEnterLeave_closure_impl_2 takes nothing returns nothing
+	local unit leavingUnit = GetTriggerUnit()
+	if unit_getAbilityLevel(leavingUnit, OnUnitEnterLeave_ABILITY_ID) == 0 then
+		set OnUnitEnterLeave_tempUnit = leavingUnit
+		call trigger_execute(OnUnitEnterLeave_eventTrigger)
+		set OnUnitEnterLeave_tempUnit = null
+	endif
+	set leavingUnit = null
+endfunction
+
+function dialog_show takes dialog this, player p returns nothing
+	call DialogDisplayBJ(true, this, p)
+endfunction
+
+function ShowDialog takes nothing returns nothing
+	local integer i = 0
+	local integer temp = bj_MAX_PLAYERS
+	local player p
+	loop
+		exitwhen i > temp
+		set p = Player(i)
+		if IsPlayerSlotState(p, PLAYER_SLOT_STATE_PLAYING) then
+			if GetPlayerController(p) == MAP_CONTROL_USER then
+				call dialog_show(ChooseRace_RaceDialog, p)
+			elseif GetPlayerController(p) == MAP_CONTROL_COMPUTER then
+			endif
+		endif
+		set i = i + 1
+	endloop
+	set p = null
+endfunction
+
+function handle_getHandleId takes handle this returns integer
+	return GetHandleId(this)
+endfunction
+
+function UnitTable_flush takes unit u returns nothing
+	call FlushChildHashtable(UnitTable_ht, handle_getHandleId(u))
+endfunction
+
+function actions takes nothing returns nothing
+	call UnitTable_flush(GetTriggerUnit())
+endfunction
+
+function group_destr takes group this returns nothing
+	call DestroyGroup(this)
+endfunction
+
+function group_removeUnit takes group this, unit u returns nothing
+	call GroupRemoveUnit(this, u)
+endfunction
+
+function OnUnitEnterLeave_closure_impl_3 takes integer this returns nothing
+	loop
+		exitwhen  not true
+		set OnUnitEnterLeave_tempUnit = FirstOfGroup(g[this])
+		if OnUnitEnterLeave_tempUnit == null then
+			exitwhen true
+		endif
+		call unit_addAbility(OnUnitEnterLeave_tempUnit, OnUnitEnterLeave_ABILITY_ID)
+		call unit_makeAbilityPermanent(OnUnitEnterLeave_tempUnit, OnUnitEnterLeave_ABILITY_ID, true)
+		call group_removeUnit(g[this], OnUnitEnterLeave_tempUnit)
+		call trigger_evaluate(OnUnitEnterLeave_eventTrigger)
+	endloop
+	call group_destr(g[this])
+endfunction
+
+function hashtable_hasBoolean takes hashtable this, integer parentKey, integer childKey returns boolean
+	return HaveSavedBoolean(this, parentKey, childKey)
+endfunction
+
+function hashtable_hasInt takes hashtable this, integer parentKey, integer childKey returns boolean
+	return HaveSavedInteger(this, parentKey, childKey)
+endfunction
+
+function hashtable_loadBoolean takes hashtable this, integer parentKey, integer childKey returns boolean
+	return LoadBoolean(this, parentKey, childKey)
+endfunction
+
+function hashtable_loadInt takes hashtable this, integer parentKey, integer childKey returns integer
+	return LoadInteger(this, parentKey, childKey)
+endfunction
+
+function hashtable_saveBoolean takes hashtable this, integer parentKey, integer childKey, boolean value returns nothing
+	call SaveBoolean(this, parentKey, childKey, value)
+endfunction
+
+function hashtable_saveInt takes hashtable this, integer parentKey, integer childKey, integer value returns nothing
+	call SaveInteger(this, parentKey, childKey, value)
+endfunction
+
+function print takes string msg returns nothing
+	call DisplayTimedTextToPlayer(GetLocalPlayer(), 0., 0., Printing_DEBUG_MSG_DURATION, msg)
+endfunction
+
+function Loglevel_getTag takes integer this returns string
+	local integer temp = this
+	if temp == 0 then
+		return "|cffADADADtrace|r"
+	elseif temp == 1 then
+		return "|cff2685DCdebug|r"
+	elseif temp == 2 then
+		return "|cffFFCC00info|r"
+	elseif temp == 3 then
+		return "|cffF47E3Ewarning|r"
+	elseif temp == 4 then
+		return "|cffFB2700error|r"
+	endif
+	return "?"
+endfunction
+
+function printLog takes player showTo, integer loglvl, string msg returns nothing
+	local string compositeMsg
+	if Printing_DEBUG_LEVEL <= loglvl then
+		set compositeMsg = Loglevel_getTag(loglvl) + " - " + msg
+		call DisplayTimedTextToPlayer(showTo, 0., 0., Printing_DEBUG_MSG_DURATION, compositeMsg)
+	endif
+endfunction
+
+function printLog_2 takes integer loglvl, string msg returns nothing
+	call printLog(GetLocalPlayer(), loglvl, msg)
+endfunction
+
+function real_toInt takes real this returns integer
+	return R2I(this)
+endfunction
+
+function string_getHash takes string this returns integer
+	return StringHash(this)
+endfunction
+
+function error takes string msg returns nothing
+	local integer hash
+	local string stacktraceStr
+	local integer stacktraceIndex
+	local integer stacktraceLimit
+	local string stacktraceStr_2
+	local integer stacktraceIndex_2
+	local integer stacktraceLimit_2
+	local string stacktraceStr_3
+	local integer stacktraceIndex_3
+	local integer stacktraceLimit_3
+	local string temp
+	local string temp_2
+	local string temp_3
+	if MagicFunctions_compiletime then
+		set temp = "ERROR: " + msg + "\n"
+		set stacktraceStr = ""
+		set stacktraceIndex = wurst_stack_depth
+		set stacktraceLimit = 0
+		loop
+			set stacktraceIndex = stacktraceIndex - 1
+			set stacktraceLimit = stacktraceLimit + 1
+			exitwhen stacktraceLimit > 20
+			exitwhen stacktraceIndex < 0
+			set stacktraceStr = stacktraceStr + "\n   " + wurst_stack[stacktraceIndex]
+		endloop
+		call print(temp + stacktraceStr)
+	else
+		set hash = string_getHash(msg)
+		if hashtable_hasInt(ErrorHandling_HT, ErrorHandling_PRIMARY_ERROR_KEY, hash) then
+			if hashtable_loadInt(ErrorHandling_HT, ErrorHandling_PRIMARY_ERROR_KEY, hash) + ErrorHandling_MUTE_ERROR_DURATION < GameTimer_currentTime then
+				set temp_2 = msg
+				set stacktraceStr_2 = ""
+				set stacktraceIndex_2 = wurst_stack_depth
+				set stacktraceLimit_2 = 0
+				loop
+					set stacktraceIndex_2 = stacktraceIndex_2 - 1
+					set stacktraceLimit_2 = stacktraceLimit_2 + 1
+					exitwhen stacktraceLimit_2 > 20
+					exitwhen stacktraceIndex_2 < 0
+					set stacktraceStr_2 = stacktraceStr_2 + "\n   " + wurst_stack[stacktraceIndex_2]
+				endloop
+				call printLog_2(4, temp_2 + stacktraceStr_2)
+				call hashtable_saveInt(ErrorHandling_HT, ErrorHandling_PRIMARY_ERROR_KEY, hash, real_toInt(GameTimer_currentTime))
+				call hashtable_saveBoolean(ErrorHandling_HT, ErrorHandling_PRIMARY_ERROR_KEY, hash, false)
+			elseif hashtable_hasBoolean(ErrorHandling_HT, ErrorHandling_PRIMARY_ERROR_KEY, hash) then
+				if  not hashtable_loadBoolean(ErrorHandling_HT, ErrorHandling_PRIMARY_ERROR_KEY, hash) then
+					call printLog_2(4, "|cffFF3A29Excessive repeating errors are being omitted")
+					call hashtable_saveBoolean(ErrorHandling_HT, ErrorHandling_PRIMARY_ERROR_KEY, hash, true)
+				endif
+			else
+				call printLog_2(4, "|cffFF3A29Excessive repeating errors are being omitted")
+				call hashtable_saveBoolean(ErrorHandling_HT, ErrorHandling_PRIMARY_ERROR_KEY, hash, true)
+			endif
+		else
+			call hashtable_saveInt(ErrorHandling_HT, ErrorHandling_PRIMARY_ERROR_KEY, hash, real_toInt(GameTimer_currentTime))
+			set temp_3 = "|cffFF3A29Error:|r " + msg
+			set stacktraceStr_3 = ""
+			set stacktraceIndex_3 = wurst_stack_depth
+			set stacktraceLimit_3 = 0
+			loop
+				set stacktraceIndex_3 = stacktraceIndex_3 - 1
+				set stacktraceLimit_3 = stacktraceLimit_3 + 1
+				exitwhen stacktraceLimit_3 > 20
+				exitwhen stacktraceIndex_3 < 0
+				set stacktraceStr_3 = stacktraceStr_3 + "\n   " + wurst_stack[stacktraceIndex_3]
+			endloop
+			call printLog_2(4, temp_3 + stacktraceStr_3)
+		endif
+		call I2S(1 / 0)
+	endif
+endfunction
+
+function dispatch_CallbackSingle_ClosureTimers_CallbackSingle_call takes integer this returns nothing
+	if CallbackSingle_typeId[this] == 0 then
+		if this == 0 then
+			set wurst_stack[wurst_stack_depth] = ""
+			set wurst_stack_depth = wurst_stack_depth + 1
+			call error("Nullpointer exception when calling CallbackSingle.ClosureTimers_CallbackSingle_call")
+		else
+			set wurst_stack[wurst_stack_depth] = ""
+			set wurst_stack_depth = wurst_stack_depth + 1
+			call error("Called CallbackSingle.ClosureTimers_CallbackSingle_call on invalid object.")
+		endif
+	endif
+	call OnUnitEnterLeave_closure_impl_3(this)
+endfunction
+
+function Table_loadInt takes integer this, integer parentKey returns integer
+	return hashtable_loadInt(Table_ht, this, parentKey)
+endfunction
+
+function dispatch_Table_Table_Table_loadInt takes integer this, integer parentKey returns integer
+	local integer Table_Table_loadInt_result
+	if Table_typeId[this] == 0 then
+		if this == 0 then
+			set wurst_stack[wurst_stack_depth] = ""
+			set wurst_stack_depth = wurst_stack_depth + 1
+			call error("Nullpointer exception when calling Table.Table_Table_loadInt")
+		else
+			set wurst_stack[wurst_stack_depth] = ""
+			set wurst_stack_depth = wurst_stack_depth + 1
+			call error("Called Table.Table_Table_loadInt on invalid object.")
+		endif
+	endif
+	set Table_Table_loadInt_result = Table_loadInt(this, parentKey)
+	set wurst_stack_depth = wurst_stack_depth - 1
+	return Table_Table_loadInt_result
+endfunction
+
+function timer_getHandleId takes timer this returns integer
+	return GetHandleId(this)
+endfunction
+
+function timer_getData takes timer this returns integer
+	local integer stackTrace_tempReturn = dispatch_Table_Table_Table_loadInt(TimerUtils_timerData, timer_getHandleId(this))
+	set wurst_stack_depth = wurst_stack_depth - 1
+	return stackTrace_tempReturn
+endfunction
+
+function timer_pause takes timer this returns nothing
+	call PauseTimer(this)
+endfunction
+
+function Table_saveInt takes integer this, integer parentKey, integer value returns nothing
+	call hashtable_saveInt(Table_ht, this, parentKey, value)
+endfunction
+
+function dispatch_Table_Table_Table_saveInt takes integer this, integer parentKey, integer value returns nothing
+	if Table_typeId[this] == 0 then
+		if this == 0 then
+			set wurst_stack[wurst_stack_depth] = ""
+			set wurst_stack_depth = wurst_stack_depth + 1
+			call error("Nullpointer exception when calling Table.Table_Table_saveInt")
+		else
+			set wurst_stack[wurst_stack_depth] = ""
+			set wurst_stack_depth = wurst_stack_depth + 1
+			call error("Called Table.Table_Table_saveInt on invalid object.")
+		endif
+	endif
+	call Table_saveInt(this, parentKey, value)
+endfunction
+
+function timer_setData takes timer this, integer data returns nothing
+	set wurst_stack[wurst_stack_depth] = "TimerUtils, line 17"
+	set wurst_stack_depth = wurst_stack_depth + 1
+	call dispatch_Table_Table_Table_saveInt(TimerUtils_timerData, timer_getHandleId(this), data)
+endfunction
+
+function timer_release takes timer this returns nothing
+	if this == null then
+		set wurst_stack[wurst_stack_depth] = "TimerUtils, line 37"
+		set wurst_stack_depth = wurst_stack_depth + 1
+		call error("Trying to release a null timer")
+		set wurst_stack_depth = wurst_stack_depth - 1
+		return
+	endif
+	set wurst_stack[wurst_stack_depth] = "TimerUtils, line 39"
+	set wurst_stack_depth = wurst_stack_depth + 1
+	if timer_getData(this) == TimerUtils_HELD then
+		set wurst_stack[wurst_stack_depth] = "TimerUtils, line 40"
+		set wurst_stack_depth = wurst_stack_depth + 1
+		call error("ReleaseTimer: Double free!")
+		set wurst_stack_depth = wurst_stack_depth - 1
+		return
+	endif
+	set wurst_stack[wurst_stack_depth] = "TimerUtils, line 42"
+	set wurst_stack_depth = wurst_stack_depth + 1
+	call timer_setData(this, TimerUtils_HELD)
+	call timer_pause(this)
+	set TimerUtils_freeTimers[TimerUtils_freeTimersCount] = this
+	set TimerUtils_freeTimersCount = TimerUtils_freeTimersCount + 1
+endfunction
+
+function CallbackSingle_onDestroy takes integer this returns nothing
+	set wurst_stack[wurst_stack_depth] = "ClosureTimers, line 79"
+	set wurst_stack_depth = wurst_stack_depth + 1
+	call timer_release(CallbackSingle_t[this])
+endfunction
+
+function dealloc_CallbackSingle takes integer obj returns nothing
+	if CallbackSingle_typeId[obj] == 0 then
+		set wurst_stack[wurst_stack_depth] = ""
+		set wurst_stack_depth = wurst_stack_depth + 1
+		call error("Double free: object of type CallbackSingle")
+	else
+		set CallbackSingle_nextFree[CallbackSingle_firstFree] = obj
+		set CallbackSingle_firstFree = CallbackSingle_firstFree + 1
+		set CallbackSingle_typeId[obj] = 0
+	endif
+endfunction
+
+function destroyCallbackSingle takes integer this returns nothing
+	set wurst_stack[wurst_stack_depth] = "ClosureTimers, line 78"
+	set wurst_stack_depth = wurst_stack_depth + 1
+	call CallbackSingle_onDestroy(this)
+	set wurst_stack[wurst_stack_depth] = "ClosureTimers, line 78"
+	set wurst_stack_depth = wurst_stack_depth + 1
+	call dealloc_CallbackSingle(this)
+endfunction
+
+function dispatch_CallbackSingle_destroyCallbackSingle takes integer this returns nothing
+	if CallbackSingle_typeId[this] == 0 then
+		if this == 0 then
+			set wurst_stack[wurst_stack_depth] = ""
+			set wurst_stack_depth = wurst_stack_depth + 1
+			call error("Nullpointer exception when calling CallbackSingle.destroyCallbackSingle")
+		else
+			set wurst_stack[wurst_stack_depth] = ""
+			set wurst_stack_depth = wurst_stack_depth + 1
+			call error("Called CallbackSingle.destroyCallbackSingle on invalid object.")
+		endif
+	endif
+	set wurst_stack[wurst_stack_depth] = "ClosureTimers, line 62"
+	set wurst_stack_depth = wurst_stack_depth + 1
+	call destroyCallbackSingle(this)
+endfunction
+
+function CallbackSingle_staticCallback takes nothing returns nothing
+	local timer t = GetExpiredTimer()
+	local integer cb
+	set wurst_stack[wurst_stack_depth] = "ClosureTimers, line 74"
+	set wurst_stack_depth = wurst_stack_depth + 1
+	set cb = timer_getData(t)
+	set wurst_stack[wurst_stack_depth] = "ClosureTimers, line 75"
+	set wurst_stack_depth = wurst_stack_depth + 1
+	call dispatch_CallbackSingle_ClosureTimers_CallbackSingle_call(cb)
+	set wurst_stack[wurst_stack_depth] = "ClosureTimers, line 76"
+	set wurst_stack_depth = wurst_stack_depth + 1
+	call dispatch_CallbackSingle_destroyCallbackSingle(cb)
+	set t = null
+endfunction
+
+function CallbackSingle_closure_impl takes nothing returns nothing
+	set wurst_stack[wurst_stack_depth] = "ClosureTimers, line 69"
+	set wurst_stack_depth = wurst_stack_depth + 1
+	call CallbackSingle_staticCallback()
+endfunction
+
+function bridge_CallbackSingle_closure_impl takes nothing returns nothing
+	set wurst_stack_depth = 1
+	set wurst_stack[0] = "ClosureTimers, line 67"
+	call CallbackSingle_closure_impl()
+endfunction
+
+function ArrayQueue_units_set takes integer instanceId, integer arrayIndex, unit value returns nothing
+	if arrayIndex < 0 or arrayIndex >= 6 then
+		set wurst_stack[wurst_stack_depth] = ""
+		set wurst_stack_depth = wurst_stack_depth + 1
+		call error("Index out of Bounds")
+	elseif arrayIndex <= 2 then
+		if arrayIndex <= 1 then
+			if arrayIndex <= 0 then
+			endif
+		endif
+	elseif arrayIndex <= 4 then
+		if arrayIndex <= 3 then
+		endif
+	endif
+endfunction
+
+function ArrayQueue_enqueue takes integer this, unit u returns nothing
+	if ArrayQueue_size[this] < DummyRecycler_SAVED_UNITS_PER_ANGLE then
+		set ArrayQueue_size[this] = ArrayQueue_size[this] + 1
+		set ArrayQueue_rp[this] = ModuloInteger(ArrayQueue_rp[this] + 1, DummyRecycler_SAVED_UNITS_PER_ANGLE)
+		set wurst_stack[wurst_stack_depth] = "DummyRecycler, line 58"
+		set wurst_stack_depth = wurst_stack_depth + 1
+		call ArrayQueue_units_set(this, ArrayQueue_rp[this], u)
+	else
+		set wurst_stack[wurst_stack_depth] = "DummyRecycler, line 60"
+		set wurst_stack_depth = wurst_stack_depth + 1
+		call error("Queue Overflow")
+	endif
+endfunction
+
+function dispatch_ArrayQueue_DummyRecycler_ArrayQueue_enqueue takes integer this, unit u returns nothing
+	if ArrayQueue_typeId[this] == 0 then
+		if this == 0 then
+			set wurst_stack[wurst_stack_depth] = ""
+			set wurst_stack_depth = wurst_stack_depth + 1
+			call error("Nullpointer exception when calling ArrayQueue.DummyRecycler_ArrayQueue_enqueue")
+		else
+			set wurst_stack[wurst_stack_depth] = ""
+			set wurst_stack_depth = wurst_stack_depth + 1
+			call error("Called ArrayQueue.DummyRecycler_ArrayQueue_enqueue on invalid object.")
+		endif
+	endif
+	set wurst_stack[wurst_stack_depth] = "DummyRecycler, line 54"
+	set wurst_stack_depth = wurst_stack_depth + 1
+	call ArrayQueue_enqueue(this, u)
+endfunction
+
+function unit_pause takes unit this returns nothing
+	call PauseUnit(this, true)
+endfunction
+
+function unit_remove takes unit this returns nothing
+	call RemoveUnit(this)
+endfunction
+
+function unit_setFacing takes unit this, real a_radians returns nothing
+	call SetUnitFacing(this, angle_degrees(a_radians))
+endfunction
+
+function unit_setScale takes unit this, real scale returns nothing
+	call SetUnitScale(this, scale, scale, scale)
+endfunction
+
+function unit_setVertexColor takes unit this, integer col_red, integer col_green, integer col_blue, integer col_alpha returns nothing
+	call SetUnitVertexColor(this, col_red, col_green, col_blue, col_alpha)
+endfunction
+
+function unit_setX takes unit this, real x returns nothing
+	call SetUnitX(this, x)
+endfunction
+
+function unit_setY takes unit this, real y returns nothing
+	call SetUnitY(this, y)
+endfunction
+
+function unit_setXY takes unit this, real pos_x, real pos_y returns nothing
+	local unit receiver = this
+	local unit receiver_2
+	call unit_setX(receiver, pos_x)
+	set receiver_2 = receiver
+	call unit_setY(receiver_2, pos_y)
+	set receiver = null
+	set receiver_2 = null
+endfunction
+
+function DummyRecycler_recycle takes unit u returns nothing
+	local integer smallestQueue = 0
+	local integer i = 1
+	local integer temp = DummyRecycler_DIFFERENT_ANGLES - 1
+	local unit receiver
+	local unit receiver_2
+	local unit receiver_3
+	local unit receiver_4
+	local unit receiver_5
+	loop
+		exitwhen i > temp
+		if ArrayQueue_size[DummyRecycler_angleQueues[smallestQueue]] > ArrayQueue_size[DummyRecycler_angleQueues[i]] then
+			set smallestQueue = i
+		endif
+		set i = i + 1
+	endloop
+	if ArrayQueue_size[DummyRecycler_angleQueues[smallestQueue]] >= DummyRecycler_SAVED_UNITS_PER_ANGLE then
+		call unit_remove(u)
+	else
+		set wurst_stack[wurst_stack_depth] = "DummyRecycler, line 38"
+		set wurst_stack_depth = wurst_stack_depth + 1
+		call dispatch_ArrayQueue_DummyRecycler_ArrayQueue_enqueue(DummyRecycler_angleQueues[smallestQueue], u)
+		set receiver = u
+		call unit_setXY(receiver, MapBounds_boundMax_x, MapBounds_boundMax_y)
+		set receiver_2 = receiver
+		call unit_pause(receiver_2)
+		set receiver_3 = receiver_2
+		call unit_setFacing(receiver_3, real_asAngleDegrees(smallestQueue * DummyRecycler_ANGLE_DEGREE))
+		set receiver_4 = receiver_3
+		call unit_setScale(receiver_4, 1.)
+		set receiver_5 = receiver_4
+		call unit_setVertexColor(receiver_5, Colors_COLOR_WHITE_red, Colors_COLOR_WHITE_green, Colors_COLOR_WHITE_blue, Colors_COLOR_WHITE_alpha)
+	endif
+	set receiver = null
+	set receiver_2 = null
+	set receiver_3 = null
+	set receiver_4 = null
+	set receiver_5 = null
+endfunction
+
+function DelayNode_onDestroy takes integer this returns nothing
+endfunction
+
+function dealloc_DelayNode takes integer obj returns nothing
+	if DelayNode_typeId[obj] == 0 then
+		set wurst_stack[wurst_stack_depth] = ""
+		set wurst_stack_depth = wurst_stack_depth + 1
+		call error("Double free: object of type DelayNode")
+	else
+		set DelayNode_firstFree = DelayNode_firstFree + 1
+		set DelayNode_typeId[obj] = 0
+	endif
+endfunction
+
+function destroyDelayNode takes integer this returns nothing
+	call DelayNode_onDestroy(this)
+	set wurst_stack[wurst_stack_depth] = "DummyRecycler, line 71"
+	set wurst_stack_depth = wurst_stack_depth + 1
+	call dealloc_DelayNode(this)
+endfunction
+
+function dispatch_DelayNode_destroyDelayNode takes integer this returns nothing
+	if DelayNode_typeId[this] == 0 then
+		if this == 0 then
+			set wurst_stack[wurst_stack_depth] = ""
+			set wurst_stack_depth = wurst_stack_depth + 1
+			call error("Nullpointer exception when calling DelayNode.destroyDelayNode")
+		else
+			set wurst_stack[wurst_stack_depth] = ""
+			set wurst_stack_depth = wurst_stack_depth + 1
+			call error("Called DelayNode.destroyDelayNode on invalid object.")
+		endif
+	endif
+	set wurst_stack[wurst_stack_depth] = "DummyRecycler, line 71"
+	set wurst_stack_depth = wurst_stack_depth + 1
+	call destroyDelayNode(this)
+endfunction
+
+function timer_getElapsed takes timer this returns real
+	return TimerGetElapsed(this)
+endfunction
+
+function getElapsedGameTime takes nothing returns real
+	return timer_getElapsed(GameTimer_gameTimer)
+endfunction
+
+function timer_start takes timer this, real time, code timerCallBack returns nothing
+	call TimerStart(this, time, false, timerCallBack)
+endfunction
+
+function DelayNode_recycle takes nothing returns nothing
+	local integer tmp
+	set wurst_stack[wurst_stack_depth] = "DummyRecycler, line 120"
+	set wurst_stack_depth = wurst_stack_depth + 1
+	call DummyRecycler_recycle(DelayNode_u[DelayNode_first])
+	set tmp = DelayNode_first
+	if DelayNode_next[DelayNode_first] == 0 then
+		set DelayNode_first = 0
+	else
+		set DelayNode_first = DelayNode_next[DelayNode_first]
+		call timer_start(DelayNode_t, DelayNode_delayTime[DelayNode_first] - getElapsedGameTime(), ref_function_bridge_DelayNode_recycle)
+	endif
+	set wurst_stack[wurst_stack_depth] = "DummyRecycler, line 129"
+	set wurst_stack_depth = wurst_stack_depth + 1
+	call dispatch_DelayNode_destroyDelayNode(tmp)
+endfunction
+
+function bridge_DelayNode_recycle takes nothing returns nothing
+	set wurst_stack_depth = 1
+	set wurst_stack[0] = "DummyRecycler, line 127"
+	call DelayNode_recycle()
+endfunction
+
+function group_close takes group this returns nothing
+	call DestroyGroup(this)
+endfunction
+
+function group_hasNext takes group this returns boolean
+	return FirstOfGroup(this) != null
+endfunction
+
+function group_iterator takes group this returns group
+	set bj_groupAddGroupDest = CreateGroup()
+	call ForGroup(this, function GroupAddGroupEnum)
+	return bj_groupAddGroupDest
+endfunction
+
+function group_next takes group this returns unit
+	local unit u = FirstOfGroup(this)
+	call GroupRemoveUnit(this, u)
+	set group_nexttempReturn = u
+	set u = null
+	return group_nexttempReturn
+endfunction
+
+function alloc_UnitIndex takes nothing returns integer
+	local integer this
+	if UnitIndex_firstFree == 0 then
+		if UnitIndex_maxIndex < 8191 then
+			set UnitIndex_maxIndex = UnitIndex_maxIndex + 1
+			set this = UnitIndex_maxIndex
+			set UnitIndex_typeId[this] = 647
+		else
+			set wurst_stack[wurst_stack_depth] = ""
+			set wurst_stack_depth = wurst_stack_depth + 1
+			call error("Out of memory: Could not create UnitIndex.")
+			set this = 0
+		endif
+	else
+		set UnitIndex_firstFree = UnitIndex_firstFree - 1
+		set this = UnitIndex_nextFree[UnitIndex_firstFree]
+		set UnitIndex_typeId[this] = 647
+	endif
+	set wurst_stack_depth = wurst_stack_depth - 1
+	return this
+endfunction
+
+function unit_setUserData takes unit this, integer data returns nothing
+	call SetUnitUserData(this, data)
+endfunction
+
+function construct_UnitIndex takes integer this, unit whichUnit returns nothing
+	set UnitIndex__unit[this] = whichUnit
+	call unit_setUserData(UnitIndex__unit[this], this)
+	call trigger_evaluate(UnitIndexer_onIndexTrigger)
+endfunction
+
+function new_UnitIndex takes unit whichUnit returns integer
+	local integer this
+	set wurst_stack[wurst_stack_depth] = "UnitIndexer, line 160"
+	set wurst_stack_depth = wurst_stack_depth + 1
+	set this = alloc_UnitIndex()
+	call construct_UnitIndex(this, whichUnit)
+	set wurst_stack_depth = wurst_stack_depth - 1
+	return this
+endfunction
+
+function unit_getFacingAngle takes unit this returns real
+	return real_asAngleDegrees(GetUnitFacing(this))
+endfunction
+
+function unit_getOwner takes unit this returns player
+	return GetOwningPlayer(this)
+endfunction
+
+function unit_getTypeId takes unit this returns integer
+	return GetUnitTypeId(this)
+endfunction
+
+function I1 takes nothing returns nothing
+	local force f = GetPlayersAll()
+	local real d = 10.0
+	local group wurst__iterator0
+	local unit u
+	local player o
+	local real v_x
+	local real v_y
+	local real a_radians
+	local real temp_v_x
+	local real temp_v_y
+	call DisplayTimedTextToForce(f, d, "Some Warcraft 3 Mod")
+	call DisplayTimedTextToForce(f, d, "v1.0")
+	call DisplayTimedTextToForce(f, d, " ")
+	call DisplayTimedTextToForce(f, d, "Available Commands:")
+	call DisplayTimedTextToForce(f, d, "-bars")
+	set wurst__iterator0 = group_iterator(GetUnitsInRectAll(GetPlayableMapRect()))
+	loop
+		exitwhen  not group_hasNext(wurst__iterator0)
+		set u = group_next(wurst__iterator0)
+		set wurst_stack[wurst_stack_depth] = "Init, line 21"
+		set wurst_stack_depth = wurst_stack_depth + 1
+		call new_UnitIndex(u)
+		if unit_getTypeId(u) == Init_TAVERN_ID then
+			set o = unit_getOwner(u)
+			set temp_v_x = unit_getPos(u)
+			set temp_v_y = unit_getPos_return_y
+			set v_x = temp_v_x
+			set v_y = temp_v_y
+			set a_radians = unit_getFacingAngle(u)
+			call unit_remove(u)
+			call createUnit(o, Init_TAVERN2_ID, v_x, v_y, a_radians)
+		endif
+	endloop
+	call group_close(wurst__iterator0)
+	set f = null
+	set wurst__iterator0 = null
+	set u = null
+	set o = null
+endfunction
+
+function bridge_I1 takes nothing returns nothing
+	set wurst_stack_depth = 1
+	set wurst_stack[0] = "Init, line 8"
+	call I1()
+endfunction
+
+function HashMap_get takes integer this, integer key returns integer
+	local integer stackTrace_tempReturn = dispatch_Table_Table_Table_loadInt(this, key)
+	set wurst_stack_depth = wurst_stack_depth - 1
+	return stackTrace_tempReturn
+endfunction
+
+function dispatch_HashMap_HashMap_HashMap_get takes integer this, integer key returns integer
+	local integer HashMap_HashMap_get_result
+	if Table_typeId[this] == 0 then
+		if this == 0 then
+			set wurst_stack[wurst_stack_depth] = ""
+			set wurst_stack_depth = wurst_stack_depth + 1
+			call error("Nullpointer exception when calling HashMap.HashMap_HashMap_get")
+		else
+			set wurst_stack[wurst_stack_depth] = ""
+			set wurst_stack_depth = wurst_stack_depth + 1
+			call error("Called HashMap.HashMap_HashMap_get on invalid object.")
+		endif
+	endif
+	set wurst_stack[wurst_stack_depth] = "HashMap, line 17"
+	set wurst_stack_depth = wurst_stack_depth + 1
+	set HashMap_HashMap_get_result = HashMap_get(this, key)
+	set wurst_stack_depth = wurst_stack_depth - 1
+	return HashMap_HashMap_get_result
+endfunction
+
+function hashtable_loadTriggerHandle takes hashtable this, integer parentKey, integer childKey returns trigger
+	return LoadTriggerHandle(this, parentKey, childKey)
+endfunction
+
+function Table_loadTrigger takes integer this, integer parentKey returns trigger
+	return hashtable_loadTriggerHandle(Table_ht, this, parentKey)
+endfunction
+
+function dispatch_Table_Table_Table_loadTrigger takes integer this, integer parentKey returns trigger
+	local trigger Table_Table_loadTrigger_result
+	if Table_typeId[this] == 0 then
+		if this == 0 then
+			set wurst_stack[wurst_stack_depth] = ""
+			set wurst_stack_depth = wurst_stack_depth + 1
+			call error("Nullpointer exception when calling Table.Table_Table_loadTrigger")
+		else
+			set wurst_stack[wurst_stack_depth] = ""
+			set wurst_stack_depth = wurst_stack_depth + 1
+			call error("Called Table.Table_Table_loadTrigger on invalid object.")
+		endif
+	endif
+	set Table_Table_loadTrigger_result = Table_loadTrigger(this, parentKey)
+	set wurst_stack_depth = wurst_stack_depth - 1
+	set dispatch_Table_Table_Table_loadTriggertempReturn = Table_Table_loadTrigger_result
+	set Table_Table_loadTrigger_result = null
+	return dispatch_Table_Table_Table_loadTriggertempReturn
+endfunction
+
+function hashtable_saveFogStateHandle takes hashtable this, integer parentKey, integer childKey, fogstate value returns nothing
+	call SaveFogStateHandle(this, parentKey, childKey, value)
+endfunction
+
+function Table_saveFogState takes integer this, integer parentKey, fogstate value returns nothing
+	call hashtable_saveFogStateHandle(Table_ht, this, parentKey, value)
+endfunction
+
+function dispatch_Table_Table_Table_saveFogState takes integer this, integer parentKey, fogstate value returns nothing
+	if Table_typeId[this] == 0 then
+		if this == 0 then
+			set wurst_stack[wurst_stack_depth] = ""
+			set wurst_stack_depth = wurst_stack_depth + 1
+			call error("Nullpointer exception when calling Table.Table_Table_saveFogState")
+		else
+			set wurst_stack[wurst_stack_depth] = ""
+			set wurst_stack_depth = wurst_stack_depth + 1
+			call error("Called Table.Table_Table_saveFogState on invalid object.")
+		endif
+	endif
+	call Table_saveFogState(this, parentKey, value)
+endfunction
+
+function triggerFromIndex takes integer index returns trigger
+	local trigger stackTrace_tempReturn
+	set wurst_stack[wurst_stack_depth] = "TypeCasting, line 77"
+	set wurst_stack_depth = wurst_stack_depth + 1
+	call dispatch_Table_Table_Table_saveFogState(TypeCasting_typecastdata, 0, ConvertFogState(index))
+	set stackTrace_tempReturn = dispatch_Table_Table_Table_loadTrigger(TypeCasting_typecastdata, 0)
+	set wurst_stack_depth = wurst_stack_depth - 1
+	set triggerFromIndextempReturn = stackTrace_tempReturn
+	set stackTrace_tempReturn = null
+	return triggerFromIndextempReturn
+endfunction
+
+function RegisterEvents_closure_impl takes nothing returns nothing
+	set wurst_stack[wurst_stack_depth] = "RegisterEvents, line 34"
+	set wurst_stack_depth = wurst_stack_depth + 1
+	call trigger_evaluate(triggerFromIndex(dispatch_HashMap_HashMap_HashMap_get(RegisterEvents_onCastMap, GetSpellAbilityId())))
+endfunction
+
+function bridge_RegisterEvents_closure_impl takes nothing returns nothing
+	set wurst_stack_depth = 1
+	set wurst_stack[0] = "RegisterEvents, line 34"
+	call RegisterEvents_closure_impl()
+endfunction
+
+function getEnterLeaveUnit takes nothing returns unit
+	return OnUnitEnterLeave_tempUnit
+endfunction
+
+function UnitIndex_onDestroy takes integer this returns nothing
+	call trigger_evaluate(UnitIndexer_onDeindexTrigger)
+	call unit_setUserData(UnitIndex__unit[this], 0)
+endfunction
+
+function dealloc_UnitIndex takes integer obj returns nothing
+	if UnitIndex_typeId[obj] == 0 then
+		set wurst_stack[wurst_stack_depth] = ""
+		set wurst_stack_depth = wurst_stack_depth + 1
+		call error("Double free: object of type UnitIndex")
+	else
+		set UnitIndex_nextFree[UnitIndex_firstFree] = obj
+		set UnitIndex_firstFree = UnitIndex_firstFree + 1
+		set UnitIndex_typeId[obj] = 0
+	endif
+endfunction
+
+function destroyUnitIndex takes integer this returns nothing
+	call UnitIndex_onDestroy(this)
+	set wurst_stack[wurst_stack_depth] = "UnitIndexer, line 166"
+	set wurst_stack_depth = wurst_stack_depth + 1
+	call dealloc_UnitIndex(this)
+endfunction
+
+function dispatch_UnitIndex_destroyUnitIndex takes integer this returns nothing
+	if UnitIndex_typeId[this] == 0 then
+		if this == 0 then
+			set wurst_stack[wurst_stack_depth] = ""
+			set wurst_stack_depth = wurst_stack_depth + 1
+			call error("Nullpointer exception when calling UnitIndex.destroyUnitIndex")
+		else
+			set wurst_stack[wurst_stack_depth] = ""
+			set wurst_stack_depth = wurst_stack_depth + 1
+			call error("Called UnitIndex.destroyUnitIndex on invalid object.")
+		endif
+	endif
+	set wurst_stack[wurst_stack_depth] = "UnitIndexer, line 151"
+	set wurst_stack_depth = wurst_stack_depth + 1
+	call destroyUnitIndex(this)
+endfunction
+
+function unit_getUserData takes unit this returns integer
+	return GetUnitUserData(this)
+endfunction
+
+function unit_toUnitIndex takes unit this returns integer
+	local integer instance = unit_getUserData(this)
+	if instance == 0 then
+		set wurst_stack[wurst_stack_depth] = "UnitIndexer, line 138"
+		set wurst_stack_depth = wurst_stack_depth + 1
+		set instance = new_UnitIndex(this)
+	endif
+	set wurst_stack_depth = wurst_stack_depth - 1
+	return instance
+endfunction
+
+function unit_deindex takes unit this returns boolean
+	if unit_getUserData(this) == 0 then
+		set wurst_stack_depth = wurst_stack_depth - 1
+		return false
+	else
+		set wurst_stack[wurst_stack_depth] = "UnitIndexer, line 148"
+		set wurst_stack_depth = wurst_stack_depth + 1
+		call dispatch_UnitIndex_destroyUnitIndex(unit_toUnitIndex(this))
+		set wurst_stack_depth = wurst_stack_depth - 1
+		return true
+	endif
+endfunction
+
+function UnitIndexer_closure_impl takes nothing returns boolean
+	local boolean stackTrace_tempReturn = unit_deindex(getEnterLeaveUnit())
+	set wurst_stack_depth = wurst_stack_depth - 1
+	return stackTrace_tempReturn
+endfunction
+
+function bridge_UnitIndexer_closure_impl takes nothing returns boolean
+	set wurst_stack_depth = 1
+	set wurst_stack[0] = "UnitIndexer, line 174"
+	return UnitIndexer_closure_impl()
+endfunction
+
+function UnitIndexer_closure_impl_2 takes nothing returns nothing
+	set wurst_stack[wurst_stack_depth] = "UnitIndexer, line 173"
+	set wurst_stack_depth = wurst_stack_depth + 1
+	call unit_toUnitIndex(getEnterLeaveUnit())
+endfunction
+
+function bridge_UnitIndexer_closure_impl_2 takes nothing returns nothing
+	set wurst_stack_depth = 1
+	set wurst_stack[0] = "UnitIndexer, line 173"
+	call UnitIndexer_closure_impl_2()
+endfunction
+
+function int_toString takes integer this returns string
+	return I2S(this)
+endfunction
+
+function alloc_Table takes nothing returns integer
+	local integer this
+	if Table_firstFree == 0 then
+		if Table_maxIndex < 8191 then
+			set Table_maxIndex = Table_maxIndex + 1
+			set this = Table_maxIndex
+			set Table_typeId[this] = 645
+		else
+			set wurst_stack[wurst_stack_depth] = ""
+			set wurst_stack_depth = wurst_stack_depth + 1
+			call error("Out of memory: Could not create Table.")
+			set this = 0
+		endif
+	else
+		set Table_firstFree = Table_firstFree - 1
+		set this = Table_nextFree[Table_firstFree]
+		set Table_typeId[this] = 645
+	endif
+	set wurst_stack_depth = wurst_stack_depth - 1
+	return this
+endfunction
+
+function construct_Table takes integer this returns nothing
+endfunction
+
+function new_Table takes nothing returns integer
+	local integer this
+	set wurst_stack[wurst_stack_depth] = "Table, line 5"
+	set wurst_stack_depth = wurst_stack_depth + 1
+	set this = alloc_Table()
+	call construct_Table(this)
+	set wurst_stack_depth = wurst_stack_depth - 1
+	return this
+endfunction
+
+function init_Colors takes nothing returns boolean
+	local integer temp_Colors_COLOR_WHITE_red = 255
+	local integer temp_Colors_COLOR_WHITE_green = 255
+	local integer temp_Colors_COLOR_WHITE_blue = 255
+	local integer temp_Colors_COLOR_WHITE_alpha = 255
+	local integer i
+	local integer i2
+	set Colors_COLOR_WHITE_red = temp_Colors_COLOR_WHITE_red
+	set Colors_COLOR_WHITE_green = temp_Colors_COLOR_WHITE_green
+	set Colors_COLOR_WHITE_blue = temp_Colors_COLOR_WHITE_blue
+	set Colors_COLOR_WHITE_alpha = temp_Colors_COLOR_WHITE_alpha
+	set i = 0
+	loop
+		exitwhen i > 9
+		call int_toString(i)
+		set i = i + 1
+	endloop
+	set wurst_stack[wurst_stack_depth] = "Colors, line 157"
+	set wurst_stack_depth = wurst_stack_depth + 1
+	set Colors_decs = new_Table()
+	set i2 = 0
+	loop
+		exitwhen i2 > 9
+		set wurst_stack[wurst_stack_depth] = "Colors, line 159"
+		set wurst_stack_depth = wurst_stack_depth + 1
+		call dispatch_Table_Table_Table_saveInt(Colors_decs, string_getHash(int_toString(i2)), i2)
+		set i2 = i2 + 1
+	endloop
+	set wurst_stack[wurst_stack_depth] = "Colors, line 161"
+	set wurst_stack_depth = wurst_stack_depth + 1
+	call dispatch_Table_Table_Table_saveInt(Colors_decs, StringHash("A"), 10)
+	set wurst_stack[wurst_stack_depth] = "Colors, line 162"
+	set wurst_stack_depth = wurst_stack_depth + 1
+	call dispatch_Table_Table_Table_saveInt(Colors_decs, StringHash("B"), 11)
+	set wurst_stack[wurst_stack_depth] = "Colors, line 163"
+	set wurst_stack_depth = wurst_stack_depth + 1
+	call dispatch_Table_Table_Table_saveInt(Colors_decs, StringHash("C"), 12)
+	set wurst_stack[wurst_stack_depth] = "Colors, line 164"
+	set wurst_stack_depth = wurst_stack_depth + 1
+	call dispatch_Table_Table_Table_saveInt(Colors_decs, StringHash("D"), 13)
+	set wurst_stack[wurst_stack_depth] = "Colors, line 165"
+	set wurst_stack_depth = wurst_stack_depth + 1
+	call dispatch_Table_Table_Table_saveInt(Colors_decs, StringHash("E"), 14)
+	set wurst_stack[wurst_stack_depth] = "Colors, line 166"
+	set wurst_stack_depth = wurst_stack_depth + 1
+	call dispatch_Table_Table_Table_saveInt(Colors_decs, StringHash("F"), 15)
+	set wurst_stack_depth = wurst_stack_depth - 1
+	return true
+endfunction
+
+function bridge_init_Colors takes nothing returns boolean
+	set wurst_stack_depth = 1
+	set wurst_stack[0] = "Colors, line 0"
+	return init_Colors()
+endfunction
+
+function unit_removeAbility takes unit this, integer abil returns boolean
+	return UnitRemoveAbility(this, abil)
+endfunction
+
+function createDummy takes real pos_x, real pos_y, player owner, real facing_radians returns unit
+	local unit u = createUnit(owner, DummyRecycler_DUMMY_UNIT_ID, pos_x, pos_y, facing_radians)
+	local unit receiver = u
+	local unit receiver_2
+	local unit receiver_3
+	local unit receiver_4
+	call unit_setXY(receiver, pos_x, pos_y)
+	set receiver_2 = receiver
+	call unit_addAbility(receiver_2, Basics_HEIGHT_ENABLER)
+	set receiver_3 = receiver_2
+	call unit_removeAbility(receiver_3, Basics_HEIGHT_ENABLER)
+	set receiver_4 = receiver_3
+	call unit_addAbility(receiver_4, Basics_LOCUST_ID)
+	set createDummytempReturn = u
+	set u = null
+	set receiver = null
+	set receiver_2 = null
+	set receiver_3 = null
+	set receiver_4 = null
+	return createDummytempReturn
+endfunction
+
+function alloc_ArrayQueue takes nothing returns integer
+	local integer this
+	if ArrayQueue_firstFree == 0 then
+		if ArrayQueue_maxIndex < 8191 then
+			set ArrayQueue_maxIndex = ArrayQueue_maxIndex + 1
+			set this = ArrayQueue_maxIndex
+			set ArrayQueue_typeId[this] = 631
+		else
+			set wurst_stack[wurst_stack_depth] = ""
+			set wurst_stack_depth = wurst_stack_depth + 1
+			call error("Out of memory: Could not create ArrayQueue.")
+			set this = 0
+		endif
+	else
+		set ArrayQueue_firstFree = ArrayQueue_firstFree - 1
+		set this = ArrayQueue_nextFree[ArrayQueue_firstFree]
+		set ArrayQueue_typeId[this] = 631
+	endif
+	set wurst_stack_depth = wurst_stack_depth - 1
+	return this
+endfunction
+
+function construct_ArrayQueue takes integer this returns nothing
+	set ArrayQueue_rp[this] = 0
+	set ArrayQueue_size[this] = 0
+endfunction
+
+function new_ArrayQueue takes nothing returns integer
+	local integer this
+	set wurst_stack[wurst_stack_depth] = "DummyRecycler, line 48"
+	set wurst_stack_depth = wurst_stack_depth + 1
+	set this = alloc_ArrayQueue()
+	call construct_ArrayQueue(this)
+	set wurst_stack_depth = wurst_stack_depth - 1
+	return this
+endfunction
+
+function init_DummyRecycler takes nothing returns boolean
+	local integer i
+	local integer temp
+	local integer j
+	local integer temp_2
+	set DummyRecycler_DUMMY_UNIT_ID = 2019849581
+	set DummyRecycler_DIFFERENT_ANGLES = 8
+	set DummyRecycler_ANGLE_DEGREE = 360 * 1. / DummyRecycler_DIFFERENT_ANGLES
+	set DummyRecycler_SAVED_UNITS_PER_ANGLE = 6
+	set DelayNode_t = CreateTimer()
+	set DelayNode_first = 0
+	set i = 0
+	set temp = DummyRecycler_DIFFERENT_ANGLES - 1
+	loop
+		exitwhen i > temp
+		set wurst_stack[wurst_stack_depth] = "DummyRecycler, line 139"
+		set wurst_stack_depth = wurst_stack_depth + 1
+		set DummyRecycler_angleQueues[i] = new_ArrayQueue()
+		set j = 0
+		set temp_2 = DummyRecycler_SAVED_UNITS_PER_ANGLE - 1
+		loop
+			exitwhen j > temp_2
+			set wurst_stack[wurst_stack_depth] = "DummyRecycler, line 141"
+			set wurst_stack_depth = wurst_stack_depth + 1
+			call dispatch_ArrayQueue_DummyRecycler_ArrayQueue_enqueue(DummyRecycler_angleQueues[i], createDummy(MapBounds_boundMax_x, MapBounds_boundMax_y, Basics_DUMMY_PLAYER, real_asAngleDegrees(i * DummyRecycler_ANGLE_DEGREE)))
+			set j = j + 1
+		endloop
+		set i = i + 1
+	endloop
+	set wurst_stack_depth = wurst_stack_depth - 1
+	return true
+endfunction
+
+function bridge_init_DummyRecycler takes nothing returns boolean
+	set wurst_stack_depth = 1
+	set wurst_stack[0] = "DummyRecycler, line 0"
+	return init_DummyRecycler()
+endfunction
+
+function alloc_IdGenerator takes nothing returns integer
+	local integer this
+	if IdGenerator_firstFree == 0 then
+		if IdGenerator_maxIndex < 8191 then
+			set IdGenerator_maxIndex = IdGenerator_maxIndex + 1
+			set this = IdGenerator_maxIndex
+		else
+			set wurst_stack[wurst_stack_depth] = ""
+			set wurst_stack_depth = wurst_stack_depth + 1
+			call error("Out of memory: Could not create IdGenerator.")
+			set this = 0
+		endif
+	else
+		set IdGenerator_firstFree = IdGenerator_firstFree - 1
+		set this = IdGenerator_nextFree[IdGenerator_firstFree]
+	endif
+	set wurst_stack_depth = wurst_stack_depth - 1
+	return this
+endfunction
+
+function construct_IdGenerator takes integer this, integer start returns nothing
+endfunction
+
+function new_IdGenerator takes integer start returns integer
+	local integer this
+	set wurst_stack[wurst_stack_depth] = "ObjectIdGenerator, line 19"
+	set wurst_stack_depth = wurst_stack_depth + 1
+	set this = alloc_IdGenerator()
+	call construct_IdGenerator(this, start)
+	set wurst_stack_depth = wurst_stack_depth - 1
+	return this
+endfunction
+
+function init_ObjectIdGenerator takes nothing returns boolean
+	set wurst_stack[wurst_stack_depth] = "ObjectIdGenerator, line 7"
+	set wurst_stack_depth = wurst_stack_depth + 1
+	call new_IdGenerator(2016423984)
+	set wurst_stack[wurst_stack_depth] = "ObjectIdGenerator, line 8"
+	set wurst_stack_depth = wurst_stack_depth + 1
+	call new_IdGenerator(1213018160)
+	set wurst_stack[wurst_stack_depth] = "ObjectIdGenerator, line 9"
+	set wurst_stack_depth = wurst_stack_depth + 1
+	call new_IdGenerator(1095577648)
+	set wurst_stack[wurst_stack_depth] = "ObjectIdGenerator, line 10"
+	set wurst_stack_depth = wurst_stack_depth + 1
+	call new_IdGenerator(1112354864)
+	set wurst_stack[wurst_stack_depth] = "ObjectIdGenerator, line 11"
+	set wurst_stack_depth = wurst_stack_depth + 1
+	call new_IdGenerator(1229795376)
+	set wurst_stack_depth = wurst_stack_depth - 1
+	return true
+endfunction
+
+function bridge_init_ObjectIdGenerator takes nothing returns boolean
+	set wurst_stack_depth = 1
+	set wurst_stack[0] = "ObjectIdGenerator, line 0"
+	return init_ObjectIdGenerator()
+endfunction
+
+function alloc_Closure takes nothing returns integer
+	local integer this
+	if CallbackSingle_firstFree == 0 then
+		if CallbackSingle_maxIndex < 8191 then
+			set CallbackSingle_maxIndex = CallbackSingle_maxIndex + 1
+			set this = CallbackSingle_maxIndex
+			set CallbackSingle_typeId[this] = 630
+		else
+			set wurst_stack[wurst_stack_depth] = ""
+			set wurst_stack_depth = wurst_stack_depth + 1
+			call error("Out of memory: Could not create Closure.")
+			set this = 0
+		endif
+	else
+		set CallbackSingle_firstFree = CallbackSingle_firstFree - 1
+		set this = CallbackSingle_nextFree[CallbackSingle_firstFree]
+		set CallbackSingle_typeId[this] = 630
+	endif
+	set wurst_stack_depth = wurst_stack_depth - 1
+	return this
+endfunction
+
+function construct_CallbackSingle takes integer this returns nothing
+endfunction
+
+function getTimer takes nothing returns timer
+	local timer receiver
+	local timer stackTrace_tempReturn
+	if TimerUtils_freeTimersCount > 0 then
+		set TimerUtils_freeTimersCount = TimerUtils_freeTimersCount - 1
+		set wurst_stack[wurst_stack_depth] = "TimerUtils, line 29"
+		set wurst_stack_depth = wurst_stack_depth + 1
+		call timer_setData(TimerUtils_freeTimers[TimerUtils_freeTimersCount], 0)
+		set wurst_stack_depth = wurst_stack_depth - 1
+		set receiver = null
+		set stackTrace_tempReturn = null
+		return TimerUtils_freeTimers[TimerUtils_freeTimersCount]
+	else
+		set receiver = CreateTimer()
+		call timer_setData(receiver, 0)
+		set stackTrace_tempReturn = receiver
+		set wurst_stack_depth = wurst_stack_depth - 1
+		set getTimertempReturn = stackTrace_tempReturn
+		set receiver = null
+		set stackTrace_tempReturn = null
+		return getTimertempReturn
+	endif
+endfunction
+
+function CallbackSingle_start takes integer this, real time returns nothing
+	local timer receiver
+	local timer receiver_2
+	set wurst_stack[wurst_stack_depth] = "ClosureTimers, line 67"
+	set wurst_stack_depth = wurst_stack_depth + 1
+	set receiver = getTimer()
+	set wurst_stack[wurst_stack_depth] = "ClosureTimers, line 67"
+	set wurst_stack_depth = wurst_stack_depth + 1
+	call timer_setData(receiver, this)
+	set receiver_2 = receiver
+	call timer_start(receiver_2, time, ref_function_bridge_CallbackSingle_closure_impl)
+	set CallbackSingle_t[this] = receiver_2
+	set receiver = null
+	set receiver_2 = null
+endfunction
+
+function dispatch_CallbackSingle_ClosureTimers_CallbackSingle_start takes integer this, real time returns nothing
+	if CallbackSingle_typeId[this] == 0 then
+		if this == 0 then
+			set wurst_stack[wurst_stack_depth] = ""
+			set wurst_stack_depth = wurst_stack_depth + 1
+			call error("Nullpointer exception when calling CallbackSingle.ClosureTimers_CallbackSingle_start")
+		else
+			set wurst_stack[wurst_stack_depth] = ""
+			set wurst_stack_depth = wurst_stack_depth + 1
+			call error("Called CallbackSingle.ClosureTimers_CallbackSingle_start on invalid object.")
+		endif
+	endif
+	set wurst_stack[wurst_stack_depth] = "ClosureTimers, line 66"
+	set wurst_stack_depth = wurst_stack_depth + 1
+	call CallbackSingle_start(this, time)
+endfunction
+
+function doAfter takes real timeToWait, integer cb returns integer
+	set wurst_stack[wurst_stack_depth] = "ClosureTimers, line 13"
+	set wurst_stack_depth = wurst_stack_depth + 1
+	call dispatch_CallbackSingle_ClosureTimers_CallbackSingle_start(cb, timeToWait)
+	set wurst_stack_depth = wurst_stack_depth - 1
+	return cb
+endfunction
+
+function nullTimer takes integer cb returns integer
+	set wurst_stack[wurst_stack_depth] = "ClosureTimers, line 20"
+	set wurst_stack_depth = wurst_stack_depth + 1
+	call doAfter(0., cb)
+	set wurst_stack_depth = wurst_stack_depth - 1
+	return cb
+endfunction
+
+function player_setAbilityAvailable takes player this, integer abilityId, boolean avail returns nothing
+	call SetPlayerAbilityAvailable(this, abilityId, avail)
+endfunction
+
+function trigger_addCondition takes trigger this, boolexpr condition returns nothing
+	call TriggerAddCondition(this, condition)
+endfunction
+
+function trigger_registerPlayerUnitEvent takes trigger this, player whichPlayer, playerunitevent whichPlayerUnitEvent, boolexpr filter returns nothing
+	call TriggerRegisterPlayerUnitEvent(this, whichPlayer, whichPlayerUnitEvent, filter)
+endfunction
+
+function registerPlayerUnitEvent takes playerunitevent p, code c returns nothing
+	local integer hid = handle_getHandleId(p)
+	local integer k
+	if RegisterEvents_t[hid] == null then
+		set RegisterEvents_t[hid] = CreateTrigger()
+		set k = 15
+		loop
+			exitwhen k < 0
+			call trigger_registerPlayerUnitEvent(RegisterEvents_t[hid], Player_players[k], p, null)
+			set k = k - 1
+		endloop
+	endif
+	call trigger_addCondition(RegisterEvents_t[hid], Filter(c))
+endfunction
+
+function trigger_registerEnterRegion takes trigger this, region whichRegion, boolexpr filter returns nothing
+	call TriggerRegisterEnterRegion(this, whichRegion, filter)
+endfunction
+
+function init_OnUnitEnterLeave takes nothing returns boolean
+	local trigger receiver
+	local integer i
+	local integer temp
+	local group g_2
+	local integer clVar
+	set OnUnitEnterLeave_eventTrigger = CreateTrigger()
+	set OnUnitEnterLeave_tempUnit = null
+	set receiver = CreateTrigger()
+	call trigger_registerEnterRegion(receiver, MapBounds_boundRegion, Filter(ref_function_OnUnitEnterLeave_closure_impl))
+	call registerPlayerUnitEvent(EVENT_PLAYER_UNIT_ISSUED_ORDER, ref_function_OnUnitEnterLeave_closure_impl_2)
+	set OnUnitEnterLeave_ABILITY_ID = 560283684
+	set i = 0
+	set temp = bj_MAX_PLAYER_SLOTS - 1
+	loop
+		exitwhen i > temp
+		call player_setAbilityAvailable(Player_players[i], OnUnitEnterLeave_ABILITY_ID, false)
+		set i = i + 1
+	endloop
+	set g_2 = CreateGroup()
+	call GroupEnumUnitsInRect(g_2, MapBounds_boundRect, null)
+	set wurst_stack[wurst_stack_depth] = "OnUnitEnterLeave, line 45"
+	set wurst_stack_depth = wurst_stack_depth + 1
+	set clVar = alloc_Closure()
+	call construct_CallbackSingle(clVar)
+	set g[clVar] = g_2
+	call nullTimer(clVar)
+	set OnUnitEnterLeave_ABILITY_ID = 560283684
+	set wurst_stack_depth = wurst_stack_depth - 1
+	set receiver = null
+	set g_2 = null
+	return true
+endfunction
+
+function bridge_init_OnUnitEnterLeave takes nothing returns boolean
+	set wurst_stack_depth = 1
+	set wurst_stack[0] = "OnUnitEnterLeave, line 0"
+	return init_OnUnitEnterLeave()
+endfunction
+
+function string_charAt takes string this, integer index returns string
+	return SubString(this, index, index + 1)
+endfunction
+
+function int2fourchar takes integer value returns string
+	local string result = ""
+	local integer remainingValue = value
+	local integer byteno = 0
+	local integer charValue
+	loop
+		exitwhen byteno > 3
+		set charValue = ModuloInteger(remainingValue, 256)
+		set remainingValue = remainingValue / 256
+		set result = string_charAt(ObjectIds_CHARMAP, charValue) + result
+		set byteno = byteno + 1
+	endloop
+	return result
+endfunction
+
+function init_Preloader takes nothing returns boolean
+	set Preloader_autoFinish = true
+	set Preloader_dumg = CreateGroup()
+	set Preloader_dum = createUnit(Basics_DUMMY_PLAYER, DummyRecycler_DUMMY_UNIT_ID, 0., 0., 0.)
+	if Preloader_dum == null then
+		set wurst_stack[wurst_stack_depth] = "Preloader, line 53"
+		set wurst_stack_depth = wurst_stack_depth + 1
+		call error("DUMMY_UNITID (" + int2fourchar(DummyRecycler_DUMMY_UNIT_ID) + ") not added correctly to the map.")
+	endif
+	if Preloader_autoFinish then
+		call timer_start(CreateTimer(), 0.0, ref_function_finishPreload)
+	endif
+	set wurst_stack_depth = wurst_stack_depth - 1
+	return true
+endfunction
+
+function bridge_init_Preloader takes nothing returns boolean
+	set wurst_stack_depth = 1
+	set wurst_stack[0] = "Preloader, line 0"
+	return init_Preloader()
+endfunction
+
+function alloc_HashMap takes nothing returns integer
+	local integer this
+	if Table_firstFree == 0 then
+		if Table_maxIndex < 8191 then
+			set Table_maxIndex = Table_maxIndex + 1
+			set this = Table_maxIndex
+			set Table_typeId[this] = 646
+		else
+			set wurst_stack[wurst_stack_depth] = ""
+			set wurst_stack_depth = wurst_stack_depth + 1
+			call error("Out of memory: Could not create HashMap.")
+			set this = 0
+		endif
+	else
+		set Table_firstFree = Table_firstFree - 1
+		set this = Table_nextFree[Table_firstFree]
+		set Table_typeId[this] = 646
+	endif
+	set wurst_stack_depth = wurst_stack_depth - 1
+	return this
+endfunction
+
+function construct_HashMap takes integer this returns nothing
+	call construct_Table(this)
+endfunction
+
+function new_HashMap takes nothing returns integer
+	local integer this
+	set wurst_stack[wurst_stack_depth] = "HashMap, line 6"
+	set wurst_stack_depth = wurst_stack_depth + 1
+	set this = alloc_HashMap()
+	call construct_HashMap(this)
+	set wurst_stack_depth = wurst_stack_depth - 1
+	return this
+endfunction
+
+function init_RegisterEvents takes nothing returns boolean
+	set wurst_stack[wurst_stack_depth] = "RegisterEvents, line 31"
+	set wurst_stack_depth = wurst_stack_depth + 1
+	set RegisterEvents_onCastMap = new_HashMap()
+	call registerPlayerUnitEvent(EVENT_PLAYER_UNIT_SPELL_EFFECT, ref_function_bridge_RegisterEvents_closure_impl)
+	set wurst_stack_depth = wurst_stack_depth - 1
+	return true
+endfunction
+
+function bridge_init_RegisterEvents takes nothing returns boolean
+	set wurst_stack_depth = 1
+	set wurst_stack[0] = "RegisterEvents, line 0"
+	return init_RegisterEvents()
+endfunction
+
+function init_TimerUtils takes nothing returns boolean
+	set TimerUtils_freeTimersCount = 0
+	set wurst_stack[wurst_stack_depth] = "TimerUtils, line 12"
+	set wurst_stack_depth = wurst_stack_depth + 1
+	set TimerUtils_timerData = new_Table()
+	set TimerUtils_HELD = 679645218
+	call CreateTimer()
+	call CreateTrigger()
+	set wurst_stack_depth = wurst_stack_depth - 1
+	return true
+endfunction
+
+function bridge_init_TimerUtils takes nothing returns boolean
+	set wurst_stack_depth = 1
+	set wurst_stack[0] = "TimerUtils, line 0"
+	return init_TimerUtils()
+endfunction
+
+function hashtable_saveString takes hashtable this, integer parentKey, integer childKey, string value returns nothing
+	call SaveStr(this, parentKey, childKey, value)
+endfunction
+
+function Table_saveString takes integer this, integer parentKey, string value returns nothing
+	call hashtable_saveString(Table_ht, this, parentKey, value)
+endfunction
+
+function dispatch_Table_Table_Table_saveString takes integer this, integer parentKey, string value returns nothing
+	if Table_typeId[this] == 0 then
+		if this == 0 then
+			set wurst_stack[wurst_stack_depth] = ""
+			set wurst_stack_depth = wurst_stack_depth + 1
+			call error("Nullpointer exception when calling Table.Table_Table_saveString")
+		else
+			set wurst_stack[wurst_stack_depth] = ""
+			set wurst_stack_depth = wurst_stack_depth + 1
+			call error("Called Table.Table_Table_saveString on invalid object.")
+		endif
+	endif
+	call Table_saveString(this, parentKey, value)
+endfunction
+
+function init_TypeCasting takes nothing returns boolean
+	set wurst_stack[wurst_stack_depth] = "TypeCasting, line 8"
+	set wurst_stack_depth = wurst_stack_depth + 1
+	set TypeCasting_typecastdata = new_Table()
+	set wurst_stack[wurst_stack_depth] = "TypeCasting, line 9"
+	set wurst_stack_depth = wurst_stack_depth + 1
+	call dispatch_Table_Table_Table_saveString(TypeCasting_typecastdata, 0, "")
+	set wurst_stack_depth = wurst_stack_depth - 1
+	return true
+endfunction
+
+function bridge_init_TypeCasting takes nothing returns boolean
+	set wurst_stack_depth = 1
+	set wurst_stack[0] = "TypeCasting, line 0"
+	return init_TypeCasting()
+endfunction
+
+function timer_destr takes timer this returns nothing
+	call DestroyTimer(this)
+endfunction
+
+function finishPreload takes nothing returns nothing
+	local group wurst__iterator0
+	local unit u
+	call unit_remove(Preloader_dum)
+	set wurst__iterator0 = group_iterator(Preloader_dumg)
+	loop
+		exitwhen  not group_hasNext(wurst__iterator0)
+		set u = group_next(wurst__iterator0)
+		call unit_remove(u)
+	endloop
+	call group_close(wurst__iterator0)
+	call group_destr(Preloader_dumg)
+	if GetExpiredTimer() != null then
+		call timer_destr(GetExpiredTimer())
+	endif
+	set wurst__iterator0 = null
+	set u = null
+endfunction
+
+function init_Angle takes nothing returns boolean
+	set Angle_DEGTORAD = 0.017453293
+	set Angle_RADTODEG = 57.295779513
+	return true
+endfunction
+
+function s__LeveledCuff__allocate takes nothing returns integer
+	local integer this = si__LeveledCuff_F
+	if this != 0 then
+		set si__LeveledCuff_F = si__LeveledCuff_V[this]
+	else
+		set si__LeveledCuff_I = si__LeveledCuff_I + 1
+		set this = si__LeveledCuff_I
+	endif
+	if this > 2729 then
+		return 0
+	endif
+	set s__LeveledCuff_cuffBuff[this] = (this - 1) * 3
+	set s__LeveledCuff_cuffAbility[this] = (this - 1) * 3
+	set si__LeveledCuff_V[this] = -1
+	return this
+endfunction
+
+function s__LeveledCuff_create takes integer ab1, integer ab2, integer ab3, integer buf1, integer buf2, integer buf3 returns integer
+	local integer s = s__LeveledCuff__allocate()
+	set s___LeveledCuff_cuffBuff[s__LeveledCuff_cuffBuff[s]] = buf3
+	set s___LeveledCuff_cuffBuff[s__LeveledCuff_cuffBuff[s] + 1] = buf1
+	set s___LeveledCuff_cuffBuff[s__LeveledCuff_cuffBuff[s] + 2] = buf2
+	set s___LeveledCuff_cuffAbility[s__LeveledCuff_cuffAbility[s]] = ab3
+	set s___LeveledCuff_cuffAbility[s__LeveledCuff_cuffAbility[s] + 1] = ab1
+	set s___LeveledCuff_cuffAbility[s__LeveledCuff_cuffAbility[s] + 2] = ab2
+	return s
+endfunction
+
+function LeveledCuff_createLeveledCuff takes integer ab1, integer ab2, integer ab3, integer buf1, integer buf2, integer buf3 returns nothing
+	local integer sc = s__LeveledCuff_create(ab1, ab2, ab3, buf1, buf2, buf3)
+	set LeveledCuff__cuffList[LeveledCuff__listMax] = sc
+	set LeveledCuff__listMax = LeveledCuff__listMax + 1
+endfunction
+
+function createLeveledCuff takes integer spell1, integer spell2, integer spell3, integer buff1, integer buff2, integer buff3 returns nothing
+	call LeveledCuff_createLeveledCuff(spell1, spell2, spell3, buff1, buff2, buff3)
+endfunction
+
+function hideAbility takes integer ab returns nothing
+	local integer i = 0
+	local integer temp = bj_MAX_PLAYER_SLOTS
+	loop
+		exitwhen i > temp
+		call player_setAbilityAvailable(Player(i), ab, false)
+		set i = i + 1
+	endloop
+endfunction
+
+function init_ArachnoAura takes nothing returns boolean
+	set ArachnoAura_BUFF_ID_1 = 1110454351
+	set ArachnoAura_BUFF_ID_2 = 1110454353
+	set ArachnoAura_BUFF_ID_3 = 1110454354
+	set ArachnoAura_SPELL_ID_1 = 1093677379
+	set ArachnoAura_SPELL_ID_2 = 1093677380
+	set ArachnoAura_SPELL_ID_3 = 1093677381
+	call hideAbility(ArachnoAura_SPELL_ID_1)
+	call hideAbility(ArachnoAura_SPELL_ID_2)
+	call hideAbility(ArachnoAura_SPELL_ID_3)
+	call createLeveledCuff(ArachnoAura_SPELL_ID_1, ArachnoAura_SPELL_ID_2, ArachnoAura_SPELL_ID_3, ArachnoAura_BUFF_ID_1, ArachnoAura_BUFF_ID_2, ArachnoAura_BUFF_ID_3)
+	return true
+endfunction
+
+function init_Basics takes nothing returns boolean
+	set Basics_ANIMATION_PERIOD = 0.030
+	set Basics_HEIGHT_ENABLER = 1097691750
+	set Basics_LOCUST_ID = 1097625443
+	set Basics_DUMMY_PLAYER = Player(15)
+	call Player(12)
+	return true
+endfunction
+
+function trigger_registerTimerEvent takes trigger this, real timeout, boolean periodic returns nothing
+	call TriggerRegisterTimerEvent(this, timeout, periodic)
+endfunction
+
+function init_ChooseRace takes nothing returns boolean
+	local trigger receiver = CreateTrigger()
+	local trigger receiver_2
+	local trigger receiver_3
+	local trigger receiver_4
+	call trigger_registerTimerEvent(receiver, 0.1, false)
+	set receiver_2 = receiver
+	call trigger_addAction(receiver_2, ref_function_BuildDialog)
+	set receiver_3 = CreateTrigger()
+	call trigger_registerTimerEvent(receiver_3, 1.0, false)
+	set receiver_4 = receiver_3
+	call trigger_addAction(receiver_4, ref_function_ShowDialog)
+	set ChooseRace_RaceDialog = DialogCreate()
+	set receiver = null
+	set receiver_2 = null
+	set receiver_3 = null
+	set receiver_4 = null
+	return true
+endfunction
+
+function init_Debug takes nothing returns boolean
+	call SetTimeOfDay(17.30)
+	return true
+endfunction
+
+function init_ErrorHandling takes nothing returns boolean
+	set ErrorHandling_MUTE_ERROR_DURATION = 60
+	set ErrorHandling_PRIMARY_ERROR_KEY = -1
+	set ErrorHandling_HT = InitHashtable()
+	return true
+endfunction
+
+function init_FloatingText takes nothing returns boolean
+	return true
+endfunction
+
+function timer_startPeriodic takes timer this, real time, code timerCallBack returns nothing
+	call TimerStart(this, time, true, timerCallBack)
+endfunction
+
+function init_GameTimer takes nothing returns boolean
+	set GameTimer_gameTimer = CreateTimer()
+	call timer_start(GameTimer_gameTimer, 100000., null)
+	call timer_startPeriodic(CreateTimer(), Basics_ANIMATION_PERIOD, ref_function_GameTimer_closure_impl)
+	return true
+endfunction
+
+function init_Group takes nothing returns boolean
+	call CreateGroup()
+	return true
+endfunction
+
+function init_Init takes nothing returns boolean
+	local trigger receiver
+	local trigger receiver_2
+	set Init_TAVERN_ID = 1853120886
+	set Init_TAVERN2_ID = 1848651859
+	set receiver = CreateTrigger()
+	call trigger_registerTimerEvent(receiver, 2.1, false)
+	set receiver_2 = receiver
+	call trigger_addAction(receiver_2, ref_function_bridge_I1)
+	set receiver = null
+	set receiver_2 = null
+	return true
+endfunction
+
+function init_MagicFunctions takes nothing returns boolean
+	set MagicFunctions_compiletime = false
+	return true
+endfunction
+
+function rect_getMaxX takes rect this returns real
+	return GetRectMaxX(this)
+endfunction
+
+function rect_getMaxY takes rect this returns real
+	return GetRectMaxY(this)
+endfunction
+
+function rect_getMinX takes rect this returns real
+	return GetRectMinX(this)
+endfunction
+
+function rect_getMinY takes rect this returns real
+	return GetRectMinY(this)
+endfunction
+
+function region_addRect takes region this, rect r returns nothing
+	call RegionAddRect(this, r)
+endfunction
+
+function init_MapBounds takes nothing returns boolean
+	local region receiver
+	local region receiver_2
+	local real temp_MapBounds_playableMin_x
+	local real temp_MapBounds_playableMin_y
+	local real temp_MapBounds_playableMax_x
+	local real temp_MapBounds_playableMax_y
+	local real temp_MapBounds_boundMin_x
+	local real temp_MapBounds_boundMin_y
+	local real temp_MapBounds_boundMax_x
+	local real temp_MapBounds_boundMax_y
+	set MapBounds_playableMapRect = GetPlayableMapRect()
+	set receiver = CreateRegion()
+	call region_addRect(receiver, MapBounds_playableMapRect)
+	set MapBounds_boundRect = GetWorldBounds()
+	set receiver_2 = CreateRegion()
+	call region_addRect(receiver_2, MapBounds_boundRect)
+	set MapBounds_boundRegion = receiver_2
+	set temp_MapBounds_playableMin_x = rect_getMinX(MapBounds_playableMapRect)
+	set temp_MapBounds_playableMin_y = rect_getMinY(MapBounds_playableMapRect)
+	set MapBounds_playableMin_x = temp_MapBounds_playableMin_x
+	set MapBounds_playableMin_y = temp_MapBounds_playableMin_y
+	set temp_MapBounds_playableMax_x = rect_getMaxX(MapBounds_playableMapRect)
+	set temp_MapBounds_playableMax_y = rect_getMaxY(MapBounds_playableMapRect)
+	set MapBounds_playableMax_x = temp_MapBounds_playableMax_x
+	set MapBounds_playableMax_y = temp_MapBounds_playableMax_y
+	set temp_MapBounds_boundMin_x = rect_getMinX(MapBounds_boundRect)
+	set temp_MapBounds_boundMin_y = rect_getMinY(MapBounds_boundRect)
+	set MapBounds_boundMin_x = temp_MapBounds_boundMin_x
+	set MapBounds_boundMin_y = temp_MapBounds_boundMin_y
+	set temp_MapBounds_boundMax_x = rect_getMaxX(MapBounds_boundRect)
+	set temp_MapBounds_boundMax_y = rect_getMaxY(MapBounds_boundRect)
+	set MapBounds_boundMax_x = temp_MapBounds_boundMax_x
+	set MapBounds_boundMax_y = temp_MapBounds_boundMax_y
+	call vec2_op_mult(vec2_op_plus(MapBounds_playableMin_x, MapBounds_playableMin_y, MapBounds_playableMax_x, MapBounds_playableMax_y), vec2_op_plus_return_y, .5)
+	call vec2_op_mult(vec2_op_plus(MapBounds_boundMin_x, MapBounds_boundMin_y, MapBounds_boundMax_x, MapBounds_boundMax_y), vec2_op_plus_return_y, .5)
+	set receiver = null
+	set receiver_2 = null
+	return true
+endfunction
+
+function init_Maths takes nothing returns boolean
+	return true
+endfunction
+
+function init_ModMax takes nothing returns boolean
+	return true
+endfunction
+
+function init_ObjectIds takes nothing returns boolean
+	set ObjectIds_CHARMAP = ".................................!.#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[.]^_`abcdefghijklmnopqrstuvwxyz{|}~................................................................................................................................."
+	return true
+endfunction
+
+function init_Player takes nothing returns boolean
+	local integer i = 0
+	local integer temp = bj_MAX_PLAYER_SLOTS - 1
+	loop
+		exitwhen i > temp
+		set Player_players[i] = Player(i)
+		set i = i + 1
+	endloop
+	return true
+endfunction
+
+function init_Printing takes nothing returns boolean
+	set Printing_DEBUG_LEVEL = 2
+	set Printing_DEBUG_MSG_DURATION = 45.
+	return true
+endfunction
+
+function string_length takes string this returns integer
+	return StringLength(this)
+endfunction
+
+function init_String takes nothing returns boolean
+	set String_charset = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+	set String_numberset = "0123456789"
+	call string_length(String_numberset)
+	call string_length(String_charset)
+	return true
+endfunction
+
+function init_Table takes nothing returns boolean
+	set Table_ht = InitHashtable()
+	return true
+endfunction
+
+function item_setVisible takes item this, boolean flag returns nothing
+	call SetItemVisible(this, flag)
+endfunction
+
+function init_TerrainUtils takes nothing returns boolean
+	set TerrainUtils_DUMMY_ITEM_ID = 2003790951
+	call Location(0., 0.)
+	set TerrainUtils_dItem = null
+	call Rect(0., 0., 128., 128.)
+	set TerrainUtils_dItem = CreateItem(TerrainUtils_DUMMY_ITEM_ID, 0., 0.)
+	call item_setVisible(TerrainUtils_dItem, false)
+	return true
+endfunction
+
+function onEnter takes code c returns nothing
+	call trigger_addCondition(OnUnitEnterLeave_eventTrigger, Condition(c))
+endfunction
+
+function onLeave takes code c returns nothing
+	call trigger_addAction(OnUnitEnterLeave_eventTrigger, c)
+endfunction
+
+function init_UnitIndexer takes nothing returns boolean
+	set UnitIndexer_onIndexTrigger = CreateTrigger()
+	set UnitIndexer_onDeindexTrigger = CreateTrigger()
+	call onEnter(ref_function_bridge_UnitIndexer_closure_impl)
+	call onLeave(ref_function_bridge_UnitIndexer_closure_impl_2)
+	return true
+endfunction
+
+function trigger_registerAnyUnitEvent takes trigger this, playerunitevent whichEvent returns nothing
+	call TriggerRegisterAnyUnitEventBJ(this, whichEvent)
+endfunction
+
+function init_UnitTable takes nothing returns boolean
+	local trigger receiver = CreateTrigger()
+	local trigger receiver_2
+	call trigger_registerAnyUnitEvent(receiver, EVENT_PLAYER_UNIT_DEATH)
+	set receiver_2 = receiver
+	call trigger_addAction(receiver_2, ref_function_actions)
+	set UnitTable_ht = InitHashtable()
+	set receiver = null
+	set receiver_2 = null
+	return true
+endfunction
+
+function init_Vectors takes nothing returns boolean
+	return true
+endfunction
+
+function initGlobals takes nothing returns nothing
+	set LeveledCuff__listMax = 0
+	set LeveledCuff__listPointer = 0
+	set Cuff__loopInterval = 0.03
+	set Cuff__maxLoop = 4
+	set si__LeveledCuff_F = 0
+	set si__LeveledCuff_I = 0
+	set CallbackSingle_firstFree = 0
+	set CallbackSingle_maxIndex = 0
+	set ArrayQueue_firstFree = 0
+	set ArrayQueue_maxIndex = 0
+	set DelayNode_firstFree = 0
+	set Table_firstFree = 0
+	set Table_maxIndex = 0
+	set IdGenerator_firstFree = 0
+	set IdGenerator_maxIndex = 0
+	set UnitIndex_firstFree = 0
+	set UnitIndex_maxIndex = 0
+	set ref_function_Cuff__iterate = function Cuff__iterate
+	set ref_function_init_Angle = function init_Angle
+	set ref_function_init_String = function init_String
+	set ref_function_init_Printing = function init_Printing
+	set ref_function_init_Vectors = function init_Vectors
+	set ref_function_init_Group = function init_Group
+	set ref_function_init_Table = function init_Table
+	set ref_function_bridge_init_Colors = function bridge_init_Colors
+	set ref_function_init_Basics = function init_Basics
+	set ref_function_init_GameTimer = function init_GameTimer
+	set ref_function_init_MagicFunctions = function init_MagicFunctions
+	set ref_function_init_ErrorHandling = function init_ErrorHandling
+	set ref_function_init_TerrainUtils = function init_TerrainUtils
+	set ref_function_init_Player = function init_Player
+	set ref_function_init_Maths = function init_Maths
+	set ref_function_init_ArachnoAura = function init_ArachnoAura
+	set ref_function_init_ChooseRace = function init_ChooseRace
+	set ref_function_init_Debug = function init_Debug
+	set ref_function_init_MapBounds = function init_MapBounds
+	set ref_function_bridge_init_DummyRecycler = function bridge_init_DummyRecycler
+	set ref_function_init_FloatingText = function init_FloatingText
+	set ref_function_bridge_init_TimerUtils = function bridge_init_TimerUtils
+	set ref_function_bridge_init_TypeCasting = function bridge_init_TypeCasting
+	set ref_function_bridge_init_RegisterEvents = function bridge_init_RegisterEvents
+	set ref_function_bridge_init_OnUnitEnterLeave = function bridge_init_OnUnitEnterLeave
+	set ref_function_init_UnitIndexer = function init_UnitIndexer
+	set ref_function_init_Init = function init_Init
+	set ref_function_init_ModMax = function init_ModMax
+	set ref_function_init_ObjectIds = function init_ObjectIds
+	set ref_function_bridge_init_Preloader = function bridge_init_Preloader
+	set ref_function_bridge_init_ObjectIdGenerator = function bridge_init_ObjectIdGenerator
+	set ref_function_init_UnitTable = function init_UnitTable
+	set ref_function_BuildDialog = function BuildDialog
+	set ref_function_ShowDialog = function ShowDialog
+	set ref_function_DialogClick = function DialogClick
+	set ref_function_bridge_CallbackSingle_closure_impl = function bridge_CallbackSingle_closure_impl
+	set ref_function_bridge_DelayNode_recycle = function bridge_DelayNode_recycle
+	set ref_function_GameTimer_closure_impl = function GameTimer_closure_impl
+	set ref_function_bridge_I1 = function bridge_I1
+	set ref_function_OnUnitEnterLeave_closure_impl = function OnUnitEnterLeave_closure_impl
+	set ref_function_OnUnitEnterLeave_closure_impl_2 = function OnUnitEnterLeave_closure_impl_2
+	set ref_function_finishPreload = function finishPreload
+	set ref_function_bridge_RegisterEvents_closure_impl = function bridge_RegisterEvents_closure_impl
+	set ref_function_bridge_UnitIndexer_closure_impl = function bridge_UnitIndexer_closure_impl_2
+	set ref_function_bridge_UnitIndexer_closure_impl_2 = function bridge_UnitIndexer_closure_impl
+	set ref_function_actions = function actions
+endfunction
+
+function jasshelper__initstructs93887343 takes nothing returns nothing
+endfunction
+
+function main takes nothing returns nothing
+	local trigger initTrig
+	call initGlobals()
+	call SetCameraBounds(( - 11008.0) + GetCameraMargin(CAMERA_MARGIN_LEFT), ( - 19456.0) + GetCameraMargin(CAMERA_MARGIN_BOTTOM), ( - 1024.0) - GetCameraMargin(CAMERA_MARGIN_RIGHT), ( - 7168.0) - GetCameraMargin(CAMERA_MARGIN_TOP), ( - 11008.0) + GetCameraMargin(CAMERA_MARGIN_LEFT), ( - 7168.0) - GetCameraMargin(CAMERA_MARGIN_TOP), ( - 1024.0) - GetCameraMargin(CAMERA_MARGIN_RIGHT), ( - 19456.0) + GetCameraMargin(CAMERA_MARGIN_BOTTOM))
+	call SetDayNightModels("Environment\\DNC\\DNCLordaeron\\DNCLordaeronTerrain\\DNCLordaeronTerrain.mdl", "Environment\\DNC\\DNCLordaeron\\DNCLordaeronUnit\\DNCLordaeronUnit.mdl")
+	call NewSoundEnvironment("Default")
+	call SetAmbientDaySound("SunkenRuinsDay")
+	call SetAmbientNightSound("SunkenRuinsNight")
+	call SetMapMusic("Music", true, 0)
+	call CreateAllItems()
+	call CreateAllUnits()
+	call InitBlizzard()
+	call ExecuteFunc("jasshelper__initstructs93887343")
+	call ExecuteFunc("Cuff__initialize")
+	call InitCustomTriggers()
+	set initTrig = CreateTrigger()
+	call TriggerAddCondition(initTrig, Condition(ref_function_init_Angle))
+	if  not TriggerEvaluate(initTrig) then
+		call DisplayTimedTextToPlayer(GetLocalPlayer(), 0., 0., 45., "Could not initialize package Angle.")
+	endif
+	call DestroyTrigger(initTrig)
+	set initTrig = CreateTrigger()
+	call TriggerAddCondition(initTrig, Condition(ref_function_init_String))
+	if  not TriggerEvaluate(initTrig) then
+		call DisplayTimedTextToPlayer(GetLocalPlayer(), 0., 0., 45., "Could not initialize package String.")
+	endif
+	call DestroyTrigger(initTrig)
+	set initTrig = CreateTrigger()
+	call TriggerAddCondition(initTrig, Condition(ref_function_init_Printing))
+	if  not TriggerEvaluate(initTrig) then
+		call DisplayTimedTextToPlayer(GetLocalPlayer(), 0., 0., 45., "Could not initialize package Printing.")
+	endif
+	call DestroyTrigger(initTrig)
+	set initTrig = CreateTrigger()
+	call TriggerAddCondition(initTrig, Condition(ref_function_init_Vectors))
+	if  not TriggerEvaluate(initTrig) then
+		call DisplayTimedTextToPlayer(GetLocalPlayer(), 0., 0., 45., "Could not initialize package Vectors.")
+	endif
+	call DestroyTrigger(initTrig)
+	set initTrig = CreateTrigger()
+	call TriggerAddCondition(initTrig, Condition(ref_function_init_Group))
+	if  not TriggerEvaluate(initTrig) then
+		call DisplayTimedTextToPlayer(GetLocalPlayer(), 0., 0., 45., "Could not initialize package Group.")
+	endif
+	call DestroyTrigger(initTrig)
+	set initTrig = CreateTrigger()
+	call TriggerAddCondition(initTrig, Condition(ref_function_init_Table))
+	if  not TriggerEvaluate(initTrig) then
+		call DisplayTimedTextToPlayer(GetLocalPlayer(), 0., 0., 45., "Could not initialize package Table.")
+	endif
+	call DestroyTrigger(initTrig)
+	set initTrig = CreateTrigger()
+	call TriggerAddCondition(initTrig, Condition(ref_function_bridge_init_Colors))
+	if  not TriggerEvaluate(initTrig) then
+		call DisplayTimedTextToPlayer(GetLocalPlayer(), 0., 0., 45., "Could not initialize package Colors.")
+	endif
+	call DestroyTrigger(initTrig)
+	set initTrig = CreateTrigger()
+	call TriggerAddCondition(initTrig, Condition(ref_function_init_Basics))
+	if  not TriggerEvaluate(initTrig) then
+		call DisplayTimedTextToPlayer(GetLocalPlayer(), 0., 0., 45., "Could not initialize package Basics.")
+	endif
+	call DestroyTrigger(initTrig)
+	set initTrig = CreateTrigger()
+	call TriggerAddCondition(initTrig, Condition(ref_function_init_GameTimer))
+	if  not TriggerEvaluate(initTrig) then
+		call DisplayTimedTextToPlayer(GetLocalPlayer(), 0., 0., 45., "Could not initialize package GameTimer.")
+	endif
+	call DestroyTrigger(initTrig)
+	set initTrig = CreateTrigger()
+	call TriggerAddCondition(initTrig, Condition(ref_function_init_MagicFunctions))
+	if  not TriggerEvaluate(initTrig) then
+		call DisplayTimedTextToPlayer(GetLocalPlayer(), 0., 0., 45., "Could not initialize package MagicFunctions.")
+	endif
+	call DestroyTrigger(initTrig)
+	set initTrig = CreateTrigger()
+	call TriggerAddCondition(initTrig, Condition(ref_function_init_ErrorHandling))
+	if  not TriggerEvaluate(initTrig) then
+		call DisplayTimedTextToPlayer(GetLocalPlayer(), 0., 0., 45., "Could not initialize package ErrorHandling.")
+	endif
+	call DestroyTrigger(initTrig)
+	set initTrig = CreateTrigger()
+	call TriggerAddCondition(initTrig, Condition(ref_function_init_TerrainUtils))
+	if  not TriggerEvaluate(initTrig) then
+		call DisplayTimedTextToPlayer(GetLocalPlayer(), 0., 0., 45., "Could not initialize package TerrainUtils.")
+	endif
+	call DestroyTrigger(initTrig)
+	set initTrig = CreateTrigger()
+	call TriggerAddCondition(initTrig, Condition(ref_function_init_Player))
+	if  not TriggerEvaluate(initTrig) then
+		call DisplayTimedTextToPlayer(GetLocalPlayer(), 0., 0., 45., "Could not initialize package Player.")
+	endif
+	call DestroyTrigger(initTrig)
+	set initTrig = CreateTrigger()
+	call TriggerAddCondition(initTrig, Condition(ref_function_init_Maths))
+	if  not TriggerEvaluate(initTrig) then
+		call DisplayTimedTextToPlayer(GetLocalPlayer(), 0., 0., 45., "Could not initialize package Maths.")
+	endif
+	call DestroyTrigger(initTrig)
+	set initTrig = CreateTrigger()
+	call TriggerAddCondition(initTrig, Condition(ref_function_init_ArachnoAura))
+	if  not TriggerEvaluate(initTrig) then
+		call DisplayTimedTextToPlayer(GetLocalPlayer(), 0., 0., 45., "Could not initialize package ArachnoAura.")
+	endif
+	call DestroyTrigger(initTrig)
+	set initTrig = CreateTrigger()
+	call TriggerAddCondition(initTrig, Condition(ref_function_init_ChooseRace))
+	if  not TriggerEvaluate(initTrig) then
+		call DisplayTimedTextToPlayer(GetLocalPlayer(), 0., 0., 45., "Could not initialize package ChooseRace.")
+	endif
+	call DestroyTrigger(initTrig)
+	set initTrig = CreateTrigger()
+	call TriggerAddCondition(initTrig, Condition(ref_function_init_Debug))
+	if  not TriggerEvaluate(initTrig) then
+		call DisplayTimedTextToPlayer(GetLocalPlayer(), 0., 0., 45., "Could not initialize package Debug.")
+	endif
+	call DestroyTrigger(initTrig)
+	set initTrig = CreateTrigger()
+	call TriggerAddCondition(initTrig, Condition(ref_function_init_MapBounds))
+	if  not TriggerEvaluate(initTrig) then
+		call DisplayTimedTextToPlayer(GetLocalPlayer(), 0., 0., 45., "Could not initialize package MapBounds.")
+	endif
+	call DestroyTrigger(initTrig)
+	set initTrig = CreateTrigger()
+	call TriggerAddCondition(initTrig, Condition(ref_function_bridge_init_DummyRecycler))
+	if  not TriggerEvaluate(initTrig) then
+		call DisplayTimedTextToPlayer(GetLocalPlayer(), 0., 0., 45., "Could not initialize package DummyRecycler.")
+	endif
+	call DestroyTrigger(initTrig)
+	set initTrig = CreateTrigger()
+	call TriggerAddCondition(initTrig, Condition(ref_function_init_FloatingText))
+	if  not TriggerEvaluate(initTrig) then
+		call DisplayTimedTextToPlayer(GetLocalPlayer(), 0., 0., 45., "Could not initialize package FloatingText.")
+	endif
+	call DestroyTrigger(initTrig)
+	set initTrig = CreateTrigger()
+	call TriggerAddCondition(initTrig, Condition(ref_function_bridge_init_TimerUtils))
+	if  not TriggerEvaluate(initTrig) then
+		call DisplayTimedTextToPlayer(GetLocalPlayer(), 0., 0., 45., "Could not initialize package TimerUtils.")
+	endif
+	call DestroyTrigger(initTrig)
+	set initTrig = CreateTrigger()
+	call TriggerAddCondition(initTrig, Condition(ref_function_bridge_init_TypeCasting))
+	if  not TriggerEvaluate(initTrig) then
+		call DisplayTimedTextToPlayer(GetLocalPlayer(), 0., 0., 45., "Could not initialize package TypeCasting.")
+	endif
+	call DestroyTrigger(initTrig)
+	set initTrig = CreateTrigger()
+	call TriggerAddCondition(initTrig, Condition(ref_function_bridge_init_RegisterEvents))
+	if  not TriggerEvaluate(initTrig) then
+		call DisplayTimedTextToPlayer(GetLocalPlayer(), 0., 0., 45., "Could not initialize package RegisterEvents.")
+	endif
+	call DestroyTrigger(initTrig)
+	set initTrig = CreateTrigger()
+	call TriggerAddCondition(initTrig, Condition(ref_function_bridge_init_OnUnitEnterLeave))
+	if  not TriggerEvaluate(initTrig) then
+		call DisplayTimedTextToPlayer(GetLocalPlayer(), 0., 0., 45., "Could not initialize package OnUnitEnterLeave.")
+	endif
+	call DestroyTrigger(initTrig)
+	set initTrig = CreateTrigger()
+	call TriggerAddCondition(initTrig, Condition(ref_function_init_UnitIndexer))
+	if  not TriggerEvaluate(initTrig) then
+		call DisplayTimedTextToPlayer(GetLocalPlayer(), 0., 0., 45., "Could not initialize package UnitIndexer.")
+	endif
+	call DestroyTrigger(initTrig)
+	set initTrig = CreateTrigger()
+	call TriggerAddCondition(initTrig, Condition(ref_function_init_Init))
+	if  not TriggerEvaluate(initTrig) then
+		call DisplayTimedTextToPlayer(GetLocalPlayer(), 0., 0., 45., "Could not initialize package Init.")
+	endif
+	call DestroyTrigger(initTrig)
+	set initTrig = CreateTrigger()
+	call TriggerAddCondition(initTrig, Condition(ref_function_init_ModMax))
+	if  not TriggerEvaluate(initTrig) then
+		call DisplayTimedTextToPlayer(GetLocalPlayer(), 0., 0., 45., "Could not initialize package ModMax.")
+	endif
+	call DestroyTrigger(initTrig)
+	set initTrig = CreateTrigger()
+	call TriggerAddCondition(initTrig, Condition(ref_function_init_ObjectIds))
+	if  not TriggerEvaluate(initTrig) then
+		call DisplayTimedTextToPlayer(GetLocalPlayer(), 0., 0., 45., "Could not initialize package ObjectIds.")
+	endif
+	call DestroyTrigger(initTrig)
+	set initTrig = CreateTrigger()
+	call TriggerAddCondition(initTrig, Condition(ref_function_bridge_init_Preloader))
+	if  not TriggerEvaluate(initTrig) then
+		call DisplayTimedTextToPlayer(GetLocalPlayer(), 0., 0., 45., "Could not initialize package Preloader.")
+	endif
+	call DestroyTrigger(initTrig)
+	set initTrig = CreateTrigger()
+	call TriggerAddCondition(initTrig, Condition(ref_function_bridge_init_ObjectIdGenerator))
+	if  not TriggerEvaluate(initTrig) then
+		call DisplayTimedTextToPlayer(GetLocalPlayer(), 0., 0., 45., "Could not initialize package ObjectIdGenerator.")
+	endif
+	call DestroyTrigger(initTrig)
+	set initTrig = CreateTrigger()
+	call TriggerAddCondition(initTrig, Condition(ref_function_init_UnitTable))
+	if  not TriggerEvaluate(initTrig) then
+		call DisplayTimedTextToPlayer(GetLocalPlayer(), 0., 0., 45., "Could not initialize package UnitTable.")
+	endif
+	call DestroyTrigger(initTrig)
+	set initTrig = null
+endfunction
+
+function InitAllyPriorities takes nothing returns nothing
+	call SetStartLocPrioCount(0, 2)
+	call SetStartLocPrio(0, 0, 6, MAP_LOC_PRIO_HIGH)
+	call SetStartLocPrio(0, 1, 7, MAP_LOC_PRIO_HIGH)
+	call SetStartLocPrioCount(1, 2)
+	call SetStartLocPrio(1, 0, 2, MAP_LOC_PRIO_HIGH)
+	call SetStartLocPrio(1, 1, 7, MAP_LOC_PRIO_HIGH)
+	call SetStartLocPrioCount(2, 2)
+	call SetStartLocPrio(2, 0, 1, MAP_LOC_PRIO_HIGH)
+	call SetStartLocPrio(2, 1, 3, MAP_LOC_PRIO_HIGH)
+	call SetStartLocPrioCount(3, 2)
+	call SetStartLocPrio(3, 0, 2, MAP_LOC_PRIO_HIGH)
+	call SetStartLocPrio(3, 1, 4, MAP_LOC_PRIO_HIGH)
+	call SetStartLocPrioCount(4, 2)
+	call SetStartLocPrio(4, 0, 3, MAP_LOC_PRIO_HIGH)
+	call SetStartLocPrio(4, 1, 5, MAP_LOC_PRIO_HIGH)
+	call SetStartLocPrioCount(5, 2)
+	call SetStartLocPrio(5, 0, 4, MAP_LOC_PRIO_HIGH)
+	call SetStartLocPrio(5, 1, 6, MAP_LOC_PRIO_HIGH)
+	call SetStartLocPrioCount(6, 2)
+	call SetStartLocPrio(6, 0, 0, MAP_LOC_PRIO_HIGH)
+	call SetStartLocPrio(6, 1, 5, MAP_LOC_PRIO_HIGH)
+	call SetStartLocPrioCount(7, 2)
+	call SetStartLocPrio(7, 0, 0, MAP_LOC_PRIO_HIGH)
+	call SetStartLocPrio(7, 1, 1, MAP_LOC_PRIO_HIGH)
+endfunction
+
+function InitCustomPlayerSlots takes nothing returns nothing
+	call SetPlayerStartLocation(Player(0), 0)
+	call SetPlayerColor(Player(0), ConvertPlayerColor(0))
+	call SetPlayerRacePreference(Player(0), RACE_PREF_HUMAN)
+	call SetPlayerRaceSelectable(Player(0), true)
+	call SetPlayerController(Player(0), MAP_CONTROL_USER)
+	call SetPlayerStartLocation(Player(1), 1)
+	call SetPlayerColor(Player(1), ConvertPlayerColor(1))
+	call SetPlayerRacePreference(Player(1), RACE_PREF_HUMAN)
+	call SetPlayerRaceSelectable(Player(1), true)
+	call SetPlayerController(Player(1), MAP_CONTROL_USER)
+	call SetPlayerStartLocation(Player(2), 2)
+	call SetPlayerColor(Player(2), ConvertPlayerColor(2))
+	call SetPlayerRacePreference(Player(2), RACE_PREF_HUMAN)
+	call SetPlayerRaceSelectable(Player(2), true)
+	call SetPlayerController(Player(2), MAP_CONTROL_USER)
+	call SetPlayerStartLocation(Player(3), 3)
+	call SetPlayerColor(Player(3), ConvertPlayerColor(3))
+	call SetPlayerRacePreference(Player(3), RACE_PREF_HUMAN)
+	call SetPlayerRaceSelectable(Player(3), true)
+	call SetPlayerController(Player(3), MAP_CONTROL_USER)
+	call SetPlayerStartLocation(Player(4), 4)
+	call SetPlayerColor(Player(4), ConvertPlayerColor(4))
+	call SetPlayerRacePreference(Player(4), RACE_PREF_HUMAN)
+	call SetPlayerRaceSelectable(Player(4), true)
+	call SetPlayerController(Player(4), MAP_CONTROL_USER)
+	call SetPlayerStartLocation(Player(5), 5)
+	call SetPlayerColor(Player(5), ConvertPlayerColor(5))
+	call SetPlayerRacePreference(Player(5), RACE_PREF_HUMAN)
+	call SetPlayerRaceSelectable(Player(5), true)
+	call SetPlayerController(Player(5), MAP_CONTROL_USER)
+	call SetPlayerStartLocation(Player(6), 6)
+	call SetPlayerColor(Player(6), ConvertPlayerColor(6))
+	call SetPlayerRacePreference(Player(6), RACE_PREF_HUMAN)
+	call SetPlayerRaceSelectable(Player(6), true)
+	call SetPlayerController(Player(6), MAP_CONTROL_USER)
+	call SetPlayerStartLocation(Player(7), 7)
+	call SetPlayerColor(Player(7), ConvertPlayerColor(7))
+	call SetPlayerRacePreference(Player(7), RACE_PREF_HUMAN)
+	call SetPlayerRaceSelectable(Player(7), true)
+	call SetPlayerController(Player(7), MAP_CONTROL_USER)
+endfunction
+
+function config takes nothing returns nothing
+	call SetMapName("TRIGSTR_010")
+	call SetMapDescription("TRIGSTR_012")
+	call SetPlayers(8)
+	call SetTeams(8)
+	call SetGamePlacement(MAP_PLACEMENT_TEAMS_TOGETHER)
+	call DefineStartLocation(0,  - 2048.0,  - 8000.0)
+	call DefineStartLocation(1,  - 2048.0,  - 9280.0)
+	call DefineStartLocation(2,  - 2112.0,  - 10560.0)
+	call DefineStartLocation(3,  - 3008.0,  - 8064.0)
+	call DefineStartLocation(4,  - 3136.0,  - 8256.0)
+	call DefineStartLocation(5,  - 3264.0,  - 7744.0)
+	call DefineStartLocation(6,  - 3328.0,  - 7872.0)
+	call DefineStartLocation(7,  - 3264.0,  - 8128.0)
+	call InitCustomPlayerSlots()
+	call SetPlayerSlotAvailable(Player(0), MAP_CONTROL_USER)
+	call SetPlayerSlotAvailable(Player(1), MAP_CONTROL_USER)
+	call SetPlayerSlotAvailable(Player(2), MAP_CONTROL_USER)
+	call SetPlayerSlotAvailable(Player(3), MAP_CONTROL_USER)
+	call SetPlayerSlotAvailable(Player(4), MAP_CONTROL_USER)
+	call SetPlayerSlotAvailable(Player(5), MAP_CONTROL_USER)
+	call SetPlayerSlotAvailable(Player(6), MAP_CONTROL_USER)
+	call SetPlayerSlotAvailable(Player(7), MAP_CONTROL_USER)
+	call InitGenericPlayerSlots()
+	call InitAllyPriorities()
+endfunction
+

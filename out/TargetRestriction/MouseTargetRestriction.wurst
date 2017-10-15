@@ -1,0 +1,57 @@
+package MouseTargetRestriction
+	import ArrayList
+	//import LastOrder
+	import Player2
+	import TargetChecker
+
+	ArrayList<MouseTargetRestriction> index = new ArrayList<MouseTargetRestriction>()
+
+	init
+		CreateTrigger()
+			..registerAnyUnitEvent(EVENT_PLAYER_UNIT_ISSUED_TARGET_ORDER)
+			..addAction(function actions)
+		
+	// On every cast check all registered MTRs
+	function actions()
+		for MouseTargetRestriction tr in index
+			if tr.conditions()
+				tr.actions()
+			
+
+	/** Allows you supress single-target spells before they are cast, emulating wc3 behavior.
+		Requires the unittype, the orderstring and a TargetChecker **/
+	public class MouseTargetRestriction
+		
+		private TargetChecker checker
+		// The orderstring and the caster unittype
+		private string order
+		private int casterID
+					
+		construct(int casterType, string order, TargetChecker checker)
+			this.checker = checker
+			this.order = order
+			this.casterID = casterType
+			register()
+			
+		private function register()
+			index.add(this)
+
+		function conditions() returns bool
+			return GetTriggerUnit().getTypeId() == casterID and GetIssuedOrderIdBJ() == String2OrderIdBJ(order)
+			
+		function actions()
+			unit u = GetOrderedUnit()
+			unit target = GetOrderTargetUnit()
+			vec2 orderLoc = u.getPos()
+			int ut = target.getTypeId()
+			let r = checker.checkRestriction(u, target)
+			if r.result
+				return
+			player owner = u.getOwner()
+			owner.simulateError(r.error)
+			u.issuePointOrder("move", orderLoc)
+			// Doesn't work
+			//u.issueImmediateOrder("stop")
+			// Resume last order
+			//u.abortOrder()
+			//Order o = u.getPastOrders().get(0)

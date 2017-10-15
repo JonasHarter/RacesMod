@@ -1,0 +1,54 @@
+package BalefulAffliction
+	import ModMax
+	import TargetChecker
+	import TargetRestrictors
+	import MouseTargetRestriction
+	import ArrayList
+
+	constant integer CASTER_TYPE = 'U00R'
+	constant integer SPELL_ID = 'A053'
+	constant string SPELL_O = "corrosivebreath"
+	constant integer W_1_ID = 'o00K'
+	constant integer W_2_ID = 'o00L'
+	constant integer W_3_ID = 'o00M'
+	constant string ERROR = "You cannot target this unit"
+		
+	init
+		CreateTrigger()
+			..registerAnyUnitEvent(EVENT_PLAYER_UNIT_SPELL_EFFECT)
+			..addCondition(Condition(function condition))
+			..addAction(function actions)
+		ArrayList<int> targets = new ArrayList<int>()
+		targets.add(W_1_ID)
+		targets.add(W_2_ID)
+		targets.add(W_3_ID)
+		TypeList tl = new TypeList(ERROR, targets)
+		tl.invert = true
+		TargetChecker tr = new TargetChecker()
+			..addRestrictionDirect(tl)
+			..addRestriction(Restrictions.Summoned)
+		new MouseTargetRestriction(CASTER_TYPE, SPELL_O, tr)
+		
+	function condition() returns boolean
+		return GetSpellAbilityId() == SPELL_ID
+		
+	function actions()
+		let target = GetSpellTargetUnit()
+		let mhp = target.getMaxHP()
+		let pos = target.getPos()
+		let level = GetTriggerUnit().getAbilityLevel(SPELL_ID)
+		unit worgen
+		if level == 1
+			worgen = createUnit(target.getOwner(), W_1_ID, pos, target.getFacingAngle())
+		else if level == 2
+			worgen = createUnit(target.getOwner(), W_2_ID, pos, target.getFacingAngle())
+		else if level == 3
+			worgen = createUnit(target.getOwner(), W_3_ID, pos, target.getFacingAngle())
+		else
+			error("Baleful Affliction: Unknown Level")
+			return
+		worgen.modMaxHP(R2I(mhp - 1), false)
+		worgen.setHP(target.getHP())
+		//target.kill()
+		target.remove()
+		worgen.setPos(pos)

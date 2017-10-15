@@ -1,0 +1,31 @@
+package MassWeb
+	import Location2
+	import DummyCaster
+
+	constant integer SPELL_ID = 'A016'
+	constant integer WEB_ID = 'A015'
+	constant string WEB_O = "ensnare"
+
+	init
+		CreateTrigger()
+			..registerAnyUnitEvent(EVENT_PLAYER_UNIT_SPELL_EFFECT)
+			..addCondition(Condition(function condition))
+			..addAction(function actions)
+		
+	function getRange(int level) returns real
+		return MAX_COLLISION_SIZE + 180.00 + ( 30.00 * level) 
+		
+	function condition() returns boolean
+		return GetSpellAbilityId() == SPELL_ID
+		
+	function actions()
+		let caster = GetTriggerUnit()
+		let owner = caster.getOwner()
+		let level = caster.getAbilityLevel(SPELL_ID)
+		location targetLoc = GetSpellTargetLoc()
+		let g = GetUnitsInRangeOfLocAll(getRange(level), targetLoc)
+		targetLoc.remove()
+		DummyCaster d = new DummyCaster(WEB_ID, WEB_O, owner, true)
+		d.setLevel(level)
+		d.castOnGroup(g)
+		g.destr()

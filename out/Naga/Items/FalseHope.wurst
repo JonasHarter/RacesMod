@@ -1,0 +1,20 @@
+package FalseHope
+	import UnitTable
+	import Cuff
+
+	UnitTable table
+
+	init
+		FalseHope x = new FalseHope()
+		x.addBuff('B01K')
+		table = new UnitTable()
+		
+	class FalseHope extends Cuff
+			
+		override function apply(unit target, integer level)
+			table.saveReal(target, target.getHP())
+			target.setHP(target.getMaxHP())
+
+		override function clean(unit target, integer level)
+			let hp = table.loadReal(target)
+			target.setHP(hp)

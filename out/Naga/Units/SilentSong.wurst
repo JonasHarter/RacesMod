@@ -1,0 +1,13 @@
+package SilentSong
+	import Cuff
+
+	// Spell the units casts
+	//integer SPELL_ID = 'A02N'
+	// Cuff buff and granted ability
+	integer BUFF_ID = 'B027'
+	integer AURA_ID = 'A02S'
+	
+	init
+		Cuff x = new Cuff()
+		x.addBuff(BUFF_ID)
+		x.addAbility(AURA_ID)

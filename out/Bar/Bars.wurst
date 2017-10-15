@@ -1,0 +1,112 @@
+package Bars
+	import ClosureTimers
+	import Register
+	import Unit2
+	
+	/*
+		Original
+			ProgressBars v2.0.1 by TriggerHappy
+			http://www.hiveworkshop.com/threads/progressbars-v2-0-1.245414/
+		Original Wurst Port
+			muzzel
+			https://github.com/muzzel/APT/tree/master/wurst/lib/ProgressBar
+	*/
+	
+	//Invis: hide or transp = 0 locally
+	//hide unhide bug?
+	
+	constant integer DUMMY = 'e005'
+	
+	public class Bar
+		
+		private unit bar
+		private unit target
+		
+		private real xOffset = 0
+		private real yOffset = 0
+		private real zOffset = 125
+		
+		//private real endVal
+		private real curPerc = 0.0
+		private real targetPerc = 1.0
+		//private boolean reverse
+		//private boolean done
+		
+		construct(unit target)
+			this.target = target
+			bar = getDummy()
+			//bar.setVertexColor(colorA(255, 255, 255, 120))
+			bar.setAnimation(1)
+			bar.setTimeScale(0)
+			// Update Size
+			if target.isHero()
+				zOffset += 75
+			else if target.isStructure()
+				zOffset += 150
+			else if not target.isFlying()
+				if target.getFoodUsed() >= 3
+					zOffset += 50
+				if target.getFoodUsed() >= 4
+					zOffset += 50
+			doPeriodically(ANIMATION_PERIOD, (CallbackPeriodic cb) -> begin
+				this.update()
+				if not this.target.isAlive()
+					destroy cb
+					destroy this
+			end)
+			
+			
+		ondestroy
+			SetUnitAnimationByIndex(bar, 0)
+			bar.remove()
+			
+		function update()
+			let pos = target.getPos()
+			bar.setPos(pos.x + xOffset, pos.y + yOffset)
+			let z = target.getFlyHeight()
+			bar.setFlyHeight(z + zOffset, 0)
+			//SetUnitTimeScale(this.bar, 1)
+			bar.setColor(target.getOwner().getColor())
+			targetPerc = target.getHP() / target.getMaxHP()
+			updateFill()
+			updateVisibility()
+			
+		private function updateFill()
+			real sFactor = 1.0
+			if curPerc > targetPerc
+				sFactor *= -1
+			if targetPerc == 1.0
+				bar.unpause()
+				bar.setTimeScale(100)
+				curPerc = 1.0
+			else if curPerc <= targetPerc - 0.01 or curPerc >= targetPerc + 0.01
+				bar.unpause()
+				bar.setTimeScale(sFactor * 0.34)
+				curPerc = curPerc + sFactor * 0.01
+			else
+				bar.setTimeScale(0)
+				bar.pause()
+				
+		private function updateVisibility()
+			// Hide for neutral passive
+			if target.getOwner().getId() == PLAYER_NEUTRAL_PASSIVE
+				bar.setVertexColor(colorA(255, 255, 255, 0))
+				return
+			// Hide if HP = 100%
+			/*if targetPerc == 1.0
+				bar.setVertexColor(colorA(255, 255, 255, 0))
+				return*/
+			// Hide for unregistered players and invisible units
+			for int i = 0 to bj_MAX_PLAYER_SLOTS - 1
+				let p = Player(i)
+				if p == GetLocalPlayer()
+					if playerRegistered(p) and IsUnitVisible(target, p)
+						bar.setVertexColor(colorA(255, 255, 255, 255))
+					else
+						bar.setVertexColor(colorA(255, 255, 255, 0))
+
+		//TODO Recycle dummy units
+		static function getDummy() returns unit
+			return CreateUnit(Player(PLAYER_NEUTRAL_PASSIVE), DUMMY, 0, 0, 270)
+			
+		
