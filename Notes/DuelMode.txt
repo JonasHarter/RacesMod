@@ -3,7 +3,7 @@ Observer Features
 	Announce events in Chat?
 	HealthBars
 Enforces Player colors
-	Primary		Race		Secondary
+	Race		Primary		Secondary
 	---------------------------------
 	Orc         Red         Orange
 	Human       Blue        Cyan

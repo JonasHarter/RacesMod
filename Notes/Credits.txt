@@ -337,6 +337,14 @@ Demon
 		Essence Slashing Buff - Vortigon
 		Energy Weave - Malvodion
 		Essence Drain - Shyster
+Forsaken
+	Icons
+		Court House, Tribunal, Justice Hall - Ujimasa Hojo
+		Herbarium - JollyD
+	Models
+		Court House, Tribunal, Justice Hall - Ujimasa Hojo
+		Altar of the Queen - Ujimasa Hojo
+		Herbarium - Korija2029
 Neutral
 	Icons
 		Nerubian Aristocrat - PeeKay

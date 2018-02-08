@@ -1,0 +1,117 @@
+General
+    Heavy T2 Ranged
+    Upgradeable Shop
+    Mix Living & Undead Units
+    Many small units?
+    Lifeleech DMG Spell
+    Culebre
+    Piercing Stuff
+
+TECHTREE
+    Arboretum
+        X Food
+    T1
+        Skeletal Worker
+            Dirt Cheap
+            Harvests
+        Artisan
+            Builds(Orc) and Harvests
+        T2
+        T3
+    Barracks
+        Black Archer
+            T1 Ranged
+            Forsaken Archer, Black Archer, Armored Lady
+            Shroud
+                Perm Invis
+        Vulture Rider
+            T2 Flyer
+        ~
+        Plague Cataplut
+            T2.5 Siege
+        T1.5 Melee
+            Defensive
+    Altar of the Queen
+        Dark Ranger
+        Forsaken Dread Lord
+            Draining Wave
+                Less dmg, slow
+            Sleep
+            Aura of Bones
+                Skelton on death
+            Arcane Inferno
+                +Range,-Dmg
+        Executor (Agi)
+            - Execute
+                Dmg, AoE Debuff on kill
+            - 
+                Silence% on attack
+            - Severed Soul
+                Illusion, TP to
+            - Final Punishment
+                SaveDmg, double @ end, noDebuff
+        Grand Apothecary (Int)
+            -
+                Anti/Hero Stats Buff
+            ~
+            - Mending Aura
+                OutOfCombatRegen
+            -
+                Revive Hero instantly?
+    T2 Units
+        T2 Ranged Heavy
+        Assassin
+            T2 Melee Light
+            Shroud
+                Perm Invis
+    T2 Casters
+        Apothecary
+            Purify
+                Bonus dmg against summons and buffed
+            Bless
+                Greater heal
+            Shadowform
+                Replaces skills for 30s
+                    Shadowbolt
+                        Bonus dmg
+                    Corrupt
+                        Dot, 1/2 of dmg when done
+        Plague Doctor
+                -
+                -
+                -
+        Arbiter
+            MeleeCaster
+            Martyr
+                AoE heal on death, passive
+            Shadow Vision
+                +dmg, detect
+            Soul Shield
+                Channel, Target invul, drains caster hp fast
+    Os Turris
+        Calcium Behemoth
+            T3 Ulti
+    ITEMS
+        T1
+            Invisibility Potion, 3
+            Clarity Potion
+            ~
+            ~
+        T2
+            ~ Ebony Tower
+        T3
+            Staff of Calling
+                Call 1 unit, lowCD
+            ~
+            Orb of Shadows
+    Scout Tower
+        Watch Tower
+            T1
+        Plague Tower
+            T2
+
+Satyr - Dark Ranger Replacement
+    1
+    2
+    3
+    4
