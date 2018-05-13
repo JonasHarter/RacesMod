@@ -1,0 +1,132 @@
+package Fuff
+    import UnitLevelSet
+    import LinkedList
+    import public FuffFunction
+    import PlayerUnitList
+
+    //FIXME Aura also when not learned
+
+    //TODO Aura: O(1) datatype
+    //TODO Aura: unitInRangeEvent for auras? -> https://github.com/nestharus/JASS/blob/master/jass/Systems/UnitInRangeEvent/script.j
+    //TODO auto rate unit iterations
+    //TODO BlizzApi -> BuffEvent, getBuffLevel
+
+    LinkedList<Fuff> allFuffs = new LinkedList<Fuff>()
+    LinkedList<Fuff> autoFillFuffs = new LinkedList<Fuff>()
+    integer autoFillIterator = 0
+    integer nextPlayer = 0
+    real FUFF_TICKRATE = 1.0
+    integer MAX_FUFFS_PER_TICK = 5
+
+    init
+        CreateTrigger()
+            ..registerTimerEvent(ANIMATION_PERIOD, true)
+            ..addAction(function unitLoop)
+        CreateTrigger()
+            ..registerTimerEvent(ANIMATION_PERIOD, true)
+            ..addAction(function fuffLoop)
+
+    function setNextPlayer()
+        nextPlayer++
+        for i = nextPlayer to bj_MAX_PLAYER_SLOTS
+            if Player(i).isIngame()
+                nextPlayer = i
+                return
+        for i = 0 to bj_MAX_PLAYER_SLOTS
+            if Player(i).isIngame()
+                nextPlayer = i
+                return
+
+    function unitLoop()
+        if autoFillFuffs.size() == 0
+            return
+        for unit u in Player(nextPlayer).getUnits()
+            integer fuffCounter = 0
+            integer subIterator = 0
+            for fuff in autoFillFuffs
+                if fuffCounter >= autoFillIterator
+                    fuff.checkUnit(u)
+                    subIterator++
+                fuffCounter++
+                if subIterator >= MAX_FUFFS_PER_TICK or autoFillFuffs.size() >= autoFillIterator + subIterator
+                    autoFillIterator = -1
+                    subIterator = 0
+                    setNextPlayer()
+            if autoFillIterator < 0
+                autoFillIterator = 0
+                    
+    function fuffLoop()
+        if allFuffs.size() == 0
+            return
+        for Fuff fuff in allFuffs
+            fuff.run()
+    
+    public abstract class Fuff
+        
+        // units that are affected by this buff
+        UnitLevelSet affectedUnits = new UnitLevelSet()
+        real time = 0.0
+        // The functions to run
+        FuffFunction applyFunc
+        FuffFunction tickFunc
+        FuffFunction removeFunc
+        
+        construct(FuffFunction applyFunc, FuffFunction tickFunc, FuffFunction removeFunc, boolean isAutoFill)
+            this.applyFunc = applyFunc
+            this.tickFunc = tickFunc
+            this.removeFunc = removeFunc
+            if isAutoFill
+                autoFillFuffs.add(this)
+            allFuffs.add(this)
+                
+        // Adds unit if it has the buff
+        function checkUnit(unit u)
+            integer level = checkForBuff(u)
+            if level > 0
+                affectedUnits.add(new UnitLevel(u, level))
+                    
+        abstract function checkForBuff(unit u) returns integer
+
+        function run()
+            time += ANIMATION_PERIOD
+            UnitSetElement unitSetElement = affectedUnits.lastElement
+            while unitSetElement != null
+                UnitSetElement tmp = unitSetElement.prevElement
+                doUnit(unitSetElement.unitLevel)
+                unitSetElement = tmp
+            if time >= FUFF_TICKRATE
+                time -= FUFF_TICKRATE
+        
+        private function doUnit(UnitLevel unitLevel)
+            integer prevLevel = unitLevel.level
+            unitLevel.level = checkForBuff(unitLevel.myUnit)
+            // Buff lost
+            if unitLevel.level <= 0
+                remove(unitLevel.myUnit, unitLevel.level)
+                affectedUnits.remove(unitLevel)
+                return
+            // Buff is running
+            if time >= FUFF_TICKRATE and unitLevel.applyState == 1 
+                tick(unitLevel.myUnit, unitLevel.level)
+                return
+            // Buff level chagned
+            if prevLevel != unitLevel.level and unitLevel.applyState != 0
+                remove(unitLevel.myUnit, unitLevel.level)
+                unitLevel.applyState = 0
+            // Buff is new or level changed
+            if unitLevel.applyState == 0
+                unitLevel.applyState = 1
+                apply(unitLevel.myUnit, unitLevel.level)
+                return
+            
+        function apply(unit u, integer level)
+            if applyFunc != null
+                applyFunc.do(u, level)
+
+        function tick(unit u, integer level)
+            if tickFunc != null
+                tickFunc.do(u, level)
+
+        function remove(unit u, integer level)
+            if removeFunc != null
+                removeFunc.do(u, level)

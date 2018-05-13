@@ -1,0 +1,32 @@
+package UnitLevelSet
+    import public UnitSetElement
+    import Table
+
+    // A set of units that implements add, remove and contains in O(1)
+    // TODO LinkedList.wurst -> iterators
+    // TODO UnitLevel -> wrapping interface with getUnit
+    public class UnitLevelSet
+        // End of the linked list
+        UnitSetElement lastElement
+        // Stores a reference to the linked list element directly.
+        private Table directAccess = new Table()
+        
+        function add(UnitLevel unitLevel)
+            if not contains(unitLevel)
+                UnitSetElement listElement = new UnitSetElement(unitLevel, lastElement)
+                lastElement = listElement
+                directAccess.saveInt(unitLevel.myUnit.getHandleId(), listElement castTo int)
+            else
+                destroy unitLevel
+        
+        function remove(UnitLevel unitLevel)
+            if contains(unitLevel)
+                UnitSetElement listElement = directAccess.loadInt(unitLevel.myUnit.getHandleId()) castTo UnitSetElement
+                if listElement == lastElement
+                    lastElement = listElement.prevElement
+                directAccess.saveInt(unitLevel.myUnit.getHandleId(), 0)
+                destroy listElement
+            
+        function contains(UnitLevel unitLevel) returns boolean
+            UnitSetElement direct = directAccess.loadInt(unitLevel.myUnit.getHandleId()) castTo UnitSetElement
+            return direct.unitLevel.myUnit == unitLevel.myUnit

@@ -1,6 +1,6 @@
 package ArachnoAura
 	import HideAbility
-	import Cuff
+	import FuffVariants
 	
 	constant integer BUFF_ID_1 = 'B00O'
 	constant integer BUFF_ID_2 = 'B00Q'
@@ -11,7 +11,8 @@ package ArachnoAura
 	constant integer SPELL_ID_3 = 'A01E'
 
 	init
+		// TODO 1 ability
 		hideAbility(SPELL_ID_1)
 		hideAbility(SPELL_ID_2)
 		hideAbility(SPELL_ID_3)
-		createLeveledCuff(SPELL_ID_1, SPELL_ID_2, SPELL_ID_3, BUFF_ID_1, BUFF_ID_2, BUFF_ID_3)
+		new LeveledFuff(BUFF_ID_1, BUFF_ID_2, BUFF_ID_3, SPELL_ID_1, SPELL_ID_2, SPELL_ID_3)

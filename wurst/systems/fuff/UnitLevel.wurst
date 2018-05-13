@@ -1,0 +1,11 @@
+package UnitLevel
+
+    public class UnitLevel
+        unit myUnit
+        integer level
+        // 0 = new, 1 = active
+        integer applyState = 0
+        
+        construct(unit myUnit, integer level)
+            this.myUnit = myUnit
+            this.level = level

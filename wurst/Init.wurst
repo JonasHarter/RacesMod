@@ -7,16 +7,16 @@ package Init
 	init
 		CreateTrigger()
 			..registerTimerEvent(2.1, false)
-			..addAction( function I1 )
+			..addAction( function init1 )
 			
-	function I1()
+	function init1()
 		let f = GetPlayersAll()
 		let d = 10.0
 		DisplayTimedTextToForce(f, d, "Some Warcraft 3 Mod")
-		DisplayTimedTextToForce(f, d, "v1.0")
-		DisplayTimedTextToForce(f, d, " ")
-		DisplayTimedTextToForce(f, d, "Available Commands:")
-		DisplayTimedTextToForce(f, d, "-bars")
+		DisplayTimedTextToForce(f, d, "pre-alpha")
+		// DisplayTimedTextToForce(f, d, " ")
+		// DisplayTimedTextToForce(f, d, "Available Commands:")
+		// DisplayTimedTextToForce(f, d, "-bars")
 		for unit u in GetUnitsInRectAll(GetPlayableMapRect())
 			new UnitIndex(u)
 			if u.getTypeId() == TAVERN_ID

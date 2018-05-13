@@ -1,0 +1,31 @@
+package PlayerUnitList
+    import LinkedList
+    import UnitIndexer
+
+    LinkedList<unit> array playerUnits
+
+    init
+        for i = 0 to bj_MAX_PLAYER_SLOTS
+            playerUnits[i] = new LinkedList<unit>()
+        group g = GetUnitsInRectAll(GetPlayableMapRect())
+        for u in g
+            u.toUnitIndex()
+            add2(u)
+        g.destr()
+        onUnitDeindex(function add)
+        onUnitIndex(function remove)
+
+    public function player.getUnits() returns LinkedList<unit>
+            return playerUnits[this.getId()]
+            
+    function add()
+        add2(getDeindexedUnit())
+
+    function add2(unit u)
+        playerUnits[u.getOwner().getId()].add(u)
+
+    function remove()
+        remove2(getDeindexedUnit())
+    
+    function remove2(unit u)
+        playerUnits[u.getOwner().getId()].remove(u)

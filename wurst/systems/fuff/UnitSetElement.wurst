@@ -1,0 +1,20 @@
+package UnitSetElement
+    import public UnitLevel
+
+    public class UnitSetElement
+
+        UnitLevel unitLevel
+        UnitSetElement prevElement
+        UnitSetElement nextElement
+        
+        construct(UnitLevel unitLevel, UnitSetElement lastElement)
+            this.unitLevel = unitLevel
+            prevElement = lastElement
+            prevElement.nextElement = this
+                
+        ondestroy
+            if prevElement != null
+                prevElement.nextElement = nextElement
+            if nextElement != null
+                nextElement.prevElement = prevElement
+            destroy unitLevel

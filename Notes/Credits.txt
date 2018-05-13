@@ -341,10 +341,12 @@ Forsaken
 	Icons
 		Court House, Tribunal, Justice Hall - Ujimasa Hojo
 		Herbarium - JollyD
+		Black Guild - Ujimasa Hojo
 	Models
 		Court House, Tribunal, Justice Hall - Ujimasa Hojo
 		Altar of the Queen - Ujimasa Hojo
 		Herbarium - Korija2029
+		Black Guild - Ujimasa Hojo
 Neutral
 	Icons
 		Nerubian Aristocrat - PeeKay

@@ -1,5 +1,4 @@
 package FloatingText
-	import Texttag
 
 	public constant color COLOR_GOLD = color(255, 200, 0)
 	public constant color COLOR_RED = color(255, 0, 0)

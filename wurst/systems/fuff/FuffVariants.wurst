@@ -1,0 +1,71 @@
+package FuffVariants
+    import Fuff
+
+    public class SimpleFuff extends Fuff
+
+        integer buffId
+        integer abilityId
+
+        // Base
+        construct(integer buffId, FuffFunction applyFunc, FuffFunction tickFunc, FuffFunction removeFunc)
+            super(applyFunc, tickFunc, removeFunc, true)
+            this.buffId = buffId
+
+        // Grants ability
+        construct(integer buffId, integer abilityId)
+            super(null, null, null, true)
+            this.buffId = buffId
+            this.abilityId = abilityId
+            applyFunc = (u, i) -> u.addAbility(abilityId)
+            tickFunc = (u, i) -> skip
+            removeFunc = (u, i) -> u.removeAbility(abilityId)
+
+        override function checkForBuff(unit u) returns integer
+            if u.hasAbility(buffId)
+                return 1
+            return 0
+
+    public class LeveledFuff extends Fuff
+
+        integer array[3] buffId
+        integer array[3] abilityId
+
+        // Base
+        construct(integer buffId1, integer buffId2, integer buffId3, FuffFunction applyFunc, FuffFunction tickFunc, FuffFunction removeFunc)
+            super(applyFunc, tickFunc, removeFunc, true)
+            this.buffId[0] = buffId1
+            this.buffId[1] = buffId2
+            this.buffId[2] = buffId3
+
+        // Grants ability based on level
+        construct(integer buffId1, integer buffId2, integer buffId3, integer abilityId1, integer abilityId2, integer abilityId3)
+            super(null, null, null, true)
+            this.buffId[0] = buffId1
+            this.buffId[1] = buffId2
+            this.buffId[2] = buffId3
+            this.abilityId[0] = abilityId1
+            this.abilityId[1] = abilityId2
+            this.abilityId[2] = abilityId3
+            applyFunc = (u, i) -> u.addAbility(abilityId[i - 1])
+            tickFunc = (u, i) -> skip
+            removeFunc = (u, i) -> u.removeAbility(abilityId[i - 1])
+
+        // Gratns ability and sets level
+        construct(integer buffId1, integer buffId2, integer buffId3, integer abilityId)
+            super(null, null, null, true)
+            this.buffId[0] = buffId1
+            this.buffId[1] = buffId2
+            this.buffId[2] = buffId3
+            this.abilityId[0] = abilityId
+            applyFunc = (u, i) -> u.addAbility(this.abilityId[0])
+            tickFunc = (u, i) -> skip
+            removeFunc = (u, i) -> begin
+                u.removeAbility(this.abilityId[0])
+                u.setAbilityLevel(this.abilityId[0], i - 1)
+            end
+
+        override function checkForBuff(unit u) returns integer
+            for i = 2 downto 0
+                if u.hasAbility(buffId[i])
+                    return i + 1
+            return 0

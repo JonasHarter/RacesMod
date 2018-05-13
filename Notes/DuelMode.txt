@@ -2,6 +2,8 @@ Automatically when 1 vs 1
 Observer Features
 	Announce events in Chat?
 	HealthBars
+		PlayerColored
+		Only when sub 100% hp|mana or hero
 Enforces Player colors
 	Race		Primary		Secondary
 	---------------------------------

@@ -1,7 +1,6 @@
 // Based on the Table class
 // Uses the unitID as parentKey to be able to flush all unit data
 package UnitTable
-	import Hashtable
 
 	init
 		CreateTrigger()

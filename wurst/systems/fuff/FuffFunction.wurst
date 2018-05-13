@@ -1,0 +1,4 @@
+package FuffFunction
+
+    public interface FuffFunction
+        function do(unit u, integer level)

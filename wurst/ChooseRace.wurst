@@ -5,27 +5,27 @@ package ChooseRace
 	init
 		CreateTrigger()
 			..registerTimerEvent(0.1, false)
-			..addAction(function BuildDialog)
+			..addAction(function buildDialog)
 		CreateTrigger()
 			..registerTimerEvent(1.0, false)
-			..addAction(function ShowDialog)
+			..addAction(function showDialog)
 			
-	dialog RaceDialog = DialogCreate()
-	button array RaceButtons
+	dialog raceDialog = DialogCreate()
+	button array raceButtons
 	
-	function BuildDialog()
-		RaceDialog.clear()
-		RaceDialog.setHeading("Choose your race")
-		RaceButtons[0] = RaceDialog.addButton("|cff0042FF Human |r")
-		RaceButtons[1] = RaceDialog.addButton("|cffFF0303 Orc |r")
-		RaceButtons[2] = RaceDialog.addButton("|cff1CE6B9 Nightelf |r")
-		RaceButtons[3] = RaceDialog.addButton("|cff540081 Undead |r")
-		RaceButtons[4] = RaceDialog.addButton("|cffFFFC01 Goblin |r")
-		RaceButtons[5] = RaceDialog.addButton("|cffFEBA0E Demon |r")
-		RaceButtons[6] = RaceDialog.addButton("|cff20C000 Naga |r")
+	function buildDialog()
+		raceDialog.clear()
+		raceDialog.setHeading("Choose your race")
+		raceButtons[0] = raceDialog.addButton("|cff0042FF Human |r")
+		raceButtons[1] = raceDialog.addButton("|cffFF0303 Orc |r")
+		raceButtons[2] = raceDialog.addButton("|cff1CE6B9 Nightelf |r")
+		raceButtons[3] = raceDialog.addButton("|cff540081 Undead |r")
+		raceButtons[4] = raceDialog.addButton("|cffFFFC01 Goblin |r")
+		raceButtons[5] = raceDialog.addButton("|cffFEBA0E Demon |r")
+		raceButtons[6] = raceDialog.addButton("|cff20C000 Naga |r")
 		CreateTrigger()
-			..registerDialogEvent(RaceDialog)
-			..addAction(function DialogClick)
+			..registerDialogEvent(raceDialog)
+			..addAction(function dialogClick)
 		/*
 		|c00E55BB0Player 8|r
 		|c00959697Player 9|r
@@ -34,32 +34,26 @@ package ChooseRace
 		|c004E2A04Player 12|r
 		*/
 		
-	function ShowDialog()
+	function showDialog()
 		for int i = 0 to bj_MAX_PLAYERS
-			let p = Player(i)
-			// Is player playing
-			if(IsPlayerSlotState(p, PLAYER_SLOT_STATE_PLAYING))
-				// is player human
-				if(GetPlayerController(p) == MAP_CONTROL_USER)
-					RaceDialog.show(p)
-				else if(GetPlayerController(p) == MAP_CONTROL_COMPUTER)
-					skip
+			if Player(i).isIngame()
+				raceDialog.show(Player(i))
 					
 				
-	function DialogClick()
+	function dialogClick()
 		let p = GetTriggerPlayer()
 		let b = GetClickedButton()
 		Races r = Races.Human
-		if(b == RaceButtons[1])
+		if(b == raceButtons[1])
 			r = Races.Orc
-		else if(b == RaceButtons[2])
+		else if(b == raceButtons[2])
 			r = Races.NightElf
-		else if(b == RaceButtons[3])
+		else if(b == raceButtons[3])
 			r = Races.Undead
-		else if(b == RaceButtons[4])
+		else if(b == raceButtons[4])
 			r = Races.Goblin
-		else if(b == RaceButtons[5])
+		else if(b == raceButtons[5])
 			r = Races.Demon
-		else if(b == RaceButtons[6])
+		else if(b == raceButtons[6])
 			r = Races.Naga
-		CreateStartingUnits(p, r)
+		createStartingUnits(p, r)
