@@ -6,13 +6,8 @@ package ArachnoAura
 	constant integer BUFF_ID_2 = 'B00Q'
 	constant integer BUFF_ID_3 = 'B00R'
 	
-	constant integer SPELL_ID_1 = 'A01C'
-	constant integer SPELL_ID_2 = 'A01D'
-	constant integer SPELL_ID_3 = 'A01E'
+	constant integer SPELL_ID = 'A019'
 
 	init
-		// TODO 1 ability
-		hideAbility(SPELL_ID_1)
-		hideAbility(SPELL_ID_2)
-		hideAbility(SPELL_ID_3)
-		new LeveledFuff(BUFF_ID_1, BUFF_ID_2, BUFF_ID_3, SPELL_ID_1, SPELL_ID_2, SPELL_ID_3)
+		//hideAbility(SPELL_ID)
+		new LeveledFuff(BUFF_ID_1, BUFF_ID_2, BUFF_ID_3, SPELL_ID)

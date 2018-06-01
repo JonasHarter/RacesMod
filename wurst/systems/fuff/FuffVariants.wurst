@@ -57,12 +57,12 @@ package FuffVariants
             this.buffId[1] = buffId2
             this.buffId[2] = buffId3
             this.abilityId[0] = abilityId
-            applyFunc = (u, i) -> u.addAbility(this.abilityId[0])
-            tickFunc = (u, i) -> skip
-            removeFunc = (u, i) -> begin
-                u.removeAbility(this.abilityId[0])
-                u.setAbilityLevel(this.abilityId[0], i - 1)
+            applyFunc = (u, i) -> begin
+                u.addAbility(this.abilityId[0])
+                u.setAbilityLevel(this.abilityId[0], i)
             end
+            tickFunc = (u, i) -> skip
+            removeFunc = (u, i) -> u.removeAbility(this.abilityId[0])
 
         override function checkForBuff(unit u) returns integer
             for i = 2 downto 0

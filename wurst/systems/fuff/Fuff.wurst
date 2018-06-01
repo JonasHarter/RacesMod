@@ -85,6 +85,7 @@ package Fuff
             if level > 0
                 affectedUnits.add(u, level)
                     
+        // Gets the level for fuff on the unit
         abstract function checkForBuff(unit u) returns integer
 
         function run()
@@ -99,7 +100,6 @@ package Fuff
             integer previousLevel = fuffUnitState.getLevel()
             integer currentLevel = checkForBuff(fuffUnitState.getUnit())
             boolean isApplied = fuffUnitState.isApplied()
-            fuffUnitState.setLevel(currentLevel)
             // Buff lost
             if currentLevel <= 0
                 remove(u, previousLevel)
@@ -118,6 +118,7 @@ package Fuff
             if not isApplied
                 fuffUnitState.setApplied(true)
                 apply(u, currentLevel)
+                fuffUnitState.setLevel(currentLevel)
                 return
             
         function apply(unit u, integer level)
