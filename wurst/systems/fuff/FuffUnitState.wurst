@@ -1,0 +1,25 @@
+package FuffUnitState
+
+    public class FuffUnitState
+        private unit myUnit
+        private integer myLevel = 0
+        private boolean isApplied = false
+        
+        construct(unit myUnit, integer level)
+            this.myUnit = myUnit
+            this.myLevel = level
+
+        function getUnit() returns unit
+            return myUnit
+
+        function getLevel() returns integer
+            return myLevel
+
+        function setLevel(integer level)
+            myLevel = level
+
+        function isApplied() returns boolean
+            return isApplied
+
+        function setApplied(boolean isApplied)
+            this.isApplied = isApplied

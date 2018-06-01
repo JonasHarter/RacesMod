@@ -3,17 +3,17 @@ package FuffVariants
 
     public class SimpleFuff extends Fuff
 
-        integer buffId
-        integer abilityId
+        protected integer buffId
+        protected integer abilityId
 
         // Base
         construct(integer buffId, FuffFunction applyFunc, FuffFunction tickFunc, FuffFunction removeFunc)
-            super(applyFunc, tickFunc, removeFunc, true)
+            super(applyFunc, tickFunc, removeFunc)
             this.buffId = buffId
 
         // Grants ability
         construct(integer buffId, integer abilityId)
-            super(null, null, null, true)
+            super()
             this.buffId = buffId
             this.abilityId = abilityId
             applyFunc = (u, i) -> u.addAbility(abilityId)
@@ -27,19 +27,19 @@ package FuffVariants
 
     public class LeveledFuff extends Fuff
 
-        integer array[3] buffId
-        integer array[3] abilityId
+        protected integer array[3] buffId
+        protected integer array[3] abilityId
 
         // Base
         construct(integer buffId1, integer buffId2, integer buffId3, FuffFunction applyFunc, FuffFunction tickFunc, FuffFunction removeFunc)
-            super(applyFunc, tickFunc, removeFunc, true)
+            super(applyFunc, tickFunc, removeFunc)
             this.buffId[0] = buffId1
             this.buffId[1] = buffId2
             this.buffId[2] = buffId3
 
         // Grants ability based on level
         construct(integer buffId1, integer buffId2, integer buffId3, integer abilityId1, integer abilityId2, integer abilityId3)
-            super(null, null, null, true)
+            super()
             this.buffId[0] = buffId1
             this.buffId[1] = buffId2
             this.buffId[2] = buffId3
@@ -52,7 +52,7 @@ package FuffVariants
 
         // Gratns ability and sets level
         construct(integer buffId1, integer buffId2, integer buffId3, integer abilityId)
-            super(null, null, null, true)
+            super()
             this.buffId[0] = buffId1
             this.buffId[1] = buffId2
             this.buffId[2] = buffId3

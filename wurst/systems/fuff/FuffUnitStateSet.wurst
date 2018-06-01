@@ -1,0 +1,31 @@
+package FuffUnitStateSet
+    import public FuffUnitState
+    import Table
+    import FuffLinkedList
+
+    // A set of units that implements add, remove and contains in O(1)
+    public class FuffUnitStateSet
+        private Table directAccess = new Table()
+        private LinkedList<FuffUnitState> listAccess = new LinkedList<FuffUnitState>()
+        
+        function add(unit u, integer level)
+            if not contains(u)
+                FuffUnitState fuffUnitSet = new FuffUnitState(u, level)
+                listAccess.add(fuffUnitSet)
+                LLEntry<FuffUnitState> entry = listAccess.getEntry(listAccess.size() - 1)
+                directAccess.saveInt(fuffUnitSet.getUnit().getHandleId(), entry castTo integer)
+        
+        function remove(unit u)
+            if contains(u)
+                LLEntry<FuffUnitState> entry = directAccess.loadInt(u.getHandleId()) castTo LLEntry<FuffUnitState>
+                listAccess.removeEntry(entry)
+                directAccess.saveInt(u.getHandleId(), 0)
+
+        function contains(unit u) returns boolean
+            LLEntry<FuffUnitState> entry = directAccess.loadInt(u.getHandleId()) castTo LLEntry<FuffUnitState>
+            if entry == null
+                return false
+            return entry.elem.getUnit() == u
+
+        function getList() returns LinkedList<FuffUnitState>
+            return listAccess
