@@ -1,5 +1,5 @@
 package Barrage
-	import DummyCaster
+	/*import DummyCaster
 	import Location2
 	
 	let SPELL_ID = 'A01J'
@@ -19,4 +19,4 @@ package Barrage
 		let caster = GetTriggerUnit()
 		DummyCaster d = new DummyCaster(BARRAGE_ID, BARRAGE_ORDER, caster.getOwner(), false)
 		d.castOnPoint(GetSpellTargetLoc().asVec2(true))
-		d.recycleDelay = 60.0
+		d.recycleDelay = 60.0*/

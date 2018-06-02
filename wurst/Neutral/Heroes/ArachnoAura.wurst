@@ -9,5 +9,5 @@ package ArachnoAura
 	constant integer SPELL_ID = 'A019'
 
 	init
-		//hideAbility(SPELL_ID)
+		hideAbility(SPELL_ID)
 		new LeveledFuff(BUFF_ID_1, BUFF_ID_2, BUFF_ID_3, SPELL_ID)

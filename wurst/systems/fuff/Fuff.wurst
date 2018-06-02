@@ -2,16 +2,18 @@ package Fuff
     import FuffUnitStateSet
     import LinkedList
     import public FuffFunction
-    import PlayerUnitList
 
     //TODO auto rate unit iterations
     //TODO BlizzApi -> BuffEvent, getBuffLevel
 
     LinkedList<Fuff> allFuffs = new LinkedList<Fuff>()
-    LinkedList<Fuff> autoFillFuffs = new LinkedList<Fuff>()
-    integer autoFillIterator = 0
-    integer nextPlayer = 0
     real FUFF_TICKRATE = 1.0
+
+    LinkedList<Fuff> autoFillFuffs = new LinkedList<Fuff>()
+    group allUnitsHolder
+    integer skipCounterSave = 0
+    integer nextPlayer = 0
+    //TODO Find a good value
     integer MAX_FUFFS_PER_TICK = 5
 
     init
@@ -36,21 +38,30 @@ package Fuff
     function unitLoop()
         if autoFillFuffs.size() == 0
             return
-        for unit u in Player(nextPlayer).getUnits()
-            integer fuffCounter = 0
-            integer subIterator = 0
-            for Fuff fuff in autoFillFuffs
+        // Get fuffs for this iteration
+        LinkedList<Fuff> todoFuffs = new LinkedList<Fuff>()
+        integer skipCounter = skipCounterSave
+        integer doneCounter = 0
+        for Fuff fuff in autoFillFuffs
+            if skipCounter > 0
+                skipCounter--
+            else if doneCounter >= MAX_FUFFS_PER_TICK
+                break
+            else
+                doneCounter++
+                todoFuffs.add(fuff)
+        skipCounterSave += doneCounter
+        if skipCounterSave >= autoFillFuffs.size()
+            skipCounterSave = 0
+        // Update units when all fuffs are through
+        if skipCounterSave == 0
+            allUnitsHolder.destr()
+            allUnitsHolder = GetUnitsInRectAll(GetPlayableMapRect())
+        // Work on units
+        for unit u in allUnitsHolder
+            for Fuff fuff in todoFuffs
                 fuff.checkUnit(u)
-                if fuffCounter >= autoFillIterator
-                    fuff.checkUnit(u)
-                    subIterator++
-                fuffCounter++
-                if subIterator >= MAX_FUFFS_PER_TICK or autoFillFuffs.size() >= autoFillIterator + subIterator
-                    autoFillIterator = -1
-                    subIterator = 0
-                    setNextPlayer()
-            if autoFillIterator < 0
-                autoFillIterator = 0
+        destroy todoFuffs
                     
     function fuffLoop()
         if allFuffs.size() == 0

@@ -1,0 +1,59 @@
+package UnitTypeWatcher
+	import UnitIndexer
+	import LinkedList
+		
+	LinkedList<UnitTypeWatcher> watchers = new LinkedList<UnitTypeWatcher>()
+	integer counter = 0
+
+
+	init
+		onUnitIndex(() -> addToWatchers())
+		onUnitDeindex(() -> removeFromWatchers())
+		CreateTrigger()
+		..registerTimerEvent(ANIMATION_PERIOD, true)
+		..addAction(function updateWatchers)
+
+	function addToWatchers()
+		for UnitTypeWatcher watcher in watchers
+			if (watcher.checkUnit(getIndexedUnit()))
+				watcher.addUnit(getIndexedUnit())
+
+	function removeFromWatchers()
+		for UnitTypeWatcher watcher in watchers
+			watcher.removeUnit(getIndexedUnit())
+
+	function updateWatchers()
+		if watchers.size() == 0
+			return
+		watchers.get(0).update()
+		counter++
+		if counter >= watchers.size()
+			counter = 0
+
+	public abstract class UnitTypeWatcher
+
+			LinkedList<unit> unitsOfType = new LinkedList<unit>()
+			integer unitType
+
+			construct(integer unitType)
+				watchers.add(this)
+				this.unitType = unitType
+
+			ondestroy
+				destroy unitsOfType
+				watchers.remove(this)
+
+			function checkUnit(unit u) returns boolean
+				return u.getTypeId() == unitType
+
+			function addUnit(unit u)
+				unitsOfType.add(u)
+
+			function removeUnit(unit u)
+				unitsOfType.remove(u)
+
+			function update()
+				for unit u in unitsOfType
+					updateUnit(u)
+
+			protected abstract function updateUnit(unit u)

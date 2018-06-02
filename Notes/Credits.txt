@@ -381,7 +381,8 @@ Neutral
 	Models
 		Nerubian Aristocrat - -Grendel
 		Nerubian Aristocrat Missle - Bloody_Turds
-		Nerubian Spiderling - -Grendel
+		?Nerubian Spiderling - -Grendel
+		Nerubian Ripper - MatiS
 		Arachno Aura - EnetheruAnuon
 		Murloc Revolutionary - Tarrasque
 		Sabotage Missle - Mythic

@@ -50,7 +50,7 @@ package FuffVariants
             tickFunc = (u, i) -> skip
             removeFunc = (u, i) -> u.removeAbility(abilityId[i - 1])
 
-        // Gratns ability and sets level
+        // Grants ability and sets level
         construct(integer buffId1, integer buffId2, integer buffId3, integer abilityId)
             super()
             this.buffId[0] = buffId1
@@ -69,3 +69,11 @@ package FuffVariants
                 if u.hasAbility(buffId[i])
                     return i + 1
             return 0
+
+    public class PermanentFuff extends Fuff
+
+        construct(FuffFunction applyFunc, FuffFunction tickFunc, FuffFunction removeFunc)
+            super(applyFunc, tickFunc, removeFunc)
+
+        override function checkForBuff(unit u) returns integer
+            return 1
