@@ -1,0 +1,21 @@
+package NocturnalPredator
+	import FuffVariants
+
+	//TODO actual hp regen
+	
+	constant integer SPELL_ID = 'A055'
+	constant integer INV_ID = 'A054'
+	
+	init
+		FuffCondition condition = (u) -> condition(u)
+		FuffFunction tickFunc = (u, level) -> tick(u)
+		new ConditionFuff(condition, null, tickFunc, null)
+
+	function condition(unit target) returns integer
+		if GetTimeOfDay() >= bj_TOD_DUSK or GetTimeOfDay() <= bj_TOD_DAWN
+			return target.getAbilityLevel(SPELL_ID)
+		return 0
+
+	function tick(unit target)
+		let l = target.getAbilityLevel(SPELL_ID)
+		target.addHP(I2R(l))

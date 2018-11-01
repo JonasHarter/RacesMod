@@ -1,0 +1,4 @@
+package Nightprowler
+
+	public constant integer NIGHTPROWLER_UNIT_ID = 'U00R'
+	public constant integer array WORGEN_UNIT_ID = ['o00K','o00L','o00M']

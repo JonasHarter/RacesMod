@@ -1,0 +1,20 @@
+package Neutral
+	import Player2
+	import NerubianAristocrat
+	import GoblinFilibuster
+	import MurlocRevolutionary
+	import Nightprowler
+
+	init
+		for int i = 0 to bj_MAX_PLAYERS
+			player p = Player(i)
+			//Heroes
+			p.setTechMaxAllowed(NERUBIAN_ARISTOCRAT_UNIT_ID, 1)
+			p.setTechMaxAllowed(GOBLIN_FILIBUSTER_UNIT_ID, 1)
+			p.setTechMaxAllowed(MURLOC_REVOLUTIONARY_UNIT_ID, 1)
+			p.setTechMaxAllowed(NIGHTPROWLER_UNIT_ID, 1)
+			// Abilities
+			p.setAbilityAvailable('A01C', false)
+			p.setAbilityAvailable('A01D', false)
+			p.setAbilityAvailable('A01E', false)
+			p.setAbilityAvailable('A03U', false)

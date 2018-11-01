@@ -1,0 +1,46 @@
+package GreedAura
+	import FloatingText
+
+	constant integer array BUFF_ID = ['B00H','B00I','B00J']
+	constant real array FACTOR = [0.1, 0.25, 0.4]
+	
+	init
+		CreateTrigger()
+			..registerAnyUnitEvent(EVENT_PLAYER_UNIT_DEATH)
+			..addCondition(Condition(function conditions1 ))
+			..addAction(function actions1)
+		CreateTrigger()
+			..registerAnyUnitEvent(EVENT_PLAYER_UNIT_SELL)
+			..addAction(function actions2)
+			
+	// Unit kill
+	function conditions1() returns boolean
+		return GetKillingUnit().getOwner().isEnemyOf(GetDyingUnit().getOwner())
+			
+	function actions1()
+		let killer = GetKillingUnit()
+		int level = 0
+		for i = 0 to 2
+			if killer.hasAbility(BUFF_ID[i])
+				level = i
+				break
+		if level == 0
+			return
+		let gold = 10 * level
+		createFloatingText(killer.getPos3Real(), "+" + gold.toString(), COLOR_GOLD)
+		killer.getOwner().addGold(gold)
+		
+	// Unit hire
+	function actions2()
+		let buyer = GetBuyingUnit()
+		real factor = 0
+		for i = 0 to 2
+			if buyer.hasAbility(BUFF_ID[i])
+				factor = FACTOR[i]
+				break
+		if factor == 0
+			return
+		let sold = GetSoldUnit()
+		let gold = (factor * sold.getMaxHP()).toInt()
+		createFloatingText(sold.getPos3Real(), "+" + gold.toString(), COLOR_GOLD)
+		buyer.getOwner().addGold(gold)

@@ -1,0 +1,4 @@
+package Vectors2
+		
+	public function vec2.asLoc() returns location
+		return Location(this.x, this.y)

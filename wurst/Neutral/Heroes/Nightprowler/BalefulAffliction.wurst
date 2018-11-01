@@ -1,0 +1,38 @@
+package BalefulAffliction
+	import TargetChecker
+	import TargetRestrictors
+	import MouseTargetRestriction
+	import LinkedList
+	import Nightprowler
+
+	constant integer SPELL_ID = 'A053'
+	constant string SPELL_ORDER = "corrosivebreath"
+	constant string ERROR_STRING = "You cannot target this unit"
+		
+	init
+		CreateTrigger()
+			..registerAnyUnitEvent(EVENT_PLAYER_UNIT_SPELL_EFFECT)
+			..addCondition(Condition(function condition))
+			..addAction(function actions)
+		LinkedList<int> targets = new LinkedList<int>()
+		for int i = 0 to 2
+			targets.add(WORGEN_UNIT_ID[i])
+		TypeList tl = new TypeList(ERROR_STRING, targets)
+		tl.invert = true
+		TargetChecker tr = new TargetChecker()
+			..addRestrictionDirect(tl)
+			..addRestriction(Restrictions.Summoned)
+		new MouseTargetRestriction(NIGHTPROWLER_UNIT_ID, SPELL_ORDER, tr)
+		
+	function condition() returns boolean
+		return GetSpellAbilityId() == SPELL_ID
+		
+	function actions()
+		let target = GetSpellTargetUnit()
+		let targetUnitPosition = target.getPos()
+		let spellLevel = GetTriggerUnit().getAbilityLevel(SPELL_ID)
+		unit worgen = createUnit(target.getOwner(), WORGEN_UNIT_ID[spellLevel - 1], targetUnitPosition, target.getFacingAngle())
+		worgen.setMaxHP(R2I(target.getMaxHP()))
+		worgen.setHP(target.getHP())
+		target.remove()
+		worgen.setPos(targetUnitPosition)

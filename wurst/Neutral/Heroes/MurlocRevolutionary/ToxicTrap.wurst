@@ -1,0 +1,36 @@
+package ToxicTrap
+	import ClosureTimers
+	import InstantDummyCaster
+	import FuffVariants
+
+	constant int TRAP_UNIT_ID = 'n01D'
+	constant string TRAP_EFFECT = "Neutral\\ToxicField.mdx"
+	
+	constant integer TRAP_SKILL_ID = 'A05K'
+	constant string TRAP_SKILL_ORDER = "thunderclap"
+	
+	constant int TRAP_BUFF_ID = 'B02A'
+	constant real TRAP_BUFF_DPS = -5.0
+	
+	
+	init
+		CreateTrigger()
+			..registerAnyUnitEvent(EVENT_PLAYER_UNIT_DEATH)
+			..addCondition(Condition(function condition))
+			..addAction(function actions)
+		FuffFunction tickFunc = (u, l) -> u.addHP(TRAP_BUFF_DPS)
+		new SimpleFuff(TRAP_BUFF_ID, null, tickFunc, null)
+
+	// Check makes sure unit has no killer
+	function condition() returns boolean
+		let d = GetDyingUnit().getTypeId()
+		let k = GetKillingUnit()
+		return d == TRAP_UNIT_ID and k == null
+		
+	function actions()
+		let d = GetDyingUnit()
+		let pos = d.getPos()
+		InstantDummyCaster.castImmediate(d.getOwner(), TRAP_SKILL_ID, 1, TRAP_SKILL_ORDER, pos)
+		effect e = addEffect(TRAP_EFFECT, pos)
+		doAfter(5.0, () -> e.destr())
+		d.remove()

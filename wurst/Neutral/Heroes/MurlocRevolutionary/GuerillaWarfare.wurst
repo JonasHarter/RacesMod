@@ -1,0 +1,28 @@
+package GuerillaWarfare
+	import InstantDummyCaster
+	import Location2
+
+	constant integer TRIGGER_SPELL_ID = 'A02P'
+	constant integer RESULT_SPELL_ID = 'A03P'
+	constant string RESULT_SPELL_ORDER = "invisibility"
+	constant real RESULT_RANGE = 700.0 + MAX_COLLISION_SIZE
+
+	init
+		CreateTrigger()
+			..registerAnyUnitEvent(EVENT_PLAYER_UNIT_SPELL_EFFECT)
+			..addCondition(Condition(function condition))
+			..addAction(function actions)
+
+	function condition() returns boolean
+		return GetSpellAbilityId() == TRIGGER_SPELL_ID
+		
+	function actions()
+		let caster = GetTriggerUnit()
+		let owner = caster.getOwner()
+		let level = caster.getAbilityLevel(TRIGGER_SPELL_ID)
+		let loc = GetUnitLoc(caster)
+		let g = GetUnitsInRangeOfLocAll(RESULT_RANGE, loc)
+		loc.remove()
+		for unit u in g
+			InstantDummyCaster.castTarget(owner, RESULT_SPELL_ID, level, RESULT_SPELL_ORDER, u)
+		g.destr()

@@ -1,0 +1,4 @@
+package Sound2
+
+	public function sound.setDistances(real min, real max)
+		SetSoundDistances(this, min, max)

@@ -1,0 +1,78 @@
+package ForgottenEmpire
+	import ClosureTimers
+	import UnitIndexer
+	import UnitObjEditing
+	import ObjectIdGenerator
+	import Location2
+
+	constant integer UNIT_ID  = compiletime(UNIT_ID_GEN.next())
+	constant integer SPELL_ID  = 'A01A'
+	string EFFECT_STR_1 = "Objects\\Spawnmodels\\Undead\\ImpaleTargetDust\\ImpaleTargetDust.mdl"
+	string EFFECT_STR_2 = "Objects\\Spawnmodels\\Undead\\UCancelDeath\\UCancelDeath.mdl"
+
+	@compiletime function genObelisk()
+		new UnitDefinition(UNIT_ID ,'osp1')
+			..setNormalAbilities("Avul")
+			..setElevationSampleRadius(0)
+			..setIconGameInterface("ReplaceableTextures/CommandButtons/BTNDragonObelisk.blp")
+			..setModelFile("Doodads/Ashenvale/Props/AshenObilisk/AshenObilisk.mdl")
+			..setScalingValue(1.4)
+			..setSelectionScale(3.3)
+			..setShadowImageUnit("")
+			..setAcquisitionRange(1000)
+			..setArmorSoundType(ArmorSoundType.Stone)
+			..setAttack1AreaofEffectSmallDamage(200)
+			..setAttack1AreaofEffectMediumDamage(200)
+			..setAttack1AreaofEffectFullDamage(200)
+			..setAttack1CooldownTime(2.3)
+			..setAttack1DamageBase(44)
+			..setAttack1DamageNumberofDice(2)
+			..setAttack1DamageSidesperDie(5)
+			..setAttack1ProjectileArt("neutral/ForgottenEmpireMissile.mdx")
+			..setAttack1ProjectileSpeed(800)
+			..setAttack1Range(1000)
+			..setAttack1WeaponType(WeaponType.MissileSplash)
+			..setMovementHeight(-270)
+			..setMovementHeightMinimum(-270)
+			..setSpeedBase(1)
+			..setSpeedMinimum(1)
+			..setCollisionSize(48)
+			..setName("Ancient Obelisk")
+
+	init
+		Preload(EFFECT_STR_1)
+		Preload(EFFECT_STR_2)
+		onUnitIndex(function onSpawn)
+		onUnitDeindex(function onDeath)
+		CreateTrigger()
+			..registerAnyUnitEvent(EVENT_PLAYER_UNIT_SPELL_EFFECT)
+			..addCondition(Condition(() -> begin
+				return GetSpellAbilityId() == SPELL_ID
+			end))
+			..addAction(() -> begin
+				createUnit(GetTriggerUnit().getOwner(), UNIT_ID, GetSpellTargetLoc().asVec2(true), GetTriggerUnit().getFacingAngle())
+			end)
+
+	function onSpawn()
+		let u = getIndexedUnit()
+		if u.getTypeId() != UNIT_ID
+			return
+		let pos = u.getPos()
+		addEffect(EFFECT_STR_1, pos).destr()
+		u.addAbility(HEIGHT_ENABLER)
+		u.removeAbility(HEIGHT_ENABLER)
+		u.setFlyHeight(0.0, 100.0)
+		u.pause()
+		doAfter(2.7, () -> begin
+			u.unpause()
+			u.setTimedLife(60.0)
+		end)
+		
+	//setFlyHeight doesn't take negative values :(
+	function onDeath()
+		let u = getDeindexedUnit()
+		if u.getTypeId() != UNIT_ID
+			return
+		let pos = u.getPos()
+		addEffect(EFFECT_STR_2, pos).destr()
+		u.remove()

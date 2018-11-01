@@ -1,0 +1,4 @@
+package Item2
+
+	public function item.getType() returns itemtype
+		return GetItemType(this)

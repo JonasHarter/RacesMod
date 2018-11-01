@@ -1,6 +1,8 @@
 package FuffVariants
     import Fuff
+    import public FuffFunction
 
+    
     public class SimpleFuff extends Fuff
 
         protected integer buffId
@@ -24,6 +26,7 @@ package FuffVariants
             if u.hasAbility(buffId)
                 return 1
             return 0
+
 
     public class LeveledFuff extends Fuff
 
@@ -70,6 +73,7 @@ package FuffVariants
                     return i + 1
             return 0
 
+
     public class PermanentFuff extends Fuff
 
         construct(FuffFunction applyFunc, FuffFunction tickFunc, FuffFunction removeFunc)
@@ -77,3 +81,16 @@ package FuffVariants
 
         override function checkForBuff(unit u) returns integer
             return 1
+
+
+    public class ConditionFuff extends Fuff
+        protected FuffCondition condition
+
+        construct(FuffCondition condition, FuffFunction applyFunc, FuffFunction tickFunc, FuffFunction removeFunc)
+            super(applyFunc, tickFunc, removeFunc)
+            this.condition = condition
+
+        override function checkForBuff(unit u) returns integer
+            if(condition != null)
+                return condition.check(u)
+            return 0

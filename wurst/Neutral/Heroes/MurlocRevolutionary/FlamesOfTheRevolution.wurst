@@ -1,0 +1,9 @@
+package FlamesOfTheRevolution
+	import FuffVariants
+	
+	constant integer BUFF_ID = 'B01U'
+	constant integer SPELL_ID = 'A03U'
+
+	init
+		new SimpleFuff(BUFF_ID, SPELL_ID)
+

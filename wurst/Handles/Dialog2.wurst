@@ -1,0 +1,17 @@
+package Dialog2
+
+	public function dialog.show(player p)
+		DialogDisplayBJ(true, this, p)
+
+	public function dialog.hide(player p)
+		DialogDisplayBJ(false, this, p)
+
+	public function dialog.setHeading(string msg)
+		DialogSetMessageBJ(this, msg)
+
+	public function dialog.addButton(string label) returns button
+		return DialogAddButtonBJ(this, label)
+
+	public function dialog.clear()
+		DialogClearBJ(this)
+

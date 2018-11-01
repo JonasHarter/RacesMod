@@ -1,0 +1,42 @@
+package Rum
+	import FuffVariants
+	import InstantDummyCaster
+	
+	constant integer SPELL_ID = 'A03M'
+	constant integer array ITEM_ID = ['I00D','I00E','I00F']
+	constant integer BUFF_SPELL_ID = 'A03O' 
+	constant string BUFF_SPELL_ORDER = "curse" 
+	constant integer array BUFFS = ['B01O','B01N','B01P']
+	constant real HP = 5.0
+	
+	init
+		CreateTrigger()
+			..registerAnyUnitEvent(EVENT_PLAYER_UNIT_SPELL_EFFECT)
+			..addCondition(Condition(function spellC))
+			..addAction(function onSpellUse)
+		CreateTrigger()
+			..registerAnyUnitEvent(EVENT_PLAYER_UNIT_USE_ITEM)
+			..addAction(function onItemUse)
+		FuffFunction tickFunc = (u, level) -> u.addHP(HP * level)
+		new LeveledFuff(BUFFS[0], BUFFS[1], BUFFS[2], null, tickFunc, null)
+			
+	function spellC() returns boolean
+		return GetSpellAbilityId() == SPELL_ID
+		
+	function onSpellUse()
+		let caster = GetTriggerUnit()
+		let level = caster.getAbilityLevel(SPELL_ID)
+		var itemid = ITEM_ID[level - 1]
+		caster.addItemById(itemid)
+		
+	function onItemUse()
+		let caster = GetTriggerUnit()
+		let itemId = GetManipulatedItem().getTypeId()
+		int spellLevel = 0
+		for i = 0 to 2
+			if ITEM_ID[i] == itemId
+				spellLevel = i
+				break
+		if spellLevel == 0
+			return
+		InstantDummyCaster.castTarget(caster.getOwner(), BUFF_SPELL_ID, spellLevel, BUFF_SPELL_ORDER, caster, caster.getPos())

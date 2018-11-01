@@ -1,0 +1,3 @@
+package GoblinFilibuster
+
+	public constant integer GOBLIN_FILIBUSTER_UNIT_ID = 'N00T'

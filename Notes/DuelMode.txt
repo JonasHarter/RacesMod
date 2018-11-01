@@ -31,8 +31,8 @@ Enforces Player colors
 				Snow
 				Emerald
 				Peanut
-	Neutral		White
-	Neutral		Black
+	Neutral		White		---
+	Neutral		Black		---
 	---------------------------------
 	Elves		Pink        LightBLue
 	Dwarves     LightBLue   Blue

@@ -1,0 +1,42 @@
+package Unit2
+	
+	public function unit.getHPPercent() returns real
+		return this.getHP() / this.getMaxHP() * 100
+	
+	public function getAllUnits() returns group
+		return GetUnitsInRectAll(GetPlayableMapRect())
+		
+	public function unit.countBuffs() returns int
+		return UnitCountBuffsExBJ(bj_BUFF_POLARITY_EITHER, bj_BUFF_RESIST_EITHER, this, false, false)
+	
+	public function unit.isHero() returns bool
+		return IsUnitType(this, UNIT_TYPE_HERO)
+		
+	public function unit.isStructure() returns bool
+		return IsUnitType(this, UNIT_TYPE_STRUCTURE)
+		
+	public function unit.isFlying() returns bool
+		return GetUnitDefaultFlyHeight(this) > 0.0
+		
+	public function unit.isUnitType(unittype ut) returns bool
+		return IsUnitType(this, ut)
+		
+	/** Spelldamage doesn't go trough magic immunity, works with etheral and ignores armor value **/
+	public function unit.damageTargetSpell(unit target, real amount)
+		UnitDamageTarget(this, target, amount, false, false, ATTACK_TYPE_MAGIC, DAMAGE_TYPE_MAGIC, WEAPON_TYPE_WHOKNOWS)
+		
+	/** Ultimates damage everything **/
+	public function unit.damageTargetUltimate(unit target, real amount)
+		UnitDamageTarget(this, target, amount, false, false, ATTACK_TYPE_NORMAL, DAMAGE_TYPE_UNIVERSAL, WEAPON_TYPE_WHOKNOWS)
+		
+	public function unit.addItemInSlot(int itemID, int slotID)
+		UnitAddItemToSlotById(this, itemID, slotID)
+
+	public function unit.getItemInSlot(int slotID) returns item
+		return UnitItemInSlot(this, slotID)
+		
+	public function unit.dropItemInSlot(int slotID) returns item
+		return UnitRemoveItemFromSlot(this, slotID)
+		
+	public function createUnit2(player p, int unitid, vec2 pos, real face) returns unit
+		return CreateUnit(p, unitid, pos.x, pos.y, face)

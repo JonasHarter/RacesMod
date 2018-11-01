@@ -1,0 +1,24 @@
+package Tavern
+	import UnitObjEditing
+	import ObjectIdGenerator
+	import ObjectIds
+	import NerubianAristocrat
+	import GoblinFilibuster
+	import MurlocRevolutionary
+	import Nightprowler
+
+	constant integer NEW_TAVERN_UNIT_ID  = compiletime(UNIT_ID_GEN.next())
+	constant integer TAVERN_UNIT_ID  = 'ntav'
+
+	@compiletime function gen()
+		new BuildingDefinition(TAVERN_UNIT_ID ,TAVERN_UNIT_ID)
+			..setUnitsSold(commaList(NERUBIAN_ARISTOCRAT_UNIT_ID, GOBLIN_FILIBUSTER_UNIT_ID, MURLOC_REVOLUTIONARY_UNIT_ID, NIGHTPROWLER_UNIT_ID))
+
+	init
+		group g = GetUnitsInRectAll(GetPlayableMapRect())
+		for unit u in g
+			if u.getTypeId() == TAVERN_UNIT_ID
+				let pos = u.getPos()
+				let newTavern = createUnit(u.getOwner(), NEW_TAVERN_UNIT_ID, pos, u.getFacingAngle())
+				u.remove()
+				newTavern.setPos(pos)

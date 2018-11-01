@@ -1,0 +1,3 @@
+package NerubianAristocrat
+
+	public constant integer NERUBIAN_ARISTOCRAT_UNIT_ID = 'O008'

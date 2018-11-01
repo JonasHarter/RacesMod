@@ -1,0 +1,21 @@
+package Group2
+	import Location2
+	import Vectors2
+
+	/** Intersects two groups and returns a new one */
+	public function group.intersect(group g) returns group
+		group r = CreateGroup()
+		for unit u in this
+			if g.contains(u)
+				r.addUnit(u)
+		return r
+		
+	/** Count the number of units in a group */
+	public function group.getSize() returns int
+		return CountUnitsInGroup(this)
+		
+	public function getUnitsInRangeOfPos(real range, vec2 pos) returns group
+		location l = pos.asLoc()
+		group g = GetUnitsInRangeOfLocAll(range, l)
+		l.remove()
+		return g

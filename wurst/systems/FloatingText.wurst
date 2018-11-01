@@ -1,8 +1,4 @@
 package FloatingText
-
-	public constant color COLOR_GOLD = color(255, 200, 0)
-	public constant color COLOR_RED = color(255, 0, 0)
-
 	constant real DUR = 1.0
 	constant real FSIZE = 10.0
 	constant vec2 V = vec2(0.0, 0.05)

@@ -1,0 +1,10 @@
+package Force2
+
+	public function force.addPlayer(player p)
+		ForceAddPlayer(this, p)
+
+	public function force.removePlayer(player p)
+		ForceRemovePlayer(this, p)
+
+	public function force.clear()
+		ForceClear(this)

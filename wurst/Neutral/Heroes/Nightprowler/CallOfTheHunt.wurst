@@ -1,0 +1,48 @@
+package CallOfTheHunt
+	import InstantDummyCaster
+	import FuffVariants
+	import LinkedList
+	import Nightprowler
+
+	constant real HEAL = 200.0
+	// The Spell and the affected unit types
+	constant integer TRIGGERING_SPELL_ID = 'A056'
+	// The Buff Spell
+	constant integer BUFFING_SPELL_ID = 'A057'
+	constant string BUFFING_SPELL_ORDER = "unholyfrenzy"
+	constant integer BUFFING_SPELL_BUFF_ID = 'B01R'
+	// The Fuff Stuff
+	constant integer GRANTED_ABILITY_ID = 'A058'
+	constant integer GRANTED_ABILITY2_ID = 'A05A'
+	
+
+	init
+		CreateTrigger()
+			..registerAnyUnitEvent(EVENT_PLAYER_UNIT_SPELL_EFFECT)
+			..addCondition(Condition(function condition))
+			..addAction(function actions)
+		FuffFunction applyFunc = (u, level) -> begin 
+			u.addAbility(GRANTED_ABILITY_ID)
+			u.addAbility(GRANTED_ABILITY2_ID)
+		end
+		FuffFunction removeFunc = (u, level) -> begin 
+			u.removeAbility(GRANTED_ABILITY_ID)
+			u.removeAbility(GRANTED_ABILITY2_ID)
+		end
+		new SimpleFuff(BUFFING_SPELL_BUFF_ID, applyFunc, null, removeFunc)
+		
+	function condition() returns boolean
+		return GetSpellAbilityId() == TRIGGERING_SPELL_ID
+		
+	function actions()
+		let caster = GetTriggerUnit()
+		let owner = caster.getOwner()
+		LinkedList<unit> list = new LinkedList<unit>()
+		list.add(caster)
+		for unit u in GetUnitsOfPlayerAll(owner)
+			for int i = 0 to 2
+				if u.getTypeId() == WORGEN_UNIT_ID[i]
+					list.add(u)
+		for unit u in list
+			u.addHP(HEAL)
+			InstantDummyCaster.castTarget(owner, BUFFING_SPELL_ID, 1, BUFFING_SPELL_ORDER, u, u.getPos())

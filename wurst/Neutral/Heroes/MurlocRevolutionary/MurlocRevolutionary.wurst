@@ -1,0 +1,3 @@
+package MurlocRevolutionary
+
+	public constant integer MURLOC_REVOLUTIONARY_UNIT_ID = 'E008'

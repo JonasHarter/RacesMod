@@ -2,3 +2,7 @@ package FuffFunction
 
     public interface FuffFunction
         function do(unit u, integer level)
+
+    // A function that checks a condition. Return value is the level or 0 for false
+    public interface FuffCondition
+        function check(unit u) returns int

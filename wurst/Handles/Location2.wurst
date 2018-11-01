@@ -1,0 +1,25 @@
+package Location2
+	
+	public function location.remove()
+		RemoveLocation(this)
+		
+	public function location.asVec2() returns vec2
+		return this.asVec2(false)
+
+	public function location.asVec2(bool removeLocation) returns vec2
+		vec2 r = vec2(GetLocationX(this), GetLocationY(this))
+		if( removeLocation )
+			this.remove()
+		return r
+		
+	public function location.asVec3() returns vec3
+		return this.asVec3(false)
+
+	public function location.asVec3(bool removeLocation) returns vec3
+		vec3 r = vec3(GetLocationX(this), GetLocationY(this), GetLocationZ(this))
+		if( removeLocation )
+			this.remove()
+		return r
+	
+	public function location.getUnitsInRange(real range) returns group
+		return GetUnitsInRangeOfLocAll(range, this)
