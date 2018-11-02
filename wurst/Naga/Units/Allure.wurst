@@ -1,0 +1,8 @@
+package Allure
+	import FuffVariants
+
+	constant integer BUFF_ID = 'B01D'
+	constant integer AB_ID = 'A02M'
+	
+	init
+		new SimpleFuff(BUFF_ID, AB_ID)

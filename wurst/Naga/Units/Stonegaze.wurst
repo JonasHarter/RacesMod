@@ -1,0 +1,18 @@
+package Stonegaze
+	import FuffVariants
+	import Basics2
+
+	constant integer BUFF_ID = 'B01E'
+
+	init
+		FuffFunction applyFunc = (u, i) -> apply(u)
+		FuffFunction removeFunc = (u, i) -> clean(u)
+		new SimpleFuff(BUFF_ID, applyFunc, null, removeFunc)
+
+	function apply(unit target)
+		target.setVertexColor(255, 120, 120, 120)
+		target.addAbility(INVULNERABILITY)
+
+	function clean(unit target)
+		target.setVertexColor(255, 255, 255, 255)
+		target.removeAbility(INVULNERABILITY)

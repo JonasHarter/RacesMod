@@ -1,0 +1,8 @@
+package AcidicBlades
+	import FuffVariants
+
+	let BUFF_ID = 'B01A'
+	let AB_ID = 'A02D'
+	
+	init
+		new SimpleFuff(BUFF_ID, AB_ID)

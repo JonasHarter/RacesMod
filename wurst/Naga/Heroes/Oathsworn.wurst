@@ -1,0 +1,23 @@
+package Oathsworn
+	import FuffVariants
+
+	integer SPELL_ID_1 = 'A01X'
+	integer SPELL_ID_2 = 'A01Y'
+	constant integer array BUFF_ID = ['B016','B017','B015']
+
+	init
+		FuffFunction applyFunc = (u, i) -> apply(u, i)
+		FuffFunction removeFunc = (u, i) -> clean(u)
+		new LeveledFuff(BUFF_ID[0], BUFF_ID[1], BUFF_ID[2], applyFunc, null, removeFunc)
+
+	function apply(unit target, integer level)
+		let perc = target.getHP() / target.getMaxHP()
+		int times = (perc.toInt() / ( 25 - level * 5 )).toInt()
+		target.addAbility(SPELL_ID_1)
+		target.setAbilityLevel(SPELL_ID_1, times)
+		target.addAbility(SPELL_ID_2)
+		target.setAbilityLevel(SPELL_ID_2, times)
+
+	function clean(unit target)
+		target.removeAbility(SPELL_ID_1)
+		target.removeAbility(SPELL_ID_2)

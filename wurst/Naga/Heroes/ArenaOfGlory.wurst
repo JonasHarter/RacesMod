@@ -1,0 +1,62 @@
+package ArenaOfGlory
+	import LinkedList
+
+	constant integer SPELL_ID = 'A01Z'
+	constant real range = 600
+	constant real duration = 15.0
+	// Should be able to divide 360�
+	constant real offset = 15.0
+	LinkedList<int> UTYPE = new LinkedList<int>()
+	constant string EFFECT = "Objects\\Spawnmodels\\Naga\\NagaDeath\\NagaDeath.mdl"
+   
+	init
+		Preload(EFFECT)
+		UTYPE.add('h00K')
+		UTYPE.add('h00K')
+		UTYPE.add('h00L')
+		UTYPE.add('h00L')
+		UTYPE.add('h00L')
+		UTYPE.add('h00M')
+		UTYPE.add('h00M')
+		UTYPE.add('h00M')
+		UTYPE.add('h00N')
+		UTYPE.add('h00N')
+		UTYPE.add('h00N')
+		UTYPE.add('h00O')
+		CreateTrigger()
+			..registerAnyUnitEvent(EVENT_PLAYER_UNIT_SPELL_EFFECT)
+			..addCondition(Condition(function conditions ))
+			..addAction(function actions)
+		CreateTrigger()
+			..registerAnyUnitEvent(EVENT_PLAYER_UNIT_DEATH)
+			..addCondition(Condition(function conditions2 ))
+			..addAction(function actions2)
+		
+	// Cast
+	function conditions() returns bool
+		return GetSpellAbilityId() == SPELL_ID
+
+	function actions()
+		let caster = GetTriggerUnit()
+		let pos = caster.getPos()
+		let steps = (360.0 / offset).toInt() - 1
+		for int i = 0 to steps
+			let utype = UTYPE.get(GetRandomInt(0, UTYPE.getSize() - 1))
+			let a = (i * offset).asAngleDegrees()
+			let rpos = pos.polarOffset(a ,range)
+			let u = createUnit(caster.getOwner(), utype, rpos, a)
+			u.setTimedLife(duration)
+			addEffect(EFFECT, u.getPos()).destr()
+			
+	// Death
+	function conditions2() returns bool
+		let ut = GetTriggerUnit().getTypeId()
+		for iut in UTYPE
+			if ut == iut
+				return true
+		return false
+
+	function actions2()
+		let u = GetTriggerUnit()
+		addEffect(EFFECT, u.getPos()).destr()
+		u.remove()

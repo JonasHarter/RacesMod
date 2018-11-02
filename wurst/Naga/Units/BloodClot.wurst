@@ -1,0 +1,26 @@
+package BloodClot
+	import FuffVariants
+
+	// Struct
+	constant integer BUFF_ID = 'B01M'
+	constant integer GRANTED_ABILITY_ID = 'A027'
+	
+	init
+		new SimpleFuff(BUFF_ID, GRANTED_ABILITY_ID)
+		
+	// Cast
+	
+	constant integer CASTED_ABILITY_ID = 'A035'
+	constant let DAMAGE_PER_CAST = -30.0
+	
+	init
+		CreateTrigger()
+			..registerAnyUnitEvent(EVENT_PLAYER_UNIT_SPELL_EFFECT)
+			..addCondition(Condition(function conditions ))
+			..addAction(function actions)
+			
+	function conditions() returns bool
+		return GetSpellAbilityId() == CASTED_ABILITY_ID
+
+	function actions()
+		GetTriggerUnit().addHP(DAMAGE_PER_CAST)

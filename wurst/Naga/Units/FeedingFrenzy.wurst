@@ -1,0 +1,26 @@
+package FeedingFrenzy
+	import InstantDummyCaster
+	import Location2
+
+	constant integer TRIGGERING_ABILITY_ID = 'A02F'
+	constant integer BUFFING_ABILITY_ID = 'A02G'
+	constant string BUFFING_ABILITY_ORDER = "bloodlust"
+	constant real BUFFING_ABILITY_RADIUS = 400.0
+
+	init
+		CreateTrigger()
+			..registerAnyUnitEvent(EVENT_PLAYER_UNIT_DEATH)
+			..addCondition(Condition(function conditions ))
+			..addAction(function actions)
+
+	function conditions() returns bool
+		return GetKillingUnit().hasAbility(TRIGGERING_ABILITY_ID)
+
+	function actions()
+		let p = GetKillingUnit()
+		location loc = GetUnitLoc(p)
+		group g = GetUnitsInRangeOfLocAll(BUFFING_ABILITY_RADIUS, loc)
+		loc.remove()
+		for unit u in g
+			InstantDummyCaster.castTarget(p.getOwner(), BUFFING_ABILITY_ID, 1, BUFFING_ABILITY_ORDER, u)
+		g.destr()

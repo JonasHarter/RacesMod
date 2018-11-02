@@ -1,0 +1,18 @@
+package KnowledgeAura
+	import FuffVariants
+
+	constant integer array BUFF_ID = ['B012','B013','B014']
+
+	init
+		FuffFunction applyFunc = (u, i) -> apply(u, i)
+		FuffFunction removeFunc = (u, i) -> clean(u, i)
+		new LeveledFuff(BUFF_ID[0], BUFF_ID[1], BUFF_ID[2], applyFunc, null, removeFunc)
+
+	function mana(int level) returns int
+		return level * 50
+
+	function apply(unit target, integer level)
+		target.setMaxMana(R2I(target.getMaxMana() + mana(level)), false)
+
+	function clean(unit target, integer level)
+		target.setMaxMana(R2I(target.getMaxMana() - mana(level)), false)

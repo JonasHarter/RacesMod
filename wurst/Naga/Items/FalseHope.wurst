@@ -1,0 +1,20 @@
+package FalseHope
+	import UnitTable
+	import FuffVariants
+
+	constant integer BUFF_ID = 'B01K'
+	UnitTable table
+
+	init
+		FuffFunction applyFunc = (u, i) -> apply(u)
+		FuffFunction removeFunc = (u, i) -> remove(u)
+		new SimpleFuff(BUFF_ID, applyFunc, null, removeFunc)
+		table = new UnitTable()
+		
+	function apply(unit target)
+		table.saveReal(target, target.getHP())
+		target.setHP(target.getMaxHP())
+
+	function remove(unit target)
+		let hp = table.loadReal(target)
+		target.setHP(hp)

@@ -1,0 +1,28 @@
+package WashOut
+	import UnitIndexer
+	import FuffVariants
+	
+	constant integer BUFF_ID = 'B00F'
+	constant integer GRANTED_ABILITY_ID = 'A03A'
+	integer array counter
+
+	init
+		FuffFunction applyFunc = (u, i) -> apply(u)
+		FuffFunction tickFunc = (u, i) -> tick(u)
+		FuffFunction removeFunc = (u, i) -> remove(u)
+		new SimpleFuff(BUFF_ID, applyFunc, tickFunc, removeFunc)
+
+	function apply(unit target)
+		target.addAbility(GRANTED_ABILITY_ID)
+		counter[target.getIndex()] = 1
+		
+	function tick(unit target)
+		var i = counter[target.getIndex()]
+		if i >= 12
+			return
+		i++
+		target.setAbilityLevel(GRANTED_ABILITY_ID, i)
+		counter[target.getIndex()] = i
+
+	function remove(unit target)
+		target.removeAbility(GRANTED_ABILITY_ID)

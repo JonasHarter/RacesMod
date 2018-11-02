@@ -1,0 +1,18 @@
+package HealInWater
+	import Naga
+	import FuffVariants
+	import WaterLocation
+
+	
+	constant integer BUFF_ID = 'B01J'
+	constant integer GRANTED_ABILITY_ID = 'A02A'
+
+	init
+		FuffCondition condition = (u) -> condition(u)
+		new ConditionFuff(condition, GRANTED_ABILITY_ID)
+
+	function condition(unit target) returns integer
+		for ut in getGlobal_NagaUnits()
+			if target.getTypeId() == ut and target.getPos().isWaterAll()
+				return 1
+		return 0

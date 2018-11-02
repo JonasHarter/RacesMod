@@ -1,0 +1,11 @@
+package SilentSong
+	import FuffVariants
+
+	// Spell the units casts
+	//integer SPELL_ID = 'A02N'
+	// Cuff buff and granted ability
+	constant integer BUFF_ID = 'B027'
+	constant integer AURA_ID = 'A02S'
+	
+	init
+		new SimpleFuff(BUFF_ID, AURA_ID)

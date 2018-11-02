@@ -1,0 +1,16 @@
+package Snakeskin
+	import FuffVariants
+
+	constant integer MAX_HP_AMOUNT = 100
+	constant integer BUFF_ID = 'B01F'
+
+	init
+		FuffFunction applyFunc = (u, i) -> apply(u)
+		FuffFunction removeFunc = (u, i) -> clean(u)
+		new SimpleFuff(BUFF_ID, applyFunc, null, removeFunc)
+	
+	function apply(unit target)
+		target.setMaxHP(R2I(target.getMaxHP() + MAX_HP_AMOUNT))
+
+	function clean(unit target)
+		target.setMaxHP(R2I(target.getMaxHP() + MAX_HP_AMOUNT))

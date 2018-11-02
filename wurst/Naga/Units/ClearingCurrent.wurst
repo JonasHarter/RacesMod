@@ -1,0 +1,32 @@
+package ClearingCurrent
+	import FuffVariants
+	import InstantDummyCaster
+	import UnitIndexer
+	
+	integer array counter
+	constant integer BUFF_ID = 'B01I'
+	constant integer dispellIntervall = 5
+	constant integer maxTime = 25
+	// Dispell
+	constant integer SPELL_DISPELL_ID = 'A02V'
+	constant string SPELL_DISPELL_ORDER = "autodispel"
+	// Recast
+	constant integer SPELL_RECAST_ID = 'A02U'
+	constant string SPELL_RECAST_ORDER = "unholyfrenzy"
+
+	init
+		FuffFunction applyFunc = (u, i) -> apply(u)
+		FuffFunction tickFunc = (u, i) -> tick(u)
+		new SimpleFuff(BUFF_ID, applyFunc, null, tickFunc)
+			
+	function apply(unit target)
+		counter[target.getIndex()] = 0
+
+	function tick(unit target)
+		var i = counter[target.getIndex()]
+		i++
+		if i % dispellIntervall == 0
+			InstantDummyCaster.castTarget(target.getOwner(), SPELL_DISPELL_ID, 1, SPELL_DISPELL_ORDER, target)
+			if i < maxTime
+				InstantDummyCaster.castTarget(target.getOwner(), SPELL_RECAST_ID, 1, SPELL_RECAST_ORDER, target)
+		counter[target.getIndex()] = i

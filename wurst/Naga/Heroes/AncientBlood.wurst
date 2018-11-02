@@ -1,0 +1,24 @@
+package AncientBlood
+	import FuffVariants
+
+	constant integer SPELL_ID = 'A021'
+
+	init
+		FuffCondition condition = (u) -> condition(u)
+		FuffFunction applyFunc = (u, i) -> apply(u, i)
+		FuffFunction removeFunc = (u, i) -> clean(u, i)
+		new ConditionFuff(condition, applyFunc, null, removeFunc)
+
+	function life(int level) returns int
+		return 50 + (level - 1) * 100
+
+	function condition(unit target) returns integer
+		if target.hasAbility(SPELL_ID)
+			return 1
+		return 0
+		
+	function apply(unit target, integer level)
+		target.setMaxHP(R2I(target.getMaxHP() + life(level)))
+
+	function clean(unit target, integer level)
+		target.setMaxHP(R2I(target.getMaxHP() - life(level)))

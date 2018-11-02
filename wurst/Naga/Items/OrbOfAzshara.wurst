@@ -1,0 +1,9 @@
+package OrbOfAzshara
+	import FuffVariants
+
+	constant integer BUFF_ID = 'B01V'
+	constant real manaLoss = 5.0
+
+	init
+		FuffFunction tickFunc = (u, i) -> u.addMana(-1 * manaLoss)
+		new SimpleFuff(BUFF_ID, null, tickFunc, null)

@@ -1,0 +1,31 @@
+package Overseer
+	import FuffVariants
+
+	constant integer BUFF_ID = 'B008'
+	constant integer UNIT_ID = 'n00P'
+	constant integer HARV_8_ID = 'A00M'
+	constant integer HARV_10_ID = 'A026'
+	constant integer DMG_ID = 'A02E'
+	
+	init
+		FuffCondition condition = (u) -> condition(u)
+		FuffFunction applyFunc = (u, i) -> apply(u)
+		FuffFunction removeFunc = (u, i) -> clean(u)
+		new ConditionFuff(condition, applyFunc, null, removeFunc)
+		
+	function condition(unit target) returns integer
+		if target.getTypeId() == UNIT_ID
+			return 1
+		return 0
+		
+	function apply(unit target)
+		target.addAbility(HARV_10_ID)
+		target.removeAbility(HARV_8_ID)
+		target.addAbility(DMG_ID)
+		AddUnitAnimationPropertiesBJ( false, "gold", target )
+
+	function clean(unit target)
+		target.addAbility(HARV_8_ID)
+		target.removeAbility(HARV_10_ID)
+		target.removeAbility(DMG_ID)
+		AddUnitAnimationPropertiesBJ( false, "gold", target )

@@ -1,0 +1,10 @@
+package HallucinogenicPoison
+	import FuffVariants
+
+	constant integer BUFF_ID = 'B01L'
+	constant integer AB_ID = 'A034'
+	
+	init
+		new SimpleFuff(BUFF_ID, AB_ID)
+
+

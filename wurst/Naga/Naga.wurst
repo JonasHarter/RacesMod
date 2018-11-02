@@ -1,0 +1,43 @@
+package Naga
+	import LinkedList
+	import Player2
+	
+	LinkedList<int> murlocs = new LinkedList<int>()
+	public function getGlobal_Murlocs() returns LinkedList<int>
+		return murlocs
+		
+	LinkedList<int> nagaunits = new LinkedList<int>()
+	public function getGlobal_NagaUnits() returns LinkedList<int>
+		return nagaunits
+		
+	init
+		for int i = 0 to bj_MAX_PLAYERS
+			player p = Player(i)
+			p.setTechMaxAllowed('N00N', 1) // Sea Witch
+			p.setTechMaxAllowed('H00G', 1) // Brine Shaper
+			p.setTechMaxAllowed('O00A', 1) // Floodbringer
+			p.setTechMaxAllowed('O00B', 1) // Abyssviper
+			p.setAbilityAvailable('A02S', false) // SilentSong
+		nagaunits.add('n00P') // Slave
+		murlocs.add('n00P')
+		nagaunits.add('n00Q') // Reaver
+		murlocs.add('n00Q')
+		nagaunits.add('o00E') // Bloodgill
+		murlocs.add('o00E')
+		nagaunits.add('n00R') // Overseer
+		murlocs.add('n00R')
+		nagaunits.add('n008') // Minion
+		murlocs.add('n008')
+		nagaunits.add('e003') // Garuda
+		nagaunits.add('e004') // Leviathan
+		nagaunits.add('h00Q') // Medusa
+		nagaunits.add('u004') // Siren
+		nagaunits.add('n005') // Couatl
+		nagaunits.add('n004') // Snapdragon
+		nagaunits.add('n007') // Myrmidon
+		nagaunits.add('n006') // Dragon Turtle
+		nagaunits.add('h00H') // Sea Water Elemental Lvl 1-3
+		nagaunits.add('h00I')
+		nagaunits.add('h00J')
+		
+
