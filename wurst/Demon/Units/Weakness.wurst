@@ -1,0 +1,16 @@
+package Weakness
+	import FuffVariants
+
+	constant integer WEAKNESS_BUFF_ID = 'B01Z'
+	constant integer WEAKNESS_HP_CHANGE = 50
+	
+	init
+		FuffFunction applyFunc = (u, i) -> apply(u)
+		FuffFunction removeFunc = (u, i) -> remove(u)
+		new SimpleFuff(WEAKNESS_BUFF_ID, applyFunc, null, removeFunc)
+
+	function apply(unit target)
+		target.setMaxHP(R2I(target.getMaxHP() - WEAKNESS_HP_CHANGE))
+		
+	function remove(unit target)
+		target.setMaxHP(R2I(target.getMaxHP() + WEAKNESS_HP_CHANGE))

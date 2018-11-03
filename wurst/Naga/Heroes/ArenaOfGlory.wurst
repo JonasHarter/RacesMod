@@ -41,7 +41,7 @@ package ArenaOfGlory
 		let pos = caster.getPos()
 		let steps = (360.0 / offset).toInt() - 1
 		for int i = 0 to steps
-			let utype = UTYPE.get(GetRandomInt(0, UTYPE.getSize() - 1))
+			let utype = UTYPE.get(GetRandomInt(0, UTYPE.size() - 1))
 			let a = (i * offset).asAngleDegrees()
 			let rpos = pos.polarOffset(a ,range)
 			let u = createUnit(caster.getOwner(), utype, rpos, a)

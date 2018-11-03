@@ -1,0 +1,24 @@
+package IntoTheFray
+	import FuffVariants
+	import InstantDummyCaster
+
+	constant integer INTOTHEFRAY_TRIGGERING_ABILITY = 'B01G'
+	constant integer INTOTHEFRAY_BUFFING_ABILITY = 'A040'
+	constant string INTOTHEFRAY_BUFFING_ORDER = "innerfire"
+	constant integer INTOTHEFRAY_BUFF = 'B01W'
+	constant integer INTOTHEFRAY_BUFF_GRANTED_ABILITY = 'A03Z'
+	
+
+	init
+		CreateTrigger()
+			..registerAnyUnitEvent( EVENT_PLAYER_UNIT_TRAIN_FINISH )
+			..addCondition( Condition( function conditions ) )
+			..addAction( function actions )
+		new SimpleFuff(INTOTHEFRAY_BUFF, INTOTHEFRAY_BUFF_GRANTED_ABILITY)
+
+	function conditions() returns bool
+		return GetTriggerUnit().hasAbility(INTOTHEFRAY_TRIGGERING_ABILITY)
+		
+	function actions()
+		unit u = GetTrainedUnit()
+		InstantDummyCaster.castTarget(u.getOwner(), INTOTHEFRAY_BUFFING_ABILITY, 1, INTOTHEFRAY_BUFFING_ORDER, u)

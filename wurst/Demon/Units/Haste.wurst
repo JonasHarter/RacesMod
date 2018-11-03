@@ -1,0 +1,20 @@
+package Haste
+	import InstantDummyCaster
+
+	constant integer HASTE_SPELL_ID = 'A04Y'
+	constant integer HASTE_BUFF_SPELL_ID = 'A04Z'
+	constant string HASTE_BUFF_SPELL_ORDER = "bloodlust"
+
+	init
+		CreateTrigger()
+			..registerAnyUnitEvent(EVENT_PLAYER_UNIT_SPELL_EFFECT)
+			..addAction(function actions)
+			..addCondition(Condition(function conditions))
+			
+	function conditions() returns boolean
+		return GetSpellAbilityId() == HASTE_SPELL_ID
+		
+	function actions()
+		unit u = GetTriggerUnit()
+		unit target = GetSpellTargetUnit()
+		InstantDummyCaster.castTarget(u.getOwner(), HASTE_BUFF_SPELL_ID, 1, HASTE_BUFF_SPELL_ORDER, target)

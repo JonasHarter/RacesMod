@@ -1,0 +1,38 @@
+package Beholders
+	import PowerOverwhelming
+	import LinkedList
+	import ClosureTimers
+	
+	int SUMMON_ID = 'A04Q'
+	LinkedList<int> BEHOLDER_ID = new LinkedList<int>()
+	real DURATION = 45.0
+	int AMOUNT = 3
+	string EFFECT = "Demon\\EnergyBurst_Portrait.mdx"
+	int AB_BONUS_DMG = 'A04S'
+	
+	init
+		BEHOLDER_ID.add('h00T')
+		BEHOLDER_ID.add('h00U')
+		BEHOLDER_ID.add('h00V')
+		CreateTrigger()
+			..registerAnyUnitEvent(EVENT_PLAYER_UNIT_SPELL_EFFECT)
+			..addAction(function actions)
+			..addCondition(Condition(function conditions))
+
+	function conditions() returns bool
+		return GetSpellAbilityId() == SUMMON_ID
+
+	function actions()
+		unit caster = GetTriggerUnit()
+		int level = caster.getAbilityLevel(SUMMON_ID)
+		player owner = caster.getOwner()
+		vec2 pos = caster.getPos()
+		for int i = 1 to AMOUNT
+			unit u = createUnit(owner, BEHOLDER_ID.get(level - 1), pos, caster.getFacingAngle())
+			u.setTimedLife(DURATION)
+			if( caster.hasAbility(POWER_BUFF) )
+				int bonusLevel = caster.getAbilityLevel(POWER_AB)
+				u.addAbility(AB_BONUS_DMG)
+				u.setAbilityLevel(AB_BONUS_DMG, bonusLevel)
+		effect e = addEffect(EFFECT, pos)
+		doAfter(5.0, () -> e.destr())

@@ -1,0 +1,58 @@
+package WaveOfWrath
+	import Location2
+	import AoE
+	import TargetChecker
+	
+	int WAVE_ID = 'A04X'
+	real DMG_PER_LVL = 50.0
+	real MAXDMG_PER_LVL = 300.0
+	real HP_FACTOR = 2.0
+	real RANGE = 800.0
+	real FINAL_AREA = 300.0
+	TargetChecker TARGETS
+
+	function getDmg(int level, unit target) returns real
+		real dmg = level * DMG_PER_LVL
+		if target.getHP() == target.getMaxHP()
+			dmg *= HP_FACTOR
+		return dmg
+		
+	function getMaxDmg(int level) returns real
+		return MAXDMG_PER_LVL * level
+		
+	init
+		CreateTrigger()
+			..registerAnyUnitEvent(EVENT_PLAYER_UNIT_SPELL_EFFECT)
+			..addAction(function actions)
+			..addCondition(Condition(function conditions))
+		TARGETS = new TargetChecker()
+			..addRestriction(Restrictions.Ally)
+			
+	function conditions() returns bool
+		return GetSpellAbilityId() == WAVE_ID
+
+	function actions()
+		unit caster = GetTriggerUnit()
+		int level = caster.getAbilityLevel(WAVE_ID)
+		vec2 start = caster.getPos()
+		vec2 target = GetSpellTargetLoc().asVec2(true)
+		target = start.polarOffset(start.angleTo(target), RANGE)
+		// Get targets
+		group targets = getUnitsInCone(start, target, FINAL_AREA / 2)
+		for unit u in targets
+			if not TARGETS.checkRestriction(caster, u).result
+				targets.removeUnit(u)
+		// Damage
+		// TODO maxdmg test
+		real curDmg = 0
+		for unit u in targets
+			real dmg = getDmg(level, u)
+			real maxDmg = getMaxDmg(level)
+			if curDmg + dmg <= maxDmg
+				caster.damageTarget(u, dmg)
+				curDmg += dmg
+			else if curDmg < maxDmg
+				dmg = maxDmg - curDmg
+				caster.damageTarget(u, dmg)
+				curDmg = maxDmg
+		targets.destr()

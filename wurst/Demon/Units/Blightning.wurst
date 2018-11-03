@@ -1,0 +1,25 @@
+package Blightning
+	import InstantDummyCaster
+
+	constant integer BLIGHTNING_SPELL_ID = 'A03G'
+	constant integer BLIGHTNING_ITEM_ID = 'A04C'
+	constant integer BLIGHTNING_BUFF = 'B00B'
+	constant integer BLIGHTNING_STUN_ID = 'A04D'
+	constant string BLIGHTNING_STUN_ORDER = "thunderbolt"
+	
+	init
+		CreateTrigger()
+			..registerAnyUnitEvent(EVENT_PLAYER_UNIT_SPELL_EFFECT)
+			..addAction(function actions)
+			..addCondition(Condition(function conditions))
+			
+	function conditions() returns boolean
+		int i = GetSpellAbilityId()
+		return i == BLIGHTNING_SPELL_ID or i == BLIGHTNING_ITEM_ID
+		
+	function actions()
+		unit u = GetTriggerUnit()
+		unit target = GetSpellTargetUnit()
+		if( not(target.hasAbility(BLIGHTNING_BUFF)))
+			return
+		InstantDummyCaster.castTarget(u.getOwner(), BLIGHTNING_STUN_ID, 1, BLIGHTNING_STUN_ORDER, target, target.getPos())

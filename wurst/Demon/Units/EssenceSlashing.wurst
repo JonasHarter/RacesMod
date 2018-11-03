@@ -1,0 +1,12 @@
+package EssenceSlashing
+	import FuffVariants
+
+	constant integer BUFF_ID = 'B01T'
+	constant real MANA = -3.0
+
+	init
+		FuffFunction tickFunc = (u, i) -> tick(u)
+		new SimpleFuff(BUFF_ID, null, tickFunc, null)
+
+	function tick(unit target)
+		target.addMana(MANA)

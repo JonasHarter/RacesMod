@@ -1,0 +1,53 @@
+package SoulBond
+	import UnitTable
+	import FuffVariants
+	import HideAbility
+
+	constant integer TRIGGERING_ABILITY_ID = 'A03H'
+	constant real MAX_DISTANCE = 500.0
+	constant integer HEALING_ABILITY_ID = 'A04V'
+	//constant integer HEALING_ABILITY_SPELLBOOK_ID = 'A04T'
+	UnitTable soulTable = new UnitTable()
+
+	init
+		CreateTrigger()
+			..registerAnyUnitEvent(EVENT_PLAYER_UNIT_SPELL_EFFECT)
+			..addAction(function actions)
+			..addCondition(Condition(function conditions))
+		
+
+	function conditions() returns bool
+		return GetSpellAbilityId() == TRIGGERING_ABILITY_ID
+
+	function actions()
+		unit target = GetSpellTargetUnit()
+		unit caster = GetTriggerUnit()
+		soulTable.saveUnit(caster, target)
+
+	init
+		hideAbility(HEALING_ABILITY_ID)
+		FuffCondition condition = (u) -> condition(u)
+		FuffFunction tickFunction = (u, i) -> tick(u)
+		new ConditionFuff(condition, null , tickFunction, null)
+
+	function condition(unit target) returns integer
+		if target.hasAbility(TRIGGERING_ABILITY_ID)
+			return 1
+		return 0
+		
+	function tick(unit target)
+		// Get the other unit
+		unit soulmate = soulTable.loadUnit(target)
+		if soulmate == null
+			return
+		// Check distance
+		real dist = soulmate.getPos().distanceTo(target.getPos())
+		if dist > MAX_DISTANCE
+			soulmate.removeAbility(HEALING_ABILITY_ID)
+			target.removeAbility(HEALING_ABILITY_ID)
+			return
+		// Set abilities
+		if not target.hasAbility(HEALING_ABILITY_ID)
+			target.addAbility(HEALING_ABILITY_ID)
+		if not soulmate.hasAbility(HEALING_ABILITY_ID)
+			soulmate.addAbility(HEALING_ABILITY_ID)

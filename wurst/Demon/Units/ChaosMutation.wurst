@@ -1,0 +1,44 @@
+package ChaosMutation
+
+	int MUTANT = 'n01C'
+	int DMG = 'A029'
+	int TECH = 'R010'
+
+	init
+		CreateTrigger()
+			..registerAnyUnitEvent( EVENT_PLAYER_UNIT_RESEARCH_FINISH )
+			..addCondition( Condition( function researchC ) )
+			..addAction( function research )
+		CreateTrigger()
+			..registerAnyUnitEvent( EVENT_PLAYER_UNIT_TRAIN_FINISH )
+			..addCondition( Condition( function trainC ) )
+			..addAction( function train )
+
+	function mutate(unit u)
+		u.addAbility(DMG)
+		u.setAbilityLevel(DMG, GetRandomInt(1, 20))
+
+	function researchC() returns bool
+		return GetResearched() == TECH
+	
+	function research()
+		unit u = GetResearchingUnit()
+		player p = u.getOwner()
+		group x = GetUnitsOfPlayerAll(p)
+		
+		// Wait for unit switch to finish
+		TriggerSleepAction(0.01)
+
+		for unit l in x
+			if l.getTypeId() == MUTANT
+				mutate(l)
+		x.destr()
+		
+	function trainC() returns bool
+		unit u = GetTrainedUnit()
+		player p = u.getOwner()
+		return GetUnitTypeId(u) == MUTANT and GetPlayerTechCountSimple( TECH, p ) == 1
+		
+	function train()
+		unit u = GetTrainedUnit()
+		mutate(u)

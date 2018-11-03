@@ -1,0 +1,21 @@
+package TaintingAura
+	import FuffVariants
+	import InstantDummyCaster
+
+	constant integer TAINTINGAURA_BUFF = 'B01Y'
+	constant integer TAINTINGAURA_MARKER = 'A045'
+	constant integer TAINTINGAURA_BLIGHT_ABILITY = 'A046'
+
+	init
+		CreateTrigger()
+			..registerAnyUnitEvent( EVENT_PLAYER_UNIT_DEATH )
+			..addCondition( Condition( function conditions ) )
+			..addAction( function actions )
+		new SimpleFuff(TAINTINGAURA_BUFF, TAINTINGAURA_MARKER)
+		
+	function conditions() returns bool
+		return GetDyingUnit().hasAbility(TAINTINGAURA_MARKER)
+		
+	function actions()
+		unit u = GetDyingUnit()
+		InstantDummyCaster.castImmediate(u.getOwner(), TAINTINGAURA_BLIGHT_ABILITY, 1, "", u.getPos())

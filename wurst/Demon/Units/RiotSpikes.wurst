@@ -1,0 +1,14 @@
+package RiotSpikes
+	import FuffVariants
+	import HideAbility
+
+	constant integer RIOTSPIKED_BUFF_ID = 'B020'
+	constant integer RIOTSPIKED_GRANTED_ABILITY_ID = 'A04J'
+	constant real RIOTSPIKED_GRANTED_DAMAGE = 30
+
+	init
+		FuffFunction applyFunc = (u, i) -> u.addAbility(RIOTSPIKED_GRANTED_ABILITY_ID)
+		FuffFunction tickFunc = (u, i) -> u.addHP(-RIOTSPIKED_GRANTED_DAMAGE)
+		FuffFunction removeFunc = (u, i) -> u.removeAbility(RIOTSPIKED_GRANTED_ABILITY_ID)
+		new SimpleFuff(RIOTSPIKED_BUFF_ID, applyFunc, tickFunc, removeFunc)
+		hideAbility(RIOTSPIKED_GRANTED_ABILITY_ID)

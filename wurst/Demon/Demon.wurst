@@ -1,0 +1,57 @@
+package Demon
+	import LinkedList
+	import Player2
+	
+	LinkedList<int> demonUnits = new LinkedList<int>()
+	
+	public function getDemonUnits() returns LinkedList<int>
+		return demonUnits
+	
+	LinkedList<int> demonBuildings = new LinkedList<int>()
+	
+	public function getDemonBuildings() returns LinkedList<int>
+		return demonBuildings
+		
+	init
+		for int i = 0 to bj_MAX_PLAYERS
+			player p = Player(i)
+			//Heroes
+			p.setTechMaxAllowed('H00R', 1)
+			p.setTechMaxAllowed('U00G', 1)
+			p.setTechMaxAllowed('N00Z', 1)
+			p.setTechMaxAllowed('N010', 1)
+			// Units
+			p.setTechMaxAllowed('n01C', 0)
+			// Abilities
+			p.setAbilityAvailable('A05E', false) //Energy Weave 2
+		demonUnits.add('h00S')
+		demonUnits.add('o00H')
+		demonUnits.add('o00J')
+		demonUnits.add('n00X')
+		demonUnits.add('u00K')
+		demonUnits.add('u00M')
+		demonUnits.add('u00B')
+		demonUnits.add('u00L')
+		demonUnits.add('u00N')
+		demonUnits.add('u006')
+		demonUnits.add('u00O')
+		demonUnits.add('n00Y')
+		demonUnits.add('n01C')
+		demonUnits.add('u00P')
+		//TODO: Missing Unit?
+	
+		demonBuildings.add('o00I')
+		demonBuildings.add('u005')
+		demonBuildings.add('u00E')
+		demonBuildings.add('u00F')
+		demonBuildings.add('u009')
+		demonBuildings.add('u008')
+		demonBuildings.add('u007')
+		demonBuildings.add('u00H')
+		demonBuildings.add('u00C')
+		demonBuildings.add('u00J')
+		demonBuildings.add('u00D')
+		demonBuildings.add('u00I')
+		demonBuildings.add('u00A')
+		
+

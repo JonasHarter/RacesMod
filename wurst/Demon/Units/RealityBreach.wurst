@@ -1,0 +1,27 @@
+package RealityBreach
+	import InstantDummyCaster
+	import TargetChecker
+	import MouseTargetRestriction
+
+	int BREACH_ID = 'A03C'
+	string BREACH_ORDER = "avatar"
+	int CASTER_ID = 'u006'
+	int BLIGHT_ID = 'A03D'
+	
+	init
+		CreateTrigger()
+			..registerAnyUnitEvent(EVENT_PLAYER_UNIT_SPELL_EFFECT)
+			..addAction(function actions)
+			..addCondition(Condition(function conditions))
+		new MouseTargetRestriction(CASTER_ID, BREACH_ORDER, new TargetChecker()
+			..addRestriction(Restrictions.Summoned))
+		
+	function conditions() returns bool
+		return GetSpellAbilityId() == BREACH_ID
+		
+	function actions()
+		unit caster = GetSpellAbilityUnit()
+		player owner = caster.getOwner()
+		unit target = GetSpellTargetUnit()
+		vec2 loc = target.getPos()
+		InstantDummyCaster.castImmediate(owner, BLIGHT_ID, 1, "", loc)

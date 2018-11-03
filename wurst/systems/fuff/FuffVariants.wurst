@@ -86,9 +86,19 @@ package FuffVariants
     public class ConditionFuff extends Fuff
         protected FuffCondition condition
 
+        protected integer abilityId
+
         construct(FuffCondition condition, FuffFunction applyFunc, FuffFunction tickFunc, FuffFunction removeFunc)
             super(applyFunc, tickFunc, removeFunc)
             this.condition = condition
+
+        construct(FuffCondition condition, integer abilityId)
+            super(applyFunc, tickFunc, removeFunc)
+            this.condition = condition
+            this.abilityId = abilityId
+            applyFunc = (u, i) -> u.addAbility(abilityId)
+            tickFunc = (u, i) -> skip
+            removeFunc = (u, i) -> u.removeAbility(abilityId)
 
         override function checkForBuff(unit u) returns integer
             if(condition != null)
