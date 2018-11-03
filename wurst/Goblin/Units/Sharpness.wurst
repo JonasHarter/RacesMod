@@ -1,0 +1,10 @@
+package Sharpness
+	import FuffVariants
+
+	constant integer SHARPNESS_BUFF = 'B00S'
+	constant integer SHARPNESS_GRANTED_ABILITY = 'A01H'
+	constant integer SHARPNESS_GRANTED_ABILITY_SPELLBOOK = 'A01I'
+	
+	init
+		new SimpleFuff(SHARPNESS_BUFF, SHARPNESS_GRANTED_ABILITY)
+

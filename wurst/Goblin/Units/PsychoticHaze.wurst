@@ -27,7 +27,7 @@ package PsychoticHaze
 		let pos = loc.asVec2(true)
 		for u in g
 			if TARGETS.checkRestriction(caster, u).result
-				let tempPos = pos.addReals(GetRandomReal(-EFFECT_R, EFFECT_R), GetRandomReal(-EFFECT_R, EFFECT_R))
+				let tempPos = pos.add(GetRandomReal(-EFFECT_R, EFFECT_R), GetRandomReal(-EFFECT_R, EFFECT_R))
 				u.issuePointOrder("move", tempPos)
 		g.destr()
 		let e = addEffect(EFFECT, pos)

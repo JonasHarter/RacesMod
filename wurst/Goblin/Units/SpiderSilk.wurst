@@ -1,6 +1,6 @@
 package SpiderSilk
 	import Location2
-	import DummyCaster
+	import InstantDummyCaster
 
 	let SPELL_ID = 'A00L'
 	let AOE = 230.0
@@ -22,6 +22,5 @@ package SpiderSilk
 		let g = GetUnitsInRangeOfLocAll(AOE, loc)
 		loc.remove()
 		for u in g
-			DummyCaster d = new DummyCaster(SLOW_ID, SLOW_O, owner, true)
-			d.castOnTarget(u)
+			InstantDummyCaster.castTarget(owner, SLOW_ID, 1, SLOW_O, u)
 		g.destr()

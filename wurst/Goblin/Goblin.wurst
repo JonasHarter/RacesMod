@@ -1,14 +1,15 @@
 package Goblin
-	import ArrayList
+	import LinkedList
 	import Player2
 	
-	ArrayList<int> goblinBuildings = new ArrayList<int>()
+	LinkedList<int> goblinBuildings = new LinkedList<int>()
 	
-	public function goblinBuildings() returns ArrayList<int>
+	public function getGoblinBuildings() returns LinkedList<int>
 		return goblinBuildings
 		
 	init
-		for player p in GetPlayersAll()
+		for int i = 0 to bj_MAX_PLAYERS
+			player p = Player(i)
 			//Heroes
 			p.setTechMaxAllowed('E001', 1)
 			p.setTechMaxAllowed('H007', 1)

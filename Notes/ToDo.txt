@@ -8,6 +8,8 @@
 	TargetSelection and Restriction
 
 >Goblin
+	Fix
+		Burning buff lvl 4
 	T1
 		Zeppelin needs to land
 	T2

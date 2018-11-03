@@ -17,9 +17,9 @@ package BuildingDeath
 	function actions()
 		let u = GetTriggerUnit()
 		let ut = u.getTypeId()
-		let gB = goblinBuildings()
+		let gB = getGoblinBuildings()
 		
-		for i = 0 to gB.getSize() - 1
+		for i = 0 to gB.size() - 1
 			if ut == gB.get(i)
 				let l = u.getPos()
 				// Prevent defaultAnim of some buildings

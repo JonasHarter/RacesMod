@@ -1,10 +1,10 @@
 package Reveal
-	import DummyCaster
+	import InstantDummyCaster
 	import Location2
 
-	int SPELL_ID = 'A00A'
-	int REVEAL_ID = 'A00E'
-	string REVEAL_ORDER = "farsight"
+	constant integer SPELL_ID = 'A00A'
+	constant integer REVEAL_ID = 'A00E'
+	constant string REVEAL_ORDER = "farsight"
 
 	init
 		CreateTrigger()
@@ -19,6 +19,5 @@ package Reveal
 		unit caster = GetTriggerUnit()
 		player owner = caster.getOwner()
 		vec2 target = GetSpellTargetLoc().asVec2(true)
-		DummyCaster d = new DummyCaster(REVEAL_ID, REVEAL_ORDER, owner, true)
-		d.castOnPoint(target)
+		InstantDummyCaster.castImmediate(owner, REVEAL_ID, 1, REVEAL_ORDER, target)
 		

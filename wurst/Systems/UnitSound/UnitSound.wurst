@@ -1,5 +1,5 @@
 package UnitSound
-	import ArrayList
+	import LinkedList
 	import HashMap
 	import Sound2
 		
@@ -27,7 +27,7 @@ package UnitSound
 		// HashMap for fast loockup on order
 		private static HashMap<int, UnitSound> unitSounds = new HashMap<int, UnitSound>()
 		// Array for iterating purposes
-		private static ArrayList<UnitSound> unitSoundsArray = new ArrayList<UnitSound>()
+		private static LinkedList<UnitSound> unitSoundsArray = new LinkedList<UnitSound>()
 		
 		private int delay = 0
 		
@@ -43,13 +43,13 @@ package UnitSound
 		
 		//############### Play Sounds ###############
 		
-		private ArrayList<sound> s_current
-		private ArrayList<sound> s_death = new ArrayList<sound>()
-		private ArrayList<sound> s_ready = new ArrayList<sound>()
-		private ArrayList<sound> s_warcry = new ArrayList<sound>()
-		private ArrayList<sound> s_what = new ArrayList<sound>()
-		private ArrayList<sound> s_yes = new ArrayList<sound>()
-		private ArrayList<sound> s_yesattack = new ArrayList<sound>()
+		private LinkedList<sound> s_current
+		private LinkedList<sound> s_death = new LinkedList<sound>()
+		private LinkedList<sound> s_ready = new LinkedList<sound>()
+		private LinkedList<sound> s_warcry = new LinkedList<sound>()
+		private LinkedList<sound> s_what = new LinkedList<sound>()
+		private LinkedList<sound> s_yes = new LinkedList<sound>()
+		private LinkedList<sound> s_yesattack = new LinkedList<sound>()
 				
 		
 		/** Returns the UnitSound Object for a specific unittype **/
@@ -60,7 +60,7 @@ package UnitSound
 		function play(unit u, UnitSoundType t)
 			
 			setUnitSoundType(t)
-			if s_current.getSize() == 0
+			if s_current.size() == 0
 				return
 			sound s = getRandomSound(s_current)
 			if t != UnitSoundType.Ready and t != UnitSoundType.Death
@@ -71,8 +71,8 @@ package UnitSound
 				AttachSoundToUnit(s, u)
 				StartSound(s)
 					
-		private function getRandomSound(ArrayList<sound> list) returns sound
-			return list.get( GetRandomInt(0, list.getSize() - 1))
+		private function getRandomSound(LinkedList<sound> list) returns sound
+			return list.get( GetRandomInt(0, list.size() - 1))
 			
 		//############### Create Sounds ###############
 			

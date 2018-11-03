@@ -10,13 +10,13 @@ package DragonTongue
 			..addRestriction(Restrictions.Ally)
 			..addRestriction(Restrictions.Structure)
 	
-	function damage(int level) returns real
-		return level * 60.0
+	function damage(int _level) returns real
+		return _level * 60.0
 
-	function length(int level) returns real
+	function length(int _level) returns real
 		return 800.0
 		
-	function width(int level) returns real
+	function width(int _level) returns real
 		return 105.0
 		
 	init
@@ -39,5 +39,5 @@ package DragonTongue
 		for u in targets
 			if TARGETS.checkRestriction(caster, u).result
 				caster.damageTargetSpell(u, damage)
-				burn(u, caster.getOwner(), level)
+				burnUnit(u, caster.getOwner(), level)
 		targets.destr()

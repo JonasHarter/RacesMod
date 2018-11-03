@@ -1,19 +1,17 @@
 package Overload
-	import Cuff
+	import FuffVariants
 
-	let EFFECT = "Goblin\\ArcaneExplosion.mdx"
-	let BUFF_ID = 'B003'
-	let AB_ID = 'A00P'
+	constant string EFFECT = "Goblin\\ArcaneExplosion.mdx"
+	constant integer BUFF_ID = 'B003'
+	constant integer AB_ID = 'A00P'
 	
 	init
+		Preload(EFFECT)
 		CreateTrigger()
 			..registerAnyUnitEvent( EVENT_PLAYER_UNIT_DEATH )
 			..addCondition( Condition( function conditions ) )
 			..addAction( function actions )
-		Cuff x = new Cuff()
-		x.addBuff(BUFF_ID) 
-		x.addAbility(AB_ID)
-		Preload(EFFECT)
+		new SimpleFuff(BUFF_ID, AB_ID)
 		
 	function conditions() returns bool
 		return GetDyingUnit().hasAbility(AB_ID)

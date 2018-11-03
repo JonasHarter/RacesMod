@@ -2,7 +2,7 @@ package TeslaCoilUplink
 	import TargetChecker
 	import TargetRestrictors
 	import MouseTargetRestriction
-	import ArrayList
+	import LinkedList
 
 	let CASTER_ID = 'h00C'
 	let ORDER = "unholyfrenzy"
@@ -10,7 +10,7 @@ package TeslaCoilUplink
 	let TARGET_ID = 'o005'
 	
 	init
-		ArrayList<int> targets = new ArrayList<int>()
+		LinkedList<int> targets = new LinkedList<int>()
 		targets.add(TARGET_ID)
 		TypeList tl = new TypeList(ERROR, targets)
 		TargetChecker tr = new TargetChecker()

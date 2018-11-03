@@ -1,5 +1,5 @@
 package StaticArmor
-	import DummyCaster
+	import InstantDummyCaster
 
 	let TECH_ID = 'R00D'
 	let TECH_ABILITY = 'A00F'
@@ -22,5 +22,4 @@ package StaticArmor
 	function actions()
 		let attacker = GetAttacker()
 		let owner = GetAttackedUnitBJ().getOwner()
-		DummyCaster d = new DummyCaster(SPELL_ID, ORDER, owner, true)
-		d.castOnTarget(attacker)
+		InstantDummyCaster.castTarget(owner, SPELL_ID, 1, ORDER, attacker)

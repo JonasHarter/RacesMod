@@ -26,7 +26,7 @@ package FieryConclusion
 		let dmg = damage(target, level)
 		for u in g
 			caster.damageTargetSpell(u, dmg)
-			burn(target, caster.getOwner(), level)
+			burnUnit(target, caster.getOwner(), level)
 		g.destr()
 
 	function range(int level) returns real

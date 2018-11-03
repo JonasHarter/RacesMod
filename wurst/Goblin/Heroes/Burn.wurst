@@ -1,0 +1,19 @@
+package Burn
+	import FuffVariants
+	import InstantDummyCaster
+
+	constant integer BURNING_APPLY_SPELL = 'A01G'
+	constant string BURNING_APPLY_ORDER = "cripple"
+	constant integer array BURNING_BUFF = ['B006', 'B00U', 'B00V']
+	// B00W
+	constant real BURNING_DPS = 3.0
+	
+	init
+		FuffFunction tickFunc = (u, i) -> tick(u, i)
+		new LeveledFuff(BURNING_BUFF[0], BURNING_BUFF[1], BURNING_BUFF[2], null, tickFunc, null)
+
+	public function burnUnit(unit target, player owner, int level)
+		InstantDummyCaster.castTarget(owner, BURNING_APPLY_SPELL, level, BURNING_APPLY_ORDER, target)
+	
+	function tick(unit target, integer level)
+		target.addHP(-level * BURNING_DPS)

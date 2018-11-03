@@ -1,12 +1,12 @@
 package RocketJump
-	import ArrayList
+	import LinkedList
 	import Location2
 	import Basics2
 	import FreeLoc
-	import DummyCaster
+	import InstantDummyCaster
 
-	let SPELL_ID = 'A01N'
-	let loopTick = 0.01
+	constant integer SPELL_ID = 'A01N'
+	constant real loopTick = 0.01
 	
 	init
 		CreateTrigger()
@@ -31,7 +31,7 @@ package RocketJump
 		
 	class FlyingUnit
 		
-		private static ArrayList<FlyingUnit> flyingUnits = new ArrayList<FlyingUnit>(1)
+		private static LinkedList<FlyingUnit> flyingUnits = new LinkedList<FlyingUnit>()
 		static let distPerStep = 10.0
 		static let heightPerStep = 10.0
 		static let EFFECT = "Goblin\\FireBlast.mdx"
@@ -43,7 +43,7 @@ package RocketJump
 			flyingUnits.add(fu)
 			
 		static function tick()
-			if flyingUnits.getSize() <= 0
+			if flyingUnits.size() <= 0
 				return
 			// Simply calling remove doesn't seem to work
 			/*for fu in flyingUnits
@@ -51,7 +51,7 @@ package RocketJump
 				if fu.finish
 					fu.clear()
 					flyingUnits.remove(fu)*/
-			for i = 0 to flyingUnits.getSize() - 1
+			for i = 0 to flyingUnits.size() - 1
 				let fu = flyingUnits.get(i)
 				fu.move()
 				if fu.finish
@@ -77,7 +77,7 @@ package RocketJump
 			u.setPathing(false)
 			u.addAbility(INVULNERABILITY)
 			loc = u.getPos()
-			let dist = loc.distToVec(target)
+			let dist = loc.distanceTo(target)
 			finalStep = (dist / distPerStep).toInt()
 			midStep = (finalStep / 2).toInt()
 			this.target = getFreeLocation(target) 
@@ -99,7 +99,7 @@ package RocketJump
 			loc = loc.moveTowards(target, distPerStep)
 			flyer.setPos(loc)
 			// Done
-			finish = target.distToVec(loc) < distPerStep * 2
+			finish = target.distanceTo(loc) < distPerStep * 2
 			return
 			
 		private function clear()
@@ -107,7 +107,5 @@ package RocketJump
 			flyer.setPos(target)
 			flyer.setFlyHeight(0, 0)
 			flyer.removeAbility(INVULNERABILITY)
-			DummyCaster d = new DummyCaster(CLAP_ID, CLAP_O, flyer.getOwner(), true)
-			d.setLevel(flyer.getAbilityLevel(SPELL_ID))
-			d.castInPoint(target)
+			InstantDummyCaster.castImmediate(flyer.getOwner(), CLAP_ID, flyer.getAbilityLevel(SPELL_ID), CLAP_O, target)
 		
