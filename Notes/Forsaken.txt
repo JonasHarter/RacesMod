@@ -36,6 +36,8 @@ TECHTREE
         XXX
     Altar of the Queen
         Dark Ranger
+            Life Drain
+                Also slows move & atk speed
         Forsaken Dread Lord
             Draining Wave
                 Less dmg, slow
@@ -45,22 +47,31 @@ TECHTREE
             Arcane Inferno
                 +Range,-Dmg
         Executor (Agi)
-            - Execute
+            Execute
                 Dmg, AoE Debuff on kill
-            - 
-                Silence% on attack
-            - Severed Soul
-                Illusion, TP to
-            - Final Punishment
-                SaveDmg, double @ end, noDebuff
+            Dark Umbra
+                Selfbuff 15s
+                +10/20/30% movespeed & Evasion
+            Brooding
+                Regen HP+Mana when standing still for 10 seconds
+                +2/4/6% per second
+            Severed Soul
+                Permanent Summon, 1max
+                CD 180s
+                Has same base stats as summoner, except no mana
+                Has 1 ability
+                    Pull into the Shadow
+                        Destroys this summon, deals AoE dmg
+                        Move Hero to its position
         Grand Apothecary (Int)
-            -
-                Anti/Hero Stats Buff
-            ~
-            - Mending Aura
-                OutOfCombatRegen
-            -
-                Revive Hero instantly?
+            Blazing Nova
+                InstantAoeHeal 120/200/280
+                Blinds enemies 50% chance to miss, 5 seconds
+            Diminish
+                AA cause AntiHero Stats Buff
+                -1/2/3 to all stats
+            X
+            X
     Plagueatorium
         Plague Doctor
                 Plague Cloud

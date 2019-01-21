@@ -20,6 +20,8 @@
 			Cauterize & Playing Effect
 			Fiery Conclusion Burn
 			AoE(+FF) on death on upgrade
+			Explosion
+				Low dmg, cd, manacost
 		Grenadier(+Creds)
 			Name -> Buccaneer?
 			Upgrade Name
@@ -32,6 +34,7 @@
 			As item and new unit?
 		Apprentice's Potion - Name(+Creds)
 	T3
+		Goblin Painter Hero
 		BearTrap
 			Anim
 		SentryTurrent
@@ -52,10 +55,19 @@
 >Naga
 	Upgrade that affecets buffed slaves dmg
 	T1
+		Royal Guard
+            Oathsworn
+                {level}stack base + x per {10,8,6}% missing hp
+		 Brineshaper
+            Unfathomable Knowledge instead of Aura
+                SelfMaxMana: 150,300,450
 		Silent Song
 			Fix! or Change
 		Enslave Item
 			Limit to Murlocs
+		Garuda
+            +Movespeed
+            Proc also when own kill
 	T2
 		Salt Wave 
 			MaxDmg?
@@ -71,9 +83,28 @@
 
 >Demon
 	CommandButtons: "Infernal"
-	Interface:Demonic | Fiery
+	Interface: Demonic | Fiery
 	T1
-		Re-check demon hero spells
+		Eradar Sorcerer
+			Evil Twin
+                Old succubus spell
+            ->BuffNextSpell
+                +AoE
+                +Duration
+                +Half CD
+            Finger of Death
+                Cooldown from Charm
+        Succusbus
+            Kiss
+                Buff allied undead
+                debuff enemy alive -> buffs self
+                +Dmg, Movespeed
+            ->remove summon, utility skill
+			Breathtaking
+				% to Silence on AA to silence
+        PitLord
+            Cleave
+                40/70/100%
 		Legion Dread Lord
 			Nightmare
 		World Eater
