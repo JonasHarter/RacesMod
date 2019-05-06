@@ -1,9 +1,4 @@
 ---
-projectName: "RacesMod"
-dependencies:
-- "https://github.com/wurstscript/wurstStdlib2"
+projectName: RacesMod
 buildMapData:
-  name: "DefaultName"
-  fileName: "DefaultFileName"
-  author: "DefaultAuthor"
-  playerCount: 1
+  fileName: RacesMod

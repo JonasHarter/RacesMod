@@ -121,7 +121,8 @@ public class LinkedList<T>
 			entry = entry.next
 
 	/** gets the size of the list */
-	@deprecated("Use .size() instead.") function getSize() returns int
+	@deprecated("Use .size() instead.")
+	function getSize() returns int
 		return size
 
 	/** gets the size of the list (java-compat wrapper) */

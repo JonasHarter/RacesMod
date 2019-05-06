@@ -46,7 +46,8 @@ package ForgottenEmpire
 		onUnitDeindex(function onDeath)
 		CreateTrigger()
 			..registerAnyUnitEvent(EVENT_PLAYER_UNIT_SPELL_EFFECT)
-			..addCondition(Condition(() -> begin
+			..addCondition(Condition(() ->
+			begin
 				return GetSpellAbilityId() == SPELL_ID
 			end))
 			..addAction(() -> begin
@@ -54,7 +55,7 @@ package ForgottenEmpire
 			end)
 
 	function onSpawn()
-		let u = getIndexedUnit()
+		let u = getIndexingUnit()
 		if u.getTypeId() != UNIT_ID
 			return
 		let pos = u.getPos()
@@ -70,7 +71,7 @@ package ForgottenEmpire
 		
 	//setFlyHeight doesn't take negative values :(
 	function onDeath()
-		let u = getDeindexedUnit()
+		let u = getIndexingUnit()
 		if u.getTypeId() != UNIT_ID
 			return
 		let pos = u.getPos()

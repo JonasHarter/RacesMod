@@ -1,0 +1,18 @@
+[TWN1]
+DependencyOr=htow,ogre,etol,unpl,h000,n00J,u005
+Name=A Tier 1 Building
+
+[TWN2]
+DependencyOr=hkee,ostr,etoa,unp1,h001,n00K,u00E
+Name=A Tier 2 Building
+
+[TWN3]
+DependencyOr=hcas,ofrt,etoe,unp2,h002,n00L,u00F
+Name=A Tier 3 Building
+
+[TALT]
+DependencyOr=halt,oalt,eate,uaod,h004,u008
+
+[HERO]
+DependencyOr=Hamg,Hblm,Hmkg,Hpal,Obla,Ofar,Oshd,Otch,Edem,Ekee,Emoo,Ewar,Ucrl,Udea,Udre,Ulic,N00D,N00E,E001,H007,N00N,H00G,O00A,O00B,H00R,U00G,N00Z,N010,Npbm,Nbrn,Nplh,Nbst,O008,N00T
+

@@ -1,0 +1,5 @@
+[CustomSkin]
+CommandRepair=ReplaceableTextures\CommandButtons\BTNRepair.blp
+
+[Categories]
+UndeadClass=Unnatural

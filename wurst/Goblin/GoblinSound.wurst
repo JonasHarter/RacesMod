@@ -4,7 +4,7 @@ package GoblinSound
 	init
 		CreateTrigger()
 			..registerTimerEvent(1.0, false)
-			..addAction(function test)
+			//..addAction(function test)
 			
 	function test()
 		// Pyro

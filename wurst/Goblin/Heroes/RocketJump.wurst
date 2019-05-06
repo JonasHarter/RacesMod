@@ -1,9 +1,9 @@
 package RocketJump
 	import LinkedList
 	import Location2
-	import Basics2
 	import FreeLoc
 	import InstantDummyCaster
+	import Basics2
 
 	constant integer SPELL_ID = 'A01N'
 	constant real loopTick = 0.01

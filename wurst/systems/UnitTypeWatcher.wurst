@@ -15,12 +15,12 @@ package UnitTypeWatcher
 
 	function addToWatchers()
 		for UnitTypeWatcher watcher in watchers
-			if (watcher.checkUnit(getIndexedUnit()))
-				watcher.addUnit(getIndexedUnit())
+			if (watcher.checkUnit(getIndexingUnit()))
+				watcher.addUnit(getIndexingUnit())
 
 	function removeFromWatchers()
 		for UnitTypeWatcher watcher in watchers
-			watcher.removeUnit(getIndexedUnit())
+			watcher.removeUnit(getIndexingUnit())
 
 	function updateWatchers()
 		if watchers.size() == 0
@@ -32,28 +32,28 @@ package UnitTypeWatcher
 
 	public abstract class UnitTypeWatcher
 
-			LinkedList<unit> unitsOfType = new LinkedList<unit>()
-			integer unitType
+		LinkedList<unit> unitsOfType = new LinkedList<unit>()
+		integer unitType
 
-			construct(integer unitType)
-				watchers.add(this)
-				this.unitType = unitType
+		construct(integer unitType)
+			watchers.add(this)
+			this.unitType = unitType
 
-			ondestroy
-				destroy unitsOfType
-				watchers.remove(this)
+		ondestroy
+			destroy unitsOfType
+			watchers.remove(this)
 
-			function checkUnit(unit u) returns boolean
-				return u.getTypeId() == unitType
+		function checkUnit(unit u) returns boolean
+			return u.getTypeId() == unitType
 
-			function addUnit(unit u)
-				unitsOfType.add(u)
+		function addUnit(unit u)
+			unitsOfType.add(u)
 
-			function removeUnit(unit u)
-				unitsOfType.remove(u)
+		function removeUnit(unit u)
+			unitsOfType.remove(u)
 
-			function update()
-				for unit u in unitsOfType
-					updateUnit(u)
+		function update()
+			for unit u in unitsOfType
+				updateUnit(u)
 
-			protected abstract function updateUnit(unit u)
+		protected abstract function updateUnit(unit u)
