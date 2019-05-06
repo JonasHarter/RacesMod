@@ -14,7 +14,7 @@ package Overseer
 		new ConditionFuff(condition, applyFunc, null, removeFunc)
 		
 	function condition(unit target) returns integer
-		if target.getTypeId() == UNIT_ID
+		if target.hasAbility(BUFF_ID) and target.getTypeId() == UNIT_ID
 			return 1
 		return 0
 		

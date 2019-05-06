@@ -14,7 +14,7 @@ package Fuff
     integer skipCounterSave = 0
     integer nextPlayer = 0
     //TODO Find a good value
-    integer MAX_FUFFS_PER_TICK = 5
+    integer MAX_FUFFS_PER_TICK = 2
 
     init
         CreateTrigger()
@@ -35,6 +35,9 @@ package Fuff
                 nextPlayer = i
                 return
 
+    /**
+        Checks all units for some fuffs and adds them
+    **/
     function unitLoop()
         if autoFillFuffs.size() == 0
             return
@@ -62,7 +65,10 @@ package Fuff
             for Fuff fuff in todoFuffs
                 fuff.checkUnit(u)
         destroy todoFuffs
-                    
+
+    /**
+        Updates the fuffs
+    **/           
     function fuffLoop()
         if allFuffs.size() == 0
             return
