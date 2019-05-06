@@ -1,0 +1,41 @@
+Automatically when 1 vs 1
+Observer Features
+	Announce events in Chat?
+	HealthBars
+		PlayerColored
+		Only when sub 100% hp|mana or hero
+Enforces Player colors
+	Race		Primary		Secondary
+	---------------------------------
+	Orc			Red			Orange
+	Human		Blue		Cyan
+	Night Elf	Cyan		DarkGreen
+	Undead		Purple		Green
+	Goblin		Yellow		Brown
+	Demon		Orange		Red
+	Naga		Green		Pink
+				Pink
+	Forsaken	Gray		Purple
+				LightBLue
+				DarkGreen
+				Brown
+				Maroon
+				Navy
+				Turquoise
+				Violett
+				Wheat
+				Peach
+				Mint
+				Lavender
+				Coal
+				Snow
+				Emerald
+				Peanut
+	Neutral		White		---
+	Neutral		Black		---
+	---------------------------------
+	Elves		Pink        LightBLue
+	Dwarves     LightBLue   Blue
+	Gilneas     DarkGreen   Gray
+	Draenei     Brown       Yellow
+	

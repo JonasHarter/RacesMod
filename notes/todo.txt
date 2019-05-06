@@ -1,0 +1,147 @@
+>Check before Release
+	Tooltips
+		No ''
+	UnitSounds
+
+>CodeClean
+	Spellbooks
+	TargetSelection and Restriction
+
+>Goblin
+	Fix
+		Burning buff lvl 4
+	T1
+		Zeppelin needs to land
+	T2
+		UnitSound Pitch
+		BuildingAnimations
+		Transmutate play more-lumber-sound
+		Pyro
+			Cauterize & Playing Effect
+			Fiery Conclusion Burn
+			AoE(+FF) on death on upgrade
+			Explosion
+				Low dmg, cd, manacost
+		Grenadier(+Creds)
+			Name -> Buccaneer?
+			Upgrade Name
+			Icon
+			OR Replace with MechBike?
+		Static Armor
+			Visuals
+			100%, but cooldown?
+		Contraption
+			As item and new unit?
+		Apprentice's Potion - Name(+Creds)
+	T3
+		Goblin Painter Hero
+		BearTrap
+			Anim
+		SentryTurrent
+			Anim
+			http://www.hiveworkshop.com/forums/models-530/turret-266656
+		Barracks
+			ModelBox Size
+		Barrage
+			UltiDmg?
+		Sharpness
+			Sound
+		RocketJump
+			Parabel
+		Factory
+			InPlace Upgrade per building
+			Model modification
+
+>Naga
+	Upgrade that affecets buffed slaves dmg
+	T1
+		Royal Guard
+            Oathsworn
+                {level}stack base + x per {10,8,6}% missing hp
+		 Brineshaper
+            Unfathomable Knowledge instead of Aura
+                SelfMaxMana: 150,300,450
+		Silent Song
+			Fix! or Change
+		Enslave Item
+			Limit to Murlocs
+		Garuda
+            +Movespeed
+            Proc also when own kill
+	T2
+		Salt Wave 
+			MaxDmg?
+		Murlocs
+			Mercs in List
+		BloodGill
+			Use aura instead of Mask ability
+		AcceleratedBreeding
+			Check for food available
+	T3
+		Check DyingUnits Ability/Tech Triggers
+		Building in Water?
+
+>Demon
+	CommandButtons: "Infernal"
+	Interface: Demonic | Fiery
+	T1
+		Eradar Sorcerer
+			Evil Twin
+                Old succubus spell
+            ->BuffNextSpell
+                +AoE
+                +Duration
+                +Half CD
+            Finger of Death
+                Cooldown from Charm
+        Succusbus
+            Kiss
+                Buff allied undead
+                debuff enemy alive -> buffs self
+                +Dmg, Movespeed
+            ->remove summon, utility skill
+			Breathtaking
+				% to Silence on AA to silence
+        PitLord
+            Cleave
+                40/70/100%
+		Legion Dread Lord
+			Nightmare
+		World Eater
+			Upgrade
+		Efreet
+			replace Essence Drain?
+	T2
+		PrimeMatron
+			Animations
+			Soul Bond Visuals
+		Bloodlust upgrade: heals, more units?
+		Fel Hound
+			Extra Upgrade
+	T3
+		Spawn doodads timed on buidlings?
+
+>Neutral
+	Replaced
+		Goblin Alchemist X (Goblin Filibuster)
+		Naga Seawitch X (Murloc Revolutionary)
+		Dark Ranger
+		Pit Lord X (Worgen Nightprowler)
+		Tinker X (Nerubian Arisocrat)
+		Fire Lord -
+		Pandaren Brewmaster -
+		Beastmaster -
+	T1
+	T2
+		Worgen Nightprowler
+			Baleful Affliction
+				Effect
+			Bite
+				Art & Sound
+			Call of the Hunt
+				Sound
+		Goblin Filibuster
+			Muster
+			  Summon Animation
+		Murloc Revolutionary
+			Toxic Trap Count HardCap?

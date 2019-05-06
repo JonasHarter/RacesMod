@@ -1,0 +1,9 @@
+Human
+Orc
+Undead
+    Skull -> Corpse Ward
+        Same Effect, but also spawn corpses
+Night Elf
+Neutral
+    Goblin Zeppelin
+Land to load units

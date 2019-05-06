@@ -45,14 +45,13 @@ package ForgottenEmpire
 		onUnitIndex(function onSpawn)
 		onUnitDeindex(function onDeath)
 		CreateTrigger()
-			..registerAnyUnitEvent(EVENT_PLAYER_UNIT_SPELL_EFFECT)
-			..addCondition(Condition(() ->
-			begin
-				return GetSpellAbilityId() == SPELL_ID
-			end))
-			..addAction(() -> begin
-				createUnit(GetTriggerUnit().getOwner(), UNIT_ID, GetSpellTargetLoc().asVec2(true), GetTriggerUnit().getFacingAngle())
-			end)
+		..registerAnyUnitEvent(EVENT_PLAYER_UNIT_SPELL_EFFECT)
+		..addCondition(Condition(() -> begin
+			return GetSpellAbilityId() == SPELL_ID
+		end))
+		..addAction(() -> begin
+			createUnit(GetTriggerUnit().getOwner(), UNIT_ID, GetSpellTargetLoc().asVec2(true), GetTriggerUnit().getFacingAngle())
+		end)
 
 	function onSpawn()
 		let u = getIndexingUnit()
