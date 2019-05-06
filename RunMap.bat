@@ -1,0 +1,1 @@
+start "" "D:\Warcraft III\Warcraft III.exe" -loadfile "E:\Projects\Warcraft 3 Custom Maps\RacesMod\_build\RacesMod.w3x"

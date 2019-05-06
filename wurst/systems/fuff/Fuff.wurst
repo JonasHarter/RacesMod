@@ -9,13 +9,6 @@ package Fuff
     LinkedList<Fuff> allFuffs = new LinkedList<Fuff>()
     real FUFF_TICKRATE = 1.0
 
-    LinkedList<Fuff> autoFillFuffs = new LinkedList<Fuff>()
-    group allUnitsHolder
-    integer skipCounterSave = 0
-    integer nextPlayer = 0
-    //TODO Find a good value
-    integer MAX_FUFFS_PER_TICK = 2
-
     init
         CreateTrigger()
             ..registerTimerEvent(ANIMATION_PERIOD, true)
@@ -24,16 +17,13 @@ package Fuff
             ..registerTimerEvent(ANIMATION_PERIOD, true)
             ..addAction(function fuffLoop)
 
-    function setNextPlayer()
-        nextPlayer++
-        for i = nextPlayer to bj_MAX_PLAYER_SLOTS
-            if Player(i).isIngame()
-                nextPlayer = i
-                return
-        for i = 0 to bj_MAX_PLAYER_SLOTS
-            if Player(i).isIngame()
-                nextPlayer = i
-                return
+    LinkedList<Fuff> autoFillFuffs = new LinkedList<Fuff>()
+    group allUnitsHolder
+    integer skipCounterSave = 0
+    integer currentPlayerIndex = 0
+    //TODO Find a good value
+    integer MAX_FUFFS_PER_TICK = 5
+    LinkedList<Fuff> todoFuffs = new LinkedList<Fuff>()
 
     /**
         Checks all units for some fuffs and adds them
@@ -42,7 +32,6 @@ package Fuff
         if autoFillFuffs.size() == 0
             return
         // Get fuffs for this iteration
-        LinkedList<Fuff> todoFuffs = new LinkedList<Fuff>()
         integer skipCounter = skipCounterSave
         integer doneCounter = 0
         for Fuff fuff in autoFillFuffs
@@ -59,12 +48,24 @@ package Fuff
         // Update units when all fuffs are through
         if skipCounterSave == 0
             allUnitsHolder.destr()
-            allUnitsHolder = GetUnitsInRectAll(GetPlayableMapRect())
+            setNextPlayerIndex()
+            allUnitsHolder = GetUnitsOfPlayerAll(Player(currentPlayerIndex))
         // Work on units
         for unit u in allUnitsHolder
             for Fuff fuff in todoFuffs
                 fuff.checkUnit(u)
-        destroy todoFuffs
+        todoFuffs.clear()
+
+    function setNextPlayerIndex()
+        currentPlayerIndex++
+        for i = currentPlayerIndex to bj_MAX_PLAYER_SLOTS
+            if Player(i).getSlotState() == PLAYER_SLOT_STATE_PLAYING
+                currentPlayerIndex = i
+                return
+        for i = currentPlayerIndex to bj_MAX_PLAYER_SLOTS
+            if Player(i).getSlotState() == PLAYER_SLOT_STATE_PLAYING
+                currentPlayerIndex = i
+                return
 
     /**
         Updates the fuffs
