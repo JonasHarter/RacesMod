@@ -29,6 +29,7 @@ package Doppelganger
 		created.setUseFood(false)
 		created.setTimedLife(getTime(level))
 		created.setVertexColor(100, 100, 100, 255)
+		created.setMana(created.getMaxMana())
 		effect e = addEffect(DOPPELGANGER_EFFECT, newPos)
 		doAfter(3.0, () -> e.destr())
 
