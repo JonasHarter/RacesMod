@@ -1,8 +1,11 @@
 package SpitefulMask
+	import ItemObjEditing
+	import AbilityObjEditing
+	import ObjectIds
 
-	let ITEM_ID = 'A04E'
-	let LIFE = -200.0
-	let MANA = 100.0
+	constant integer SPITEFUL_MASK_ITEM = 'I00I'
+	constant real SPITEFUL_MASK_LIFE = -200.0
+	constant integer SPITEFUL_MASK_MANA_ABILITY = 'A04E'
 
 	init
 		CreateTrigger()
@@ -11,9 +14,29 @@ package SpitefulMask
 			..addAction(function actions)
 			
 	function conditions() returns bool
-		return GetManipulatedItem().getTypeId() == ITEM_ID
+		return GetManipulatedItem().getTypeId() == SPITEFUL_MASK_ITEM
 
 	function actions()
 		unit u = GetTriggerUnit()
-		u.addHP(LIFE)
-		u.addMana(MANA)
+		u.addHP(SPITEFUL_MASK_LIFE)
+
+	@compiletime function compileSpitefulMask()
+		new ItemDefinition(SPITEFUL_MASK_ITEM, 'dust')
+			..setAbilities(commaList(SPITEFUL_MASK_MANA_ABILITY))
+			..setButtonPositionX(1)
+			..setInterfaceIcon("ReplaceableTextures\\CommandButtons\\BTN_cr_GraveSwampMASK.blp")
+			..setClassification("Permanent")
+			..setCooldownGroup(commaList(SPITEFUL_MASK_MANA_ABILITY))
+			..setGoldCost(175)
+			..setNumberofCharges(0)
+			..setDescription("Restores mana to the hero, but deals damages him.")
+			..setHotkey("M")
+			..setName("Spiteful Mask")
+			..setTooltipBasic("Purchase Spiteful |cffffcc00M|rask")
+			..setTooltipExtended("Restores 100 mana to the hero, but deals 200 damage to him.")
+		new AbilityDefinitionItemManaRestoreLesser(SPITEFUL_MASK_MANA_ABILITY)
+			..setName("Spiteful Mask")
+			..setEditorSuffix("")
+			..setManaPointsGained(1, 100)
+			..setIconNormal("ReplaceableTextures\\CommandButtons\\BTN_cr_GraveSwampMASK.blp")
+			..setRace(Race.Undead)

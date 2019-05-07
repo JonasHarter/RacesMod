@@ -3091,15 +3091,6 @@ package CompileAbilities
 		..setLvlDataString("ansf", 0, 0, "(Blightning)")
 
 
-	@compiletime function create_w3a_A04E()
-		let _def = createObjectDefinition("w3a", 'A04E', 'AIm1')
-		..setLvlDataString("anam", 0, 0, "Spiteful Mask")
-		..setLvlDataInt("Impg", 1, 1, 100)
-		..setLvlDataString("aart", 0, 0, "ReplaceableTextures\\CommandButtons\\BTN_cr_GraveSwampMASK.blp")
-		..setLvlDataString("arac", 0, 0, "undead")
-		..setLvlDataString("ansf", 0, 0, "")
-
-
 	@compiletime function create_w3a_A04F()
 		let _def = createObjectDefinition("w3a", 'A04F', 'AIrt')
 		..setLvlDataString("anam", 0, 0, "Staff of the Festival")

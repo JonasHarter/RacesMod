@@ -273,22 +273,6 @@ import ObjEditingNatives
 	..setInt("iuse", 1)
 
 
-@compiletime function create_w3t_I00I()
-	let _def = createObjectDefinition("w3t", 'I00I', 'dust')
-	..setString("icla", "Permanent")
-	..setInt("ubpx", 1)
-	..setString("iico", "ReplaceableTextures\\CommandButtons\\BTN_cr_GraveSwampMASK.blp")
-	..setInt("igol", 175)
-	..setString("unam", "Spiteful Mask")
-	..setString("utip", "Purchase Spiteful |cffffcc00M|rask")
-	..setString("utub", "Restores 100 mana to the hero, but deals 200 damage to him.")
-	..setInt("iuse", 0)
-	..setString("uhot", "M")
-	..setString("iabi", "A04E")
-	..setString("icid", "A04E")
-	..setString("ides", "Restores mana to the hero, but deals damages him.")
-
-
 @compiletime function create_w3t_I00J()
 	let _def = createObjectDefinition("w3t", 'I00J', 'stel')
 	..setString("unam", "Staff of the Festival")
