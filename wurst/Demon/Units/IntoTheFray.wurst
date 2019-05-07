@@ -1,12 +1,15 @@
 package IntoTheFray
-	import FuffVariants
 	import InstantDummyCaster
+	import ObjectIds
+	import ObjectIdGenerator
+	import AbilityObjEditing
 
 	constant integer INTOTHEFRAY_TRIGGERING_ABILITY = 'B01G'
-	constant integer INTOTHEFRAY_BUFFING_ABILITY = 'A040'
-	constant string INTOTHEFRAY_BUFFING_ORDER = "innerfire"
 	constant integer INTOTHEFRAY_BUFF = 'B01W'
-	constant integer INTOTHEFRAY_BUFF_GRANTED_ABILITY = 'A03Z'
+
+	constant integer INTOTHEFRAY_BUFF_GRANTED_ABILITY  = compiletime(UNIT_ID_GEN.next())
+	constant integer INTOTHEFRAY_BUFFING_ABILITY  = compiletime(UNIT_ID_GEN.next())
+	constant string INTOTHEFRAY_BUFFING_ORDER = "bloodlust"
 	
 
 	init
@@ -14,7 +17,6 @@ package IntoTheFray
 			..registerAnyUnitEvent( EVENT_PLAYER_UNIT_TRAIN_FINISH )
 			..addCondition( Condition( function conditions ) )
 			..addAction( function actions )
-		new SimpleFuff(INTOTHEFRAY_BUFF, INTOTHEFRAY_BUFF_GRANTED_ABILITY)
 
 	function conditions() returns bool
 		return GetTriggerUnit().hasAbility(INTOTHEFRAY_TRIGGERING_ABILITY)
@@ -22,3 +24,27 @@ package IntoTheFray
 	function actions()
 		unit u = GetTrainedUnit()
 		InstantDummyCaster.castTarget(u.getOwner(), INTOTHEFRAY_BUFFING_ABILITY, 1, INTOTHEFRAY_BUFFING_ORDER, u)
+
+	@compiletime function compileIntoTheFray()
+		new AbilityDefinitionBloodlust(INTOTHEFRAY_BUFFING_ABILITY)
+			..setIconNormal("")
+			..setIconTurnOff("")
+			..setAttackSpeedIncrease(1, 0)
+			..setMovementSpeedIncrease(1, 0.5)
+			..setScalingFactor(1, 0)
+			..setBuffs(1, commaList(INTOTHEFRAY_BUFF))
+			..setCastRange(1, 99999)
+			..setCooldown(1, 0)
+			..setDurationHero(1, 30)
+			..setDurationNormal(1, 30)
+			..setManaCost(1, 0)
+			..setPriorityforSpellSteal(5)
+			..setRace(Race.Undead)
+			..setCheckDependencies(false)
+			..setRequirements("")
+			..setRequirementsLevels("")
+			..setName("Into the Fray")
+			..setTooltipNormal(1, "")
+			..setTooltipNormalExtended(1, "")
+			..setTooltipTurnOff(1, "")
+			..setTooltipTurnOffExtended(1, "")
