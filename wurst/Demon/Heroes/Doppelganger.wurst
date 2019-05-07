@@ -1,9 +1,10 @@
 package Doppelganger
 	import ClosureTimers
+	import AbilityObjEditing
 
-	int DOPPEL_ID = 'A04U'
-	real DUR_PER_LVL = 20.0
-	string EFFECT = "Demon\\ShadowTrap.mdx"
+	constant integer DOPPELGANGER  = 'A04U'
+	constant real DOPPELGANGER_DURATION_PER_LEVEL = 20.0
+	constant string DOPPELGANGER_EFFECT = "Demon\\ShadowTrap.mdx"
 	
 	init
 		CreateTrigger()
@@ -12,14 +13,14 @@ package Doppelganger
 			..addCondition(Condition(function conditions))
 
 	function getTime(integer level) returns real
-		return level * DUR_PER_LVL
+		return level * DOPPELGANGER_DURATION_PER_LEVEL
 
 	function conditions() returns bool
-		return GetSpellAbilityId() == DOPPEL_ID
+		return GetSpellAbilityId() == DOPPELGANGER
 
 	function actions()
 		unit caster = GetTriggerUnit()
-		int level = caster.getAbilityLevel(DOPPEL_ID)
+		int level = caster.getAbilityLevel(DOPPELGANGER)
 		unit target = GetSpellTargetUnit()
 		player owner = caster.getOwner()
 		vec2 pos = caster.getPos()
@@ -28,5 +29,53 @@ package Doppelganger
 		created.setUseFood(false)
 		created.setTimedLife(getTime(level))
 		created.setVertexColor(100, 100, 100, 255)
-		effect e = addEffect(EFFECT, newPos)
+		effect e = addEffect(DOPPELGANGER_EFFECT, newPos)
 		doAfter(3.0, () -> e.destr())
+
+	@compiletime function compileDoppelganger()
+		new AbilityDefinitionIllidanChannel(DOPPELGANGER)
+			..setName("Doppelganger")
+			..setRace(Race.Undead)
+			..setAnimationNames("attack,slam")
+			..setButtonPositionNormalX(1)
+			..setButtonPositionNormalY(2)
+			..setButtonPositionResearchX(1)
+			..setArtCaster("")
+			..setArtEffect("")
+			..setArtTarget("")
+			..setTargetAttachmentPoint1("")
+			..setIconNormal("ReplaceableTextures\\CommandButtons\\BTNSuccubusTrueSight.blp")
+			..setHotkeyLearn("D")
+			..setHotkeyNormal("D")
+			..setTooltipLearn("Learn |cffffcc00D|roppelganger - [|cffffcc00Level %d|r]")
+			..setTooltipLearnExtended("Creates a copy of target unit. |n|n|cffffcc00Level 1|r - Lasts " + getTime(1).toString(0) + " seconds. |n|cffffcc00Level 2|r - Lasts " + getTime(2).toString(0) + " seconds. |n|cffffcc00Level 3|r - Lasts " + getTime(3).toString(0) + " seconds.")
+			..setArtDuration(1, 1.4)
+			..setArtDuration(2, 1.4)
+			..setArtDuration(3, 1.4)
+			..setBaseOrderID(1, "darksummoning")
+			..setBaseOrderID(2, "darksummoning")
+			..setBaseOrderID(3, "darksummoning")
+			..setFollowThroughTime(1, 1)
+			..setFollowThroughTime(2, 1)
+			..setFollowThroughTime(3, 1)
+			..setOptions(1, 1)
+			..setOptions(2, 1)
+			..setOptions(3, 1)
+			..setTargetType(1, 1)
+			..setTargetType(2, 1)
+			..setTargetType(3, 1)
+			..setCooldown(1, 30)
+			..setCooldown(2, 30)
+			..setCooldown(3, 30)
+			..setManaCost(1, 70)
+			..setManaCost(2, 70)
+			..setManaCost(3, 70)
+			..setTargetsAllowed(1, "nonhero,nonsapper,organic")
+			..setTargetsAllowed(2, "nonhero,nonsapper,organic")
+			..setTargetsAllowed(3, "nonhero,nonsapper,organic")
+			..setTooltipNormal(1, "|cffffcc00D|roppelganger - [|cffffcc00Level 1|r]")
+			..setTooltipNormal(2, "|cffffcc00D|roppelganger - [|cffffcc00Level 2|r]")
+			..setTooltipNormal(3, "|cffffcc00D|roppelganger - [|cffffcc00Level 3|r]")
+			..setTooltipNormalExtended(1, "Creates a copy of target unit. |nLasts 20 seconds.")
+			..setTooltipNormalExtended(2, "Creates a copy of target unit. |nLasts 40 seconds.")
+			..setTooltipNormalExtended(3, "Creates a copy of target unit. |nLasts 60 seconds.")
