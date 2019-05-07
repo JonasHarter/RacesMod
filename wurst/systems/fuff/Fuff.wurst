@@ -5,6 +5,7 @@ package Fuff
 
     //TODO auto rate unit iterations
     //TODO BlizzApi -> BuffEvent, getBuffLevel
+    //TODO Find a good value for MAX_FUFFS_PER_TICK
 
     LinkedList<Fuff> allFuffs = new LinkedList<Fuff>()
     real FUFF_TICKRATE = 1.0
@@ -21,7 +22,6 @@ package Fuff
     group allUnitsHolder
     integer skipCounterSave = 0
     integer currentPlayerIndex = 0
-    //TODO Find a good value
     integer MAX_FUFFS_PER_TICK = 5
     LinkedList<Fuff> todoFuffs = new LinkedList<Fuff>()
 

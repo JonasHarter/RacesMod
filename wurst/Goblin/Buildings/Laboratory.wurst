@@ -1,0 +1,48 @@
+package Laboratory
+    import ObjectIdGenerator
+    import ObjectIds
+    import AbilityObjEditing
+    import Abilities
+    import Icons
+    import Sounds
+    import Soundsets
+
+    constant integer LABORATORY_REVEAL  = compiletime(UNIT_ID_GEN.next())
+    constant integer LABORATORY  = 'o001'
+    
+    @compiletime function compileLaboratory()
+        let _revealAbility = new AbilityDefinitionFarseerFarSight(LABORATORY_REVEAL)
+            ..setName("Reveal")
+            ..setLevels(1)
+            ..setRace(Race.Human)
+            ..setButtonPositionNormalX(0)
+            ..setButtonPositionNormalY(2)
+            ..setEffects(1, commaList(Abilities.andt))
+            ..setIconNormal(Icons.bTNReveal)
+            ..setCooldown(1, 60)
+            ..setTooltipNormal(1, "R|cffffcc00e|rveal")
+            ..setTooltipNormalExtended(1, "Reveals an area of the map. |nDetects invisible units. |nLasts 6 seconds.")
+            ..setAreaofEffect(1, 900)
+            ..setDurationHero(1, 6)
+            ..setDurationNormal(1, 6)
+            ..setManaCost(1, 0)
+            ..setHotkeyNormal("E")
+        let _unit = new BuildingDefinition(LABORATORY, 'ofor')
+            ..setName("Laboratory")
+            ..setRace(Race.Human)
+            ..setNormalAbilities(commaList(LABORATORY_REVEAL,'A001','Abds','Arlm'))
+            ..setModelFile("Goblin\\AmmoDump V2.01.mdl")
+            ..setIconGameInterface("ReplaceableTextures\\CommandButtons\\BTNAmmoDump.blp")
+            ..setTooltipBasic("Build Labo|cffffcc00r|ratory")
+            ..setTooltipExtended("Serves as a drop-off point for harvested lumber. |nAlso contains upgrades for improved armor and weapons as well as Improved Manufacturing. Has the Reveal and the Transmutate ability.")
+            ..setGoldCost(220)
+            ..setRepairGoldCost(220)
+            ..setLumberCost(20)
+            ..setRepairLumberCost(20)
+            ..setScalingValue(0.5)
+            ..setSelectionScale(3.8)
+            ..setUnitSoundSet(Soundsets.ammoDump)
+            ..setUpgradesUsed("")
+            ..setRequiredAnimationNames("")
+            ..setConstructionSound(Sounds.constructionLoop1)
+            ..setResearchesAvailable(commaList('R003','R004','R006','R005','R007'))

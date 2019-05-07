@@ -1,12 +1,16 @@
 package RealityBreach
-	import InstantDummyCaster
+	import DummyCaster
 	import TargetChecker
 	import MouseTargetRestriction
+	import AbilityObjEditing
+	import ObjectIdGenerator
 
-	int BREACH_ID = 'A03C'
-	string BREACH_ORDER = "avatar"
-	int CASTER_ID = 'u006'
-	int BLIGHT_ID = 'A03D'
+	//TODO
+	constant integer REALITY_BREACH  = 'A03C'
+	constant integer CASTER_ID = 'u006'
+	constant string BREACH_ORDER = "avatar"
+
+	constant integer REALITY_BREACH_BLIGHT  = compiletime(UNIT_ID_GEN.next())
 	
 	init
 		CreateTrigger()
@@ -17,11 +21,42 @@ package RealityBreach
 			..addRestriction(Restrictions.Summoned))
 		
 	function conditions() returns bool
-		return GetSpellAbilityId() == BREACH_ID
+		return GetSpellAbilityId() == REALITY_BREACH
 		
 	function actions()
-		unit caster = GetSpellAbilityUnit()
-		player owner = caster.getOwner()
 		unit target = GetSpellTargetUnit()
 		vec2 loc = target.getPos()
-		InstantDummyCaster.castImmediate(owner, BLIGHT_ID, 1, "", loc)
+		let dummyCaster = new DummyCaster()
+		dummyCaster.delay(1)
+		dummyCaster.origin(loc)
+		dummyCaster.castImmediate(REALITY_BREACH_BLIGHT, 1, 'asdf')
+		target.kill()
+
+	@compiletime function compileRealityBreach()
+		new AbilityDefinitionIllidanChannel(REALITY_BREACH)
+			..setName("Reality Breach")
+			..setTooltipNormal(1, "Reality B|cffffcc00r|reach")
+			..setTooltipNormalExtended(1, "Sacrifice a unit to spread blight underneath its corpse.")
+			..setIconNormal("ReplaceableTextures\\CommandButtons\\BTNRift.blp")
+			..setRace(Race.Undead)
+			..setLevels(1)
+			..setAnimationNames("spell")
+			..setArtTarget("")
+			..setTargetAttachmentPoint1("")
+			..setHotkeyNormal("R")
+			..setButtonPositionNormalX(1)
+			..setButtonPositionNormalY(2)
+			..setBaseOrderID(1, BREACH_ORDER)
+			..setTargetsAllowed(1, "nonhero,organic,player")
+			..setManaCost(1, 50)
+			..setCastRange(1, 500)
+			..setCooldown(1, 10)
+			..setTargetType(1, 1)
+			..setArtDuration(1, 0.01)
+			..setFollowThroughTime(1, 0.01)
+			..setDisableOtherAbilities(1, false)
+			..setOptions(1, 1)
+			..setHeroAbility(false)
+		new AbilityDefinitionBlightGrowthSmall(REALITY_BREACH_BLIGHT)
+			..setName("RealityBreachBlight")
+			..setAreaofEffect(1, 500)

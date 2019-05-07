@@ -11,10 +11,6 @@ package StartingPosition
 		Naga
 
 	public function createStartingUnits(player p, Races r)
-		group prevUnits = GetUnitsOfPlayerAll(p)
-		for unit u in prevUnits
-			u.remove()
-		prevUnits.destr()
 		let unitSpacing = 64.00
 		let defaultAngle = bj_UNIT_FACING.asAngleDegrees()
 		let startPos = p.getStartLocation()

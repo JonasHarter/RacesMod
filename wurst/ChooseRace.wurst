@@ -14,6 +14,12 @@ package ChooseRace
 	button array raceButtons
 	
 	function buildDialog()
+		for int i = 0 to bj_MAX_PLAYERS
+			if Player(i).isIngame()
+				group units = GetUnitsOfPlayerAll(Player(i))
+				for unit u in units
+					u.remove()
+				units.destr()
 		raceDialog.clear()
 		raceDialog.setHeading("Choose your race")
 		raceButtons[0] = raceDialog.addButton("|cff0042FF Human |r")
@@ -26,13 +32,6 @@ package ChooseRace
 		CreateTrigger()
 			..registerDialogEvent(raceDialog)
 			..addAction(function dialogClick)
-		/*
-		|c00E55BB0Player 8|r
-		|c00959697Player 9|r
-		|c007EBFF1Player 10|r
-		|c00106246Player 11|r
-		|c004E2A04Player 12|r
-		*/
 		
 	function showDialog()
 		for int i = 0 to bj_MAX_PLAYERS
